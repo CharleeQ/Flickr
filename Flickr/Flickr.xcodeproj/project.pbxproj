@@ -13,6 +13,7 @@
 		9F92AC7426CFC2C200433CF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F92AC7226CFC2C200433CF3 /* Main.storyboard */; };
 		9F92AC7626CFC2C500433CF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F92AC7526CFC2C500433CF3 /* Assets.xcassets */; };
 		9F92AC7926CFC2C500433CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F92AC7726CFC2C500433CF3 /* LaunchScreen.storyboard */; };
+		9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC8A26CFDE0300433CF3 /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		9F92AC7526CFC2C500433CF3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F92AC7826CFC2C500433CF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F92AC7A26CFC2C500433CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F92AC8A26CFDE0300433CF3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		9F92AC6B26CFC2C200433CF3 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				9F92AC8926CFDDF200433CF3 /* Services */,
 				9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */,
 				9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */,
 				9F92AC7026CFC2C200433CF3 /* ViewController.swift */,
@@ -65,6 +68,14 @@
 				9F92AC7A26CFC2C500433CF3 /* Info.plist */,
 			);
 			path = Flickr;
+			sourceTree = "<group>";
+		};
+		9F92AC8926CFDDF200433CF3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9F92AC8A26CFDE0300433CF3 /* AuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +151,7 @@
 				9F92AC7126CFC2C200433CF3 /* ViewController.swift in Sources */,
 				9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */,
 				9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */,
+				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
