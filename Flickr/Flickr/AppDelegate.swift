@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         print("[1] First Step")
-        print(AuthService.shared.signWithURL)
+        print(AuthService.shared.signature)
         
         return true
     }
