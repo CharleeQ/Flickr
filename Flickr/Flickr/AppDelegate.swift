@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        print(AuthService.shared.signWithURL!.absoluteString)
+        print("[1] First Step")
+        print(AuthService.shared.signWithURL)
+        
         return true
     }
 
