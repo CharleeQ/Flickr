@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class AuthService {
     static let shared = AuthService()
@@ -66,7 +67,7 @@ class AuthService {
             let session = URLSession(configuration: config)
             
             let urlRequest = URLRequest(url: url)
-            session.dataTask(with: urlRequest) { data, response, error in
+            session.dataTask(with: urlRequest) { data, _, error in
                 if let data = data {
                     let string = String(data: data, encoding: .utf8)
                     AuthService.shared.requestToken = string?.components(separatedBy: "&oauth_token=").last?.components(separatedBy: "&oauth_token_secret").first
@@ -81,8 +82,16 @@ class AuthService {
     }
     
     // Second step
-    private func getTheUserAuthorization(presenter: UIViewController, token: String, completion: ((Result<String, Error>) -> Void)) {
-        
+    private func getTheUserAuthorization(presenter: UIViewController, token: String, completion: @escaping ((Result<String, Error>) -> Void)) {
+        if let requestToken = requestToken {
+            let url = URL(string: "https://www.flickr.com/services/oauth/authorize?oauth_token=\(requestToken)")
+            if let url = url {
+                let vc = SFSafariViewController(url: url)
+                DispatchQueue.main.async {
+                    presenter.present(vc, animated: true)
+                }
+            }
+        }
     }
     
     // Third step
@@ -90,6 +99,7 @@ class AuthService {
         
     }
 }
+
 
 //"https://www.flickr.com/services/oauth/request_token?oauth_callback=http://www.github.com&oauth_consumer_key=1877653cabad94b4cd42e56f49689e6c&oauth_nonce=956r13465&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1305586162&oauth_version=1.0&oauth_signature=kDgmLbI4KS8KYmNv8OD1cR0ln74="
 //"GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Frequest_token&oauth_callback%3Dhttp%253A%252F%252Fwww.github.com%26oauth_consumer_key%3D1877653cabad94b4cd42e56f49689e6c%26oauth_nonce%3D956r13465%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1305586162%26oauth_version%3D1.0"
