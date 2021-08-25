@@ -26,6 +26,6 @@ class ViewController: UIViewController {
 
 extension ViewController: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return view.window!
+            return view.window!
     }
 }
