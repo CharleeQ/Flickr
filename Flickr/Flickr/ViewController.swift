@@ -6,12 +6,12 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemPink
         
         AuthService.shared.login(presenter: self) { result in
             switch result {
@@ -24,3 +24,8 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return view.window!
+    }
+}
