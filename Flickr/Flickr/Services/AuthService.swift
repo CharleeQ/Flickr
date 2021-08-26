@@ -27,6 +27,7 @@ class AuthService {
         return encryptString
     }
     private var tokenSecret: String?
+    private var accessToken: String?
     
     // MARK: - Public functions
     
@@ -44,7 +45,7 @@ class AuthService {
     func handleURL(url: URL) {
         print("Handle the Callback \(url.absoluteString)")
         let verifier = url.absoluteString.components(separatedBy: "verifier=").last
-        let token = url.absoluteString.components(separatedBy: "&oauth_token=").last?.components(separatedBy: "&oauth_verifier").first
+        let token = url.absoluteString.components(separatedBy: "?oauth_token=").last?.components(separatedBy: "&oauth_verifier").first
         if let verifier = verifier, let token = token {
             exchangeTokens(token: token, verifier: verifier)
         }
@@ -94,11 +95,13 @@ class AuthService {
     // Third step
     private func exchangeTokens(token: String, verifier: String) {
         var sign: String {
-            let string = "GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Faccess_token&oauth_consumer_key%3D\(consumerKey)%26oauth_nonce%3D956w13465%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1305586309%26oauth_token%3D\(token)%26oauth_verifier%3D\(verifier)%26oauth_version%3D1.0"
-            return string.hmac(key: "\(consumerSecret)&\(tokenSecret)")
+            print("[SIGNATURE FOR EXCHANGE]: ")
+            print("Token Secret: \(tokenSecret!), Token: \(token), Verifier: \(verifier)")
+            let string = "GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Faccess_token&oauth_consumer_key%3D\(consumerKey)%26oauth_nonce%3D9q5613465%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1305586309%26oauth_token%3D\(token)%26oauth_verifier%3D\(verifier)%26oauth_version%3D1.0"
+            return string.hmac(key: "\(consumerSecret)&\(tokenSecret!)")
         }
         
-        let url = URL(string: "https://www.flickr.com/services/oauth/access_token?oauth_nonce=956w13465&oauth_timestamp=1305586309&oauth_verifier=\(verifier)&oauth_consumer_key=\(consumerKey)&oauth_signature_method=HMAC-SHA1&oauth_version=1.0&oauth_token=\(token)&oauth_signature=\(sign)")
+        let url = URL(string: "https://www.flickr.com/services/oauth/access_token?oauth_nonce=9q5613465&oauth_timestamp=1305586309&oauth_verifier=\(verifier)&oauth_consumer_key=\(consumerKey)&oauth_signature_method=HMAC-SHA1&oauth_version=1.0&oauth_token=\(token)&oauth_signature=\(sign)")
         if let url = url {
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
@@ -107,9 +110,39 @@ class AuthService {
             session.dataTask(with: urlRequest) { data, _, error in
                 if let data = data {
                     let string = String(data: data, encoding: .utf8)
-                    print(string)
+                    if let string = string {
+                        print(string)
+                        self.accessToken = string.components(separatedBy: "&oauth_token=").last?.components(separatedBy: "&oauth_token_secret").first
+                        self.tokenSecret = string.components(separatedBy: "&oauth_token_secret=").last?.components(separatedBy: "&user_nsid").first
+                        self.testLogin()
+                    }
                 } else if let error = error {
                     print(error)
+                }
+            }.resume()
+        }
+    }
+    
+    private func testLogin() {
+        var sign: String {
+            print("Access: \(accessToken!), Consumer: \(consumerKey), Secret: \(tokenSecret!)")
+            let string = "GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Frest&format%3Djson%26method%3Dflickr.test.login%26nojsoncallback%3D1%26oauth_consumer_key%3D\(consumerKey)%26oauth_nonce%3D8435e4935%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1305583871%26oauth_token%3D\(accessToken!)%26oauth_version%3D1.0"
+            return string.hmac(key: "\(consumerSecret)&\(tokenSecret!)")
+        }
+        
+        let url = URL(string: "https://www.flickr.com/services/rest?nojsoncallback=1&oauth_nonce=8435e4935&format=json&oauth_consumer_key=\(consumerKey)&oauth_timestamp=1305583871&oauth_signature_method=HMAC-SHA1&oauth_version=1.0&oauth_token=\(accessToken!)&oauth_signature=\(sign)&method=flickr.test.login")
+        if let url = url {
+            print(url.absoluteString)
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config)
+            
+            let urlRequest = URLRequest(url: url)
+            session.dataTask(with: urlRequest) { data, response, error in
+                if let data = data {
+                    let string = String(data: data, encoding: .utf8)
+                    if let string = string {
+                        print(string)
+                    }
                 }
             }.resume()
         }
