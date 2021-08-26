@@ -15,6 +15,7 @@
 		9F92AC7926CFC2C500433CF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F92AC7726CFC2C500433CF3 /* LaunchScreen.storyboard */; };
 		9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC8A26CFDE0300433CF3 /* AuthService.swift */; };
 		9F92AC9126D2812B00433CF3 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC9026D2812B00433CF3 /* Encryption.swift */; };
+		9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9F92AC7A26CFC2C500433CF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F92AC8A26CFDE0300433CF3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		9F92AC9026D2812B00433CF3 /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
+		9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				9F92AC8A26CFDE0300433CF3 /* AuthService.swift */,
 				9F92AC9026D2812B00433CF3 /* Encryption.swift */,
+				9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			files = (
 				9F92AC7126CFC2C200433CF3 /* ViewController.swift in Sources */,
 				9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */,
+				9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */,
 				9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */,
 				9F92AC9126D2812B00433CF3 /* Encryption.swift in Sources */,
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
