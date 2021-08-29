@@ -46,8 +46,17 @@ private enum OAuthParameters: String {
     }
 }
 
-private enum OAuthRequestState {
+private enum OAuthRequestState: String {
     case requestToken, accessToken
+    
+    var description: String {
+        switch self {
+        case .requestToken:
+            return "request_token"
+        case .accessToken:
+            return "access_token"
+        }
+    }
 }
 
 class AuthService {
@@ -58,33 +67,28 @@ class AuthService {
     
     private let consumerKey = "1877653cabad94b4cd42e56f49689e6c"
     private let consumerSecret = "f1938a9c14a1d472"
-    private let callback = "kiryl"
-    private let nonce = "956w13465"
-    private var signature: String {
-        // Step zero: Signing requests
-        let string = "GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Frequest_token&oauth_callback%3D\(callback)%253A%252F%252Fapp.com%26oauth_consumer_key%3D\(consumerKey)%26oauth_nonce%3D\(nonce)%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1305586162%26oauth_version%3D1.0"
-
-        let encryptString = string.hmac(key: "\(consumerSecret)&")
-        print("[SIGNATURE]: " + encryptString)
+    private let version = "1.0"
+    private let signatureMethod = "HMAC-SHA1"
+    private let callbackScheme = "kiryl"
+    private var nonce: String {
+        let temp = UUID().uuidString
+        let nonce = temp.replacingOccurrences(of: "-", with: "")
         
-        return encryptString
+        return nonce
+    }
+    private var timestamp: String {
+        return String(Date().timeIntervalSince1970)
     }
     
     
     // MARK: - Tokens
     
-    private var tokenSecret: String?
     private var accessToken: String?
+    private var tokenSecret: String?
     
-    
-    // MARK: - Public functions
+    // MARK: - Intents
     
     func login(presenter: ASWebAuthenticationPresentationContextProviding, completion: ((Result<String, Error>) -> Void)) {
-        let params: [OAuthParameters: String] = [.callback: "\(callback)%253A%252F%252Fapp.com",.consumerKey: consumerKey,.nonce: nonce, .signatureMethod: "HMAC-SHA1", .timestamp: "1305586162",.version: "1.0"]
-        _ = signWithURL(path: "https://www.flickr.com/services/oauth/request_token", parameters: params)
-        
-        
-        
         getARequestToken { result in
             switch result {
             case .success(let data):
@@ -110,6 +114,7 @@ class AuthService {
         }
         
         let url = URL(string: "https://www.flickr.com/services/rest?nojsoncallback=1&oauth_nonce=8435e4935&format=json&oauth_consumer_key=\(consumerKey)&oauth_timestamp=1305583871&oauth_signature_method=HMAC-SHA1&oauth_version=1.0&oauth_token=\(accessToken!)&oauth_signature=\(sign)&method=flickr.test.login")
+        
         if let url = url {
             print(url.absoluteString)
             let config = URLSessionConfiguration.default
@@ -130,27 +135,20 @@ class AuthService {
     
     // MARK: - Private functions
     
-    private func signWithURL(path: String, parameters: [OAuthParameters:String], method: HTTPMethod = .GET) -> URL {
-        print(">> SIGNATURE: ")
-        print("> Base string: ")
-        let base = path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-        print(base ?? "NIL")
-        
-        print("> Parameters: ")
+    private func signWithURL(path: String, state: OAuthRequestState, parameters: [OAuthParameters:String], method: HTTPMethod = .GET) -> URL? {
+        print(">> \(state.description.uppercased()) SIGNATURE: ")
+        let base = (path + "/" + state.description).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let params = parameters.sorted { $0.0.description < $1.0.description }.map { (key, value) -> String in
             return "\(key.description)%3D\(value.description)%26"
         }
-        print(params)
-        print("> Total string: ")
         let string = "\(method.rawValue)&\(base ?? "")&\(params.joined().dropLast(3))"
-        print(string)
-        print("> Signature string: ")
         let encryptString = string.hmac(key: "\(consumerSecret)&\(tokenSecret ?? "")")
         print(encryptString)
         
-        let urlString = path + "?" + params.joined() + OAuthParameters.signature.description + "=" + encryptString
+        let urlString = path + "/" + state.description + "?" + params.joined() + OAuthParameters.signature.description + "=" + encryptString
+        let url = URL(string: urlString.removingPercentEncoding ?? "")
         
-        return URL(fileURLWithPath: urlString.removingPercentEncoding ?? "")
+        return url
     }
     
     
@@ -158,7 +156,13 @@ class AuthService {
     
     // First step
     private func getARequestToken(completion: @escaping (Result<String, Error>) -> Void) {
-        guard let url = URL(string: "https://www.flickr.com/services/oauth/request_token?oauth_callback=\(callback)://app.com&oauth_consumer_key=\(consumerKey)&oauth_nonce=\(nonce)&oauth_signature_method=HMAC-SHA1&oauth_timestamp=1305586162&oauth_version=1.0&oauth_signature=\(signature)") else { return }
+        let params: [OAuthParameters: String] = [.callback: "\(callbackScheme)%253A%252F%252F",
+                                                 .consumerKey: consumerKey,
+                                                 .nonce: nonce,
+                                                 .signatureMethod: signatureMethod,
+                                                 .timestamp: timestamp,
+                                                 .version: version]
+        guard let url = signWithURL(path: "https://www.flickr.com/services/oauth", state: .requestToken, parameters: params) else { return }
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
@@ -167,7 +171,7 @@ class AuthService {
         session.dataTask(with: urlRequest) { data, _, error in
             if let data = data {
                 guard let string = String(data: data, encoding: .utf8) else { return }
-                
+                print(string)
                 let requestToken = string.components(separatedBy: "&oauth_token=").last?.components(separatedBy: "&oauth_token_secret").first
                 self.tokenSecret = string.components(separatedBy: "&oauth_token_secret=").last
                 
@@ -184,7 +188,7 @@ class AuthService {
     private func getTheUserAuthorization(presenter: ASWebAuthenticationPresentationContextProviding, token: String, completion: @escaping (Result<(String, String), Error>) -> Void) {
         guard let url = URL(string: "https://www.flickr.com/services/oauth/authorize?oauth_token=\(token)") else { return }
         
-        let signSession = ASWebAuthenticationSession(url: url, callbackURLScheme: callback) { callbackURL, error in
+        let signSession = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackScheme) { callbackURL, error in
             guard error == nil, let callbackURL = callbackURL else { return }
             
             print("Handle the Callback \(callbackURL.absoluteString)")
@@ -205,14 +209,15 @@ class AuthService {
     
     // Third step
     private func exchangingTheRequestForAccess(request: String, verifier: String) {
-        var sign: String {
-            print("[SIGNATURE FOR EXCHANGE]: ")
-            print("Token Secret: \(tokenSecret!), Token: \(request), Verifier: \(verifier)")
-            let string = "GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Faccess_token&oauth_consumer_key%3D\(consumerKey)%26oauth_nonce%3D9q5613465%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1305586309%26oauth_token%3D\(request)%26oauth_verifier%3D\(verifier)%26oauth_version%3D1.0"
-            return string.hmac(key: "\(consumerSecret)&\(tokenSecret!)")
-        }
-        
-        guard let url = URL(string: "https://www.flickr.com/services/oauth/access_token?oauth_nonce=9q5613465&oauth_timestamp=1305586309&oauth_verifier=\(verifier)&oauth_consumer_key=\(consumerKey)&oauth_signature_method=HMAC-SHA1&oauth_version=1.0&oauth_token=\(request)&oauth_signature=\(sign)") else { return }
+        let params: [OAuthParameters: String] = [.consumerKey: consumerKey,
+                                                 .nonce: nonce,
+                                                 .signatureMethod: self.signatureMethod,
+                                                 .timestamp: self.timestamp,
+                                                 .version: self.version,
+                                                 .verifier: verifier,
+                                                 .token: request]
+        guard let url = signWithURL(path: "https://www.flickr.com/services/oauth",
+                                    state: .accessToken, parameters: params) else { return }
         
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
