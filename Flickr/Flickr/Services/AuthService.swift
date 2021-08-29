@@ -9,16 +9,45 @@ import UIKit
 import AuthenticationServices
 
 private enum OAuthParameters: String {
-    case nonce = "oauth_nonce"
-    case timestamp = "oauth_timestamp"
-    case consumerKey = "oauth_consumer_key"
-    case signatureMethod = "oauth_signature_method"
-    case version = "oauth_version"
-    case callback = "oauth_callback"
-    case signature = "oauth_signature"
-    case token = "oauth_token"
-    case permissions = "perms"
-    case verifier = "oauth_verifier"
+    case nonce
+    case timestamp
+    case consumerKey
+    case signatureMethod
+    case version
+    case callback
+    case signature
+    case token
+    case permissions
+    case verifier
+    
+    var description: String {
+        switch self {
+        case .nonce:
+            return "oauth_nonce"
+        case .timestamp:
+            return "oauth_timestamp"
+        case .consumerKey:
+            return "oauth_consumer_key"
+        case .signatureMethod:
+            return "oauth_signature_method"
+        case .version:
+            return "oauth_version"
+        case .callback:
+            return "oauth_callback"
+        case .signature:
+            return "oauth_signature"
+        case .token:
+            return "oauth_token"
+        case .permissions:
+            return "perms"
+        case .verifier:
+            return "oauth_verifier"
+        }
+    }
+}
+
+private enum OAuthRequestState {
+    case requestToken, accessToken
 }
 
 class AuthService {
@@ -34,6 +63,7 @@ class AuthService {
     private var signature: String {
         // Step zero: Signing requests
         let string = "GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Frequest_token&oauth_callback%3D\(callback)%253A%252F%252Fapp.com%26oauth_consumer_key%3D\(consumerKey)%26oauth_nonce%3D\(nonce)%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1305586162%26oauth_version%3D1.0"
+
         let encryptString = string.hmac(key: "\(consumerSecret)&")
         print("[SIGNATURE]: " + encryptString)
         
@@ -51,7 +81,7 @@ class AuthService {
     
     func login(presenter: ASWebAuthenticationPresentationContextProviding, completion: ((Result<String, Error>) -> Void)) {
         let params: [OAuthParameters: String] = [.callback: "\(callback)%253A%252F%252Fapp.com",.consumerKey: consumerKey,.nonce: nonce, .signatureMethod: "HMAC-SHA1", .timestamp: "1305586162",.version: "1.0"]
-        _ = sign(path: "https://www.flickr.com/services/oauth/request_token", parameters: params)
+        _ = signWithURL(path: "https://www.flickr.com/services/oauth/request_token", parameters: params)
         
         
         
@@ -100,31 +130,27 @@ class AuthService {
     
     // MARK: - Private functions
     
-    private func sign(path: String, parameters: [OAuthParameters:String], method: HTTPMethod = .GET) -> String {
-        //        var sign: String {
-        //            print("[SIGNATURE FOR EXCHANGE]: ")
-        //            print("Token Secret: \(tokenSecret!), Token: \(token), Verifier: \(verifier)")
-        //            let string = "GET&https%3A%2F%2Fwww.flickr.com%2Fservices%2Foauth%2Faccess_token&oauth_consumer_key%3D\(consumerKey)%26oauth_nonce%3D9q5613465%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1305586309%26oauth_token%3D\(token)%26oauth_verifier%3D\(verifier)%26oauth_version%3D1.0"
-        //            return string.hmac(key: "\(consumerSecret)&\(tokenSecret!)")
-        //        }
-        print("[SIGNATURE]: ")
+    private func signWithURL(path: String, parameters: [OAuthParameters:String], method: HTTPMethod = .GET) -> URL {
+        print(">> SIGNATURE: ")
         print("> Base string: ")
         let base = path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         print(base ?? "NIL")
         
         print("> Parameters: ")
-        let params = parameters.sorted { $0.0.rawValue < $1.0.rawValue }.map { (key, value) -> String in
-            return "\(key)%3D\(value)%26"
+        let params = parameters.sorted { $0.0.description < $1.0.description }.map { (key, value) -> String in
+            return "\(key.description)%3D\(value.description)%26"
         }
         print(params)
         print("> Total string: ")
-        let string = "\(method.rawValue)&\(base ?? "")&\(params)"
+        let string = "\(method.rawValue)&\(base ?? "")&\(params.joined().dropLast(3))"
         print(string)
         print("> Signature string: ")
-        let encryptString = string.hmac(key: "\(consumerKey)&\(tokenSecret ?? "")")
+        let encryptString = string.hmac(key: "\(consumerSecret)&\(tokenSecret ?? "")")
         print(encryptString)
         
-        return encryptString
+        let urlString = path + "?" + params.joined() + OAuthParameters.signature.description + "=" + encryptString
+        
+        return URL(fileURLWithPath: urlString.removingPercentEncoding ?? "")
     }
     
     
