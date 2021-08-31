@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140B526DE7344003EE7AA /* NetworkService.swift */; };
+		9F8140BB26DE83B1003EE7AA /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140BA26DE83B1003EE7AA /* Profile.swift */; };
 		9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */; };
 		9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */; };
 		9F92AC7126CFC2C200433CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC7026CFC2C200433CF3 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		9F8140B526DE7344003EE7AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		9F8140BA26DE83B1003EE7AA /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		9F92AC6926CFC2C200433CF3 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,9 +66,18 @@
 		9F8140B926DE7579003EE7AA /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9F8140BC26DE83BF003EE7AA /* Requests */,
 				9F8140B526DE7344003EE7AA /* NetworkService.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		9F8140BC26DE83BF003EE7AA /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				9F8140BA26DE83B1003EE7AA /* Profile.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		9F92AC6026CFC2C200433CF3 = {
@@ -182,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F92AC7126CFC2C200433CF3 /* ViewController.swift in Sources */,
+				9F8140BB26DE83B1003EE7AA /* Profile.swift in Sources */,
 				9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */,
 				9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */,
 				9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */,

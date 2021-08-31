@@ -17,7 +17,15 @@ class ViewController: UIViewController {
             switch result {
             case .success(let data):
                 let network = NetworkService(access: data)
-                print(network.accessToken)
+                network.getProfile { result in
+                    switch result {
+                    case .success(let data):
+                        print("DATA")
+                        print(data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
