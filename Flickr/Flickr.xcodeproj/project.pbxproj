@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140B526DE7344003EE7AA /* NetworkService.swift */; };
 		9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */; };
 		9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */; };
 		9F92AC7126CFC2C200433CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC7026CFC2C200433CF3 /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F8140B526DE7344003EE7AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		9F92AC6926CFC2C200433CF3 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F8140B726DE734E003EE7AA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9F92AC9026D2812B00433CF3 /* Encryption.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9F8140B826DE756B003EE7AA /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				9F92AC8A26CFDE0300433CF3 /* AuthService.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		9F8140B926DE7579003EE7AA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9F8140B526DE7344003EE7AA /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		9F92AC6026CFC2C200433CF3 = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +88,7 @@
 		9F92AC6B26CFC2C200433CF3 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				9F8140B726DE734E003EE7AA /* Extensions */,
 				9F92AC8926CFDDF200433CF3 /* Services */,
 				9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */,
 				9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */,
@@ -77,8 +104,8 @@
 		9F92AC8926CFDDF200433CF3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				9F92AC8A26CFDE0300433CF3 /* AuthService.swift */,
-				9F92AC9026D2812B00433CF3 /* Encryption.swift */,
+				9F8140B926DE7579003EE7AA /* Network */,
+				9F8140B826DE756B003EE7AA /* Auth */,
 				9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */,
 			);
 			path = Services;
@@ -160,6 +187,7 @@
 				9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */,
 				9F92AC9126D2812B00433CF3 /* Encryption.swift in Sources */,
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
+				9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

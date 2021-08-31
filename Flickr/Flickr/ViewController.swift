@@ -16,7 +16,8 @@ class ViewController: UIViewController {
         AuthService.shared.login(presenter: self) { result in
             switch result {
             case .success(let data):
-                print(data)
+                let network = NetworkService(access: data)
+                print(network.accessToken)
             case .failure(let error):
                 print(error)
             }
