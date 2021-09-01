@@ -26,7 +26,7 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
-                network.getHotList(apiKey: authData["api_key"] ?? "") { result in
+                network.getTagsHotList(apiKey: authData["api_key"] ?? "") { result in
                     switch result {
                     case .success(let data):
                         print("[!] Tags:")
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
-                network.getRecent(apiKey: authData["api_key"] ?? "", extras: "owner_name,last_update") { result in
+                network.getRecentPhotos(apiKey: authData["api_key"] ?? "", extras: "owner_name,last_update") { result in
                     switch result {
                     case .success(let data):
                         print("[!] Recent:")
@@ -44,10 +44,19 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
-                network.getInfo(apiKey: authData["api_key"] ?? "", photoID: "51416324487") { result in
+                network.getPhotoInfo(apiKey: authData["api_key"] ?? "", photoID: "51416324487") { result in
                     switch result {
                     case .success(let data):
                         print("[!] Info:")
+                        print(data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                network.getCommentsList(apiKey: authData["api_key"] ?? "", photoID: "51416324487") { result in
+                    switch result {
+                    case .success(let data):
+                        print("[!] Comments List:")
                         print(data)
                     case .failure(let error):
                         print(error)

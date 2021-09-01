@@ -8,7 +8,7 @@
 import Foundation
 
 extension NetworkService {
-    func getRecent(apiKey: String, extras: String? = nil, perPage: Int? = nil, page: Int? = nil, completion: @escaping (Result<String, Error>) -> Void) {
+    func getRecentPhotos(apiKey: String, extras: String? = nil, perPage: Int? = nil, page: Int? = nil, completion: @escaping (Result<String, Error>) -> Void) {
         var params = ["api_key": apiKey]
         if extras != nil { params["extras"] = extras }
         if perPage != nil { params["per_page"] = String(perPage!) }
@@ -23,7 +23,7 @@ extension NetworkService {
         }
     }
     
-    func getInfo(apiKey: String, photoID: String, secret: String? = nil, completion: @escaping (Result<String, Error>) -> Void) {
+    func getPhotoInfo(apiKey: String, photoID: String, secret: String? = nil, completion: @escaping (Result<String, Error>) -> Void) {
         var params = ["api_key": apiKey, "photo_id": photoID]
         if secret != nil { params["secret"] = secret }
         request(method: "flickr.photos.getInfo", parameters: params) { result in

@@ -8,7 +8,7 @@
 import Foundation
 
 extension NetworkService {
-    func getHotList(apiKey: String, period: Int? = nil, count: Int? = nil, completion: @escaping (Result<String, Error>) -> Void) {
+    func getTagsHotList(apiKey: String, period: Int? = nil, count: Int? = nil, completion: @escaping (Result<String, Error>) -> Void) {
         var params = ["api_key": apiKey]
         if period != nil { params["period"] = String(period!) }
         if count != nil { params["count"] = String(count!) }
