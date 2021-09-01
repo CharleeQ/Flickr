@@ -44,6 +44,15 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
+                network.getInfo(apiKey: authData["api_key"] ?? "", photoID: "51416324487") { result in
+                    switch result {
+                    case .success(let data):
+                        print("[!] Info:")
+                        print(data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
