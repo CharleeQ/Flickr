@@ -25,22 +25,41 @@ extension NetworkService {
         }
     }
     
-    func addComment(photoID: String, commentText: String, completion: @escaping (Result<String, Error>) -> Void) {
-        var nonce: String {
-            let temp = UUID().uuidString
-            let nonce = temp.replacingOccurrences(of: "-", with: "")
-            
-            return nonce
-        }
+    func addComment(photoID: String, commentText: String, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+        
         let params = ["oauth_consumer_key": consumerKey,
                       "oauth_nonce": nonce,
-                      "oauth_timestamp": String(Date().timeIntervalSince1970),
+                      "oauth_timestamp": timestamp,
                       "oauth_signature_method": "HMAC-SHA1",
                       "oauth_version": "1.0",
                       "oauth_token": accessToken,
                       "photo_id": photoID,
                       "comment_text": commentText,
+                      "format": format,
                       "method": "flickr.photos.comments.addComment"]
+        
+        request(http: .POST, parameters: params) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func deleteComment(photoID: String, commentID: String, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let params = ["oauth_consumer_key": consumerKey,
+                      "oauth_nonce": nonce,
+                      "oauth_timestamp": timestamp,
+                      "oauth_signature_method": "HMAC-SHA1",
+                      "oauth_version": "1.0",
+                      "oauth_token": accessToken,
+                      "photo_id": photoID,
+                      "comment_id": commentID,
+                      "format": format,
+                      "method": "flickr.photos.comments.deleteComment"]
         
         request(http: .POST, parameters: params) { result in
             switch result {

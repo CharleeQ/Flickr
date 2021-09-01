@@ -14,6 +14,15 @@ class NetworkService {
     let consumerSecret: String = "f1938a9c14a1d472"
     let accessToken: String
     let tokenSecret: String
+    var nonce: String {
+        let temp = UUID().uuidString
+        let nonce = temp.replacingOccurrences(of: "-", with: "")
+        
+        return nonce
+    }
+    var timestamp: String {
+        return String(Date().timeIntervalSince1970)
+    }
     
     init(accessToken: String, tokenSecret: String) {
         self.accessToken = accessToken
