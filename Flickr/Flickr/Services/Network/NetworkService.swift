@@ -10,17 +10,40 @@ import Foundation
 class NetworkService {
     let session = URLSession(configuration: .default)
     
-    func request(http: HTTPMethod = .GET, method: String, parameters: [String: String], completion: @escaping (Result<String, Error>) -> Void) {
-        let params = parameters
-            .map { (key, value) in "\(key)=\(value)" }
-            .joined(separator: "&")
-        let urlString = "https://www.flickr.com/services/rest/?method=\(method)&\(params)"
+    let consumerKey: String = "1877653cabad94b4cd42e56f49689e6c"
+    let consumerSecret: String = "f1938a9c14a1d472"
+    let accessToken: String
+    let tokenSecret: String
+    
+    init(accessToken: String, tokenSecret: String) {
+        self.accessToken = accessToken
+        self.tokenSecret = tokenSecret
+    }
+    
+    private func signWithURL(parameters: [String:String], method: HTTPMethod = .GET) -> URL? {
+        let base = "https://www.flickr.com/services/rest".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        var params = parameters
+            .sorted { $0.key < $1.key }
+            .map { (key, value) in "\(key)%3D\(value)" }
+            .joined(separator: "%26")
         
-        if let url = URL(string: urlString) {
+        let string = "\(method.rawValue)&\(base)&\(params)"
+        let encryptString = string.hmac(key: "\(consumerSecret)&\(tokenSecret)")
+        print(encryptString)
+        params.append("&oauth_signature=\(encryptString)")
+        let urlString = base + "?" + params
+        let url = URL(string: urlString.removingPercentEncoding!)
+
+        return url
+    }
+    
+    func request(http: HTTPMethod = .GET, parameters: [String: String], completion: @escaping (Result<String, Error>) -> Void) {
+        
+        if let url = signWithURL(parameters: parameters, method: http) {
             var request = URLRequest(url: url)
             request.httpMethod = "\(http.rawValue)"
             
-            session.dataTask(with: request) { data, _, error in
+            session.dataTask(with: request) { data, response, error in
                 if let data = data {
                     let string = String(data: data, encoding: .utf8)
                     if let string = string {

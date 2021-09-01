@@ -12,12 +12,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         AuthService.shared.login(presenter: self) { result in
             switch result {
             case .success(let authData):
-                let network = NetworkService()
-                network.getProfile(apiKey: authData["api_key"] ?? "", nsid: authData["user_nsid"] ?? "") { result in
+                print(authData)
+                let network = NetworkService(accessToken: authData["oauth_token"] ?? "", tokenSecret: authData["oauth_token_secret"] ?? "")
+                network.getProfile(nsid: "193759241%40N06") { result in
                     switch result {
                     case .success(let data):
                         print("[!] Profile:")
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
-                network.getTagsHotList(apiKey: authData["api_key"] ?? "") { result in
+                network.getTagsHotList() { result in
                     switch result {
                     case .success(let data):
                         print("[!] Tags:")
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
-                network.getRecentPhotos(apiKey: authData["api_key"] ?? "", extras: "owner_name,last_update") { result in
+                network.getRecentPhotos(extras: "owner_name,last_update") { result in
                     switch result {
                     case .success(let data):
                         print("[!] Recent:")
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
-                network.getPhotoInfo(apiKey: authData["api_key"] ?? "", photoID: "51416324487") { result in
+                network.getPhotoInfo(photoID: "51416324487") { result in
                     switch result {
                     case .success(let data):
                         print("[!] Info:")
@@ -53,10 +53,19 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
-                network.getCommentsList(apiKey: authData["api_key"] ?? "", photoID: "51416324487") { result in
+                network.getCommentsList(photoID: "51416324487") { result in
                     switch result {
                     case .success(let data):
                         print("[!] Comments List:")
+                        print(data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                network.addComment(photoID: "51416324487", commentText: "Hello") { result in
+                    switch result {
+                    case .success(let data):
+                        print("[!] Add Comment:")
                         print(data)
                     case .failure(let error):
                         print(error)

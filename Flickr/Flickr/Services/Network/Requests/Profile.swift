@@ -8,9 +8,12 @@
 import Foundation
 
 extension NetworkService {
-    func getProfile(apiKey: String, nsid: String, completion: @escaping (Result<String, Error>) -> Void) {
-        let params = ["api_key": apiKey, "user_id": nsid]
-        request(method: "flickr.profile.getProfile", parameters: params) { result in
+    func getProfile(nsid: String, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+        let params = ["api_key": consumerKey,
+                      "user_id": nsid,
+                      "method": "flickr.profile.getProfile",
+                      "format": format]
+        request(parameters: params) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))

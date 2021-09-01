@@ -8,12 +8,14 @@
 import Foundation
 
 extension NetworkService {
-    func getRecentPhotos(apiKey: String, extras: String? = nil, perPage: Int? = nil, page: Int? = nil, completion: @escaping (Result<String, Error>) -> Void) {
-        var params = ["api_key": apiKey]
-        if extras != nil { params["extras"] = extras }
-        if perPage != nil { params["per_page"] = String(perPage!) }
-        if page != nil { params["page"] = String(page!) }
-        request(method: "flickr.photos.getRecent", parameters: params) { result in
+    func getRecentPhotos(extras: String = "", perPage: Int = 100, page: Int = 1, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+        let params = ["api_key": consumerKey,
+                      "per_page": String(perPage),
+                      "page": String(page),
+                      "method": "flickr.photos.getRecent",
+                      "format": format,
+                      "extras": extras]
+        request(parameters: params) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))
@@ -23,10 +25,13 @@ extension NetworkService {
         }
     }
     
-    func getPhotoInfo(apiKey: String, photoID: String, secret: String? = nil, completion: @escaping (Result<String, Error>) -> Void) {
-        var params = ["api_key": apiKey, "photo_id": photoID]
-        if secret != nil { params["secret"] = secret }
-        request(method: "flickr.photos.getInfo", parameters: params) { result in
+    func getPhotoInfo(photoID: String, secret: String = "", format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+        let params = ["api_key": consumerKey,
+                      "photo_id": photoID,
+                      "secret": secret,
+                      "method": "flickr.photos.getInfo",
+                      "format": format]
+        request(parameters: params) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))

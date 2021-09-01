@@ -98,8 +98,7 @@ class AuthService {
                     case .success(let tokens):
                         self.exchangingTheRequestForAccess(request: tokens.0, verifier: tokens.1) { result in
                             switch result {
-                            case .success(var tokens):
-                                tokens["api_key"] = self.consumerKey
+                            case .success(let tokens):
                                 completion(.success(tokens))
                             case .failure(let error):
                                 completion(.failure(error))
