@@ -8,14 +8,13 @@
 import Foundation
 
 extension NetworkService {
-    // MARK: - Favorites no testing
     func getFavoriteList(userID: String, minFavoriteDate: Date? = nil, maxFavoriteDate: Date? = nil, extras: String = "", perPage: Int = 100, page: Int = 1, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
         var params = ["api_key": consumerKey,
-                      "user": userID,
+                      "user_id": userID,
                       "extras": extras,
                       "per_page": String(perPage),
                       "page": String(page),
-                      "method": "flickr.photos.comments.getList",
+                      "method": "flickr.favorites.getList",
                       "format": format]
         if minFavoriteDate != nil { params["min_fave_date"] = String(minFavoriteDate!.timeIntervalSince1970) }
         if maxFavoriteDate != nil { params["max_fave_date"] = String(maxFavoriteDate!.timeIntervalSince1970) }
@@ -51,7 +50,7 @@ extension NetworkService {
         }
     }
     
-    func removeFavorite(photoID: String, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func removeFavorite(photoID: String, completion: @escaping (Result<String, Error>) -> Void) {
         let params = ["oauth_consumer_key": consumerKey,
                       "oauth_nonce": nonce,
                       "oauth_timestamp": timestamp,
@@ -59,7 +58,6 @@ extension NetworkService {
                       "oauth_version": "1.0",
                       "oauth_token": accessToken,
                       "photo_id": photoID,
-                      "format": format,
                       "method": "flickr.favorites.remove"]
         
         request(http: .POST, parameters: params) { result in
