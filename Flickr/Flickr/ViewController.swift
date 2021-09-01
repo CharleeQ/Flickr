@@ -35,6 +35,15 @@ class ViewController: UIViewController {
                         print(error)
                     }
                 }
+                network.getRecent(apiKey: authData["api_key"] ?? "", extras: "owner_name,last_update") { result in
+                    switch result {
+                    case .success(let data):
+                        print("[!] Recent:")
+                        print(data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
