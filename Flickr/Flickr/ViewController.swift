@@ -12,15 +12,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         AuthService.shared.login(presenter: self) { result in
             switch result {
-            case .success(let data):
-                let network = NetworkService(access: data)
-                network.getProfile { result in
+            case .success(let authData):
+                let network = NetworkService()
+                network.getProfile(apiKey: authData["api_key"] ?? "", nsid: authData["user_nsid"] ?? "") { result in
                     switch result {
                     case .success(let data):
-                        print("DATA")
+                        print("[!] Profile:")
+                        print(data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                network.getHotList(apiKey: authData["api_key"] ?? "") { result in
+                    switch result {
+                    case .success(let data):
+                        print("[!] Tags:")
                         print(data)
                     case .failure(let error):
                         print(error)

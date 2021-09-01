@@ -79,11 +79,6 @@ class AuthService {
     private var timestamp: String {
         return String(Date().timeIntervalSince1970)
     }
-    
-    
-    // MARK: - Tokens
-    
-    private var accessToken: String?
     private var tokenSecret: String?
     
     
@@ -94,7 +89,7 @@ class AuthService {
     
     // MARK: - Intents
     
-    func login(presenter: ASWebAuthenticationPresentationContextProviding, completion: @escaping ((Result<String, Error>) -> Void)) {
+    func login(presenter: ASWebAuthenticationPresentationContextProviding, completion: @escaping ((Result<[String: String], Error>) -> Void)) {
         getARequestToken { result in
             switch result {
             case .success(let data):
@@ -103,10 +98,9 @@ class AuthService {
                     case .success(let tokens):
                         self.exchangingTheRequestForAccess(request: tokens.0, verifier: tokens.1) { result in
                             switch result {
-                            case .success(let tokens):
-                                self.accessToken = tokens.0
-                                self.tokenSecret = tokens.1
-                                completion(.success(tokens.0))
+                            case .success(var tokens):
+                                tokens["api_key"] = self.consumerKey
+                                completion(.success(tokens))
                             case .failure(let error):
                                 completion(.failure(error))
                             }
@@ -149,7 +143,6 @@ class AuthService {
                 dict[String(split.first!)] = String(split.last!)
             }
         }
-        print(dict)
         
         return dict
     }
@@ -172,7 +165,7 @@ class AuthService {
             if let data = data {
                 guard let string = String(data: data, encoding: .utf8) else { return }
                 let tokens = self.parsingTokens(of: string)
-                
+                print(tokens)
                 self.tokenSecret = tokens["oauth_token_secret"]
                 
                 if let requestToken = tokens["oauth_token"] {
@@ -205,7 +198,7 @@ class AuthService {
     }
     
     // Third step
-    private func exchangingTheRequestForAccess(request: String, verifier: String, completion: @escaping (Result<(String, String), Error>) -> Void) {
+    private func exchangingTheRequestForAccess(request: String, verifier: String, completion: @escaping (Result<[String: String], Error>) -> Void) {
         let params: [OAuthParameters: String] = [.consumerKey: consumerKey,
                                                  .nonce: nonce,
                                                  .signatureMethod: signatureMethod,
@@ -222,9 +215,8 @@ class AuthService {
                 guard let string = String(data: data, encoding: .utf8) else { return }
                 print(string)
                 let tokens = self.parsingTokens(of: string)
-                if let access = tokens["oauth_token"], let secret = tokens["oauth_token_secret"] {
-                    completion(.success((access, secret)))
-                }
+                completion(.success(tokens))
+                
             } else if let error = error {
                 completion(.failure(error))
             }
