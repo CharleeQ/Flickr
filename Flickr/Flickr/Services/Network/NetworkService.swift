@@ -35,8 +35,8 @@ class NetworkService {
         
         
         let base = path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        var paramsString = parameters
-            .sorted { $0.key.rawValue < $1.key.rawValue }
+        var paramsString = params
+            .sorted { $0.key < $1.key }
             .map { (key, value) in "\(key)%3D\(value)" }
             .joined(separator: "%26")
         

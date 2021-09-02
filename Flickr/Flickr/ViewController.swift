@@ -18,25 +18,25 @@ class ViewController: UIViewController {
                 print(authData)
                 let network = NetworkService(accessToken: authData["oauth_token"] ?? "", tokenSecret: authData["oauth_token_secret"] ?? "")
                 
-                network.getProfile(nsid: "193759241%40N06") { result in
-                    switch result {
-                    case .success(let data):
-                        print("[!] Profile:")
-                        print(data)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-                network.getTagsHotList(count: 5) { result in
-                    switch result {
-                    case .success(let data):
-                        print("[!] Tags:")
-                        print(data)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-//                network.getRecentPhotos(extras: "owner_name,last_update") { result in
+//                network.getProfile(nsid: "193759241%40N06") { result in
+//                    switch result {
+//                    case .success(let data):
+//                        print("[!] Profile:")
+//                        print(data)
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
+//                network.getTagsHotList(count: 5) { result in
+//                    switch result {
+//                    case .success(let data):
+//                        print("[!] Tags:")
+//                        print(data)
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
+//                network.getRecentPhotos(extras: "geo") { result in
 //                    switch result {
 //                    case .success(let data):
 //                        print("[!] Recent:")
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.getCommentsList(photoID: "51416324487") { result in
+//                network.getCommentsList(photoID: "51370339706") { result in
 //                    switch result {
 //                    case .success(let data):
 //                        print("[!] Comments List:")
@@ -63,7 +63,7 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.addComment(photoID: "51416324487", commentText: "Hello") { result in
+//                network.addComment(photoID: "51370339706", commentText: "Hello") { result in
 //                    switch result {
 //                    case .success(let data):
 //                        print("[!] Add Comment:")
@@ -72,7 +72,7 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.deleteComment(photoID: "51416324487", commentID: "193535940-51416324487-72157719771241642") { result in
+//                network.deleteComment(photoID: "51370339706", commentID: "38053722-51370339706-72157719765333219") { result in
 //                    switch result {
 //                    case .success(let data):
 //                        print("[!] Delete comment:")
@@ -81,7 +81,7 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.addFavorite(photoID: "50863449876") { result in
+//                network.addFavorite(photoID: "51370339706") { result in
 //                    switch result {
 //                    case .success(let data):
 //                        print("[!] Add favorite")
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
 //                    case .failure(let error):
 //                        print(error)
 //                    }
-//                }
+//                } // MARK: - no working
 //                network.getFavoriteList(userID: "193759241%40N06") { result in
 //                    switch result {
 //                    case .success(let data):
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.removeFavorite(photoID: "50863449876") { result in
+//                network.removeFavorite(photoID: "51370339706") { result in
 //                    switch result {
 //                    case .success(let data):
 //                        print("[!] Remove favorite")
