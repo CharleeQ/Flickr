@@ -8,7 +8,11 @@
 import Foundation
 
 extension NetworkService {
-    func getCommentsList(photoID: String, minCommentDate: Date? = nil, maxCommentDate: Date? = nil, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func getCommentsList(photoID: String,
+                         minCommentDate: Date? = nil,
+                         maxCommentDate: Date? = nil,
+                         format: String = "json",
+                         completion: @escaping (Result<String, Error>) -> Void) {
         var params = ["api_key": consumerKey,
                       "photo_id": photoID,
                       "method": "flickr.photos.comments.getList",
@@ -25,7 +29,10 @@ extension NetworkService {
         }
     }
     
-    func addComment(photoID: String, commentText: String, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func addComment(photoID: String,
+                    commentText: String,
+                    format: String = "json",
+                    completion: @escaping (Result<String, Error>) -> Void) {
         
         let params = ["oauth_consumer_key": consumerKey,
                       "oauth_nonce": nonce,
@@ -48,7 +55,10 @@ extension NetworkService {
         }
     }
     
-    func deleteComment(photoID: String, commentID: String, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func deleteComment(photoID: String,
+                       commentID: String,
+                       format: String = "json",
+                       completion: @escaping (Result<String, Error>) -> Void) {
         
         let params = ["oauth_consumer_key": consumerKey,
                       "oauth_nonce": nonce,

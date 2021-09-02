@@ -8,7 +8,14 @@
 import Foundation
 
 extension NetworkService {
-    func getFavoriteList(userID: String, minFavoriteDate: Date? = nil, maxFavoriteDate: Date? = nil, extras: String = "", perPage: Int = 100, page: Int = 1, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func getFavoriteList(userID: String,
+                         minFavoriteDate: Date? = nil,
+                         maxFavoriteDate: Date? = nil,
+                         extras: String = "",
+                         perPage: Int = 100,
+                         page: Int = 1,
+                         format: String = "json",
+                         completion: @escaping (Result<String, Error>) -> Void) {
         var params = ["api_key": consumerKey,
                       "user_id": userID,
                       "extras": extras,
@@ -29,7 +36,9 @@ extension NetworkService {
         }
     }
     
-    func addFavorite(photoID: String, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func addFavorite(photoID: String,
+                     format: String = "json",
+                     completion: @escaping (Result<String, Error>) -> Void) {
         let params = ["oauth_consumer_key": consumerKey,
                       "oauth_nonce": nonce,
                       "oauth_timestamp": timestamp,
@@ -50,7 +59,8 @@ extension NetworkService {
         }
     }
     
-    func removeFavorite(photoID: String, completion: @escaping (Result<String, Error>) -> Void) {
+    func removeFavorite(photoID: String,
+                        completion: @escaping (Result<String, Error>) -> Void) {
         let params = ["oauth_consumer_key": consumerKey,
                       "oauth_nonce": nonce,
                       "oauth_timestamp": timestamp,

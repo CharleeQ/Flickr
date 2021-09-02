@@ -8,7 +8,10 @@
 import Foundation
 
 extension NetworkService {
-    func getTagsHotList(period: String = "day", count: Int = 20, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func getTagsHotList(period: String = "day",
+                        count: Int = 20,
+                        format: String = "json",
+                        completion: @escaping (Result<String, Error>) -> Void) {
         let params = ["api_key": consumerKey,
                       "count": String(count),
                       "period": period,

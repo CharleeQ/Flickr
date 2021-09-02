@@ -8,7 +8,11 @@
 import Foundation
 
 extension NetworkService {
-    func getRecentPhotos(extras: String = "", perPage: Int = 100, page: Int = 1, format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func getRecentPhotos(extras: String = "",
+                         perPage: Int = 100,
+                         page: Int = 1,
+                         format: String = "json",
+                         completion: @escaping (Result<String, Error>) -> Void) {
         let params = ["api_key": consumerKey,
                       "per_page": String(perPage),
                       "page": String(page),
@@ -25,7 +29,10 @@ extension NetworkService {
         }
     }
     
-    func getPhotoInfo(photoID: String, secret: String = "", format: String = "json", completion: @escaping (Result<String, Error>) -> Void) {
+    func getPhotoInfo(photoID: String,
+                      secret: String = "",
+                      format: String = "json",
+                      completion: @escaping (Result<String, Error>) -> Void) {
         let params = ["api_key": consumerKey,
                       "photo_id": photoID,
                       "secret": secret,
