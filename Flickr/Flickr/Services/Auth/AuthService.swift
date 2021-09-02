@@ -8,46 +8,9 @@
 import UIKit
 import AuthenticationServices
 
-private enum OAuthParameters: String {
-    case nonce
-    case timestamp
-    case consumerKey
-    case signatureMethod
-    case version
-    case callback
-    case signature
-    case token
-    case permissions
-    case verifier
-    
-    var description: String {
-        switch self {
-        case .nonce:
-            return "oauth_nonce"
-        case .timestamp:
-            return "oauth_timestamp"
-        case .consumerKey:
-            return "oauth_consumer_key"
-        case .signatureMethod:
-            return "oauth_signature_method"
-        case .version:
-            return "oauth_version"
-        case .callback:
-            return "oauth_callback"
-        case .signature:
-            return "oauth_signature"
-        case .token:
-            return "oauth_token"
-        case .permissions:
-            return "perms"
-        case .verifier:
-            return "oauth_verifier"
-        }
-    }
-}
-
 private enum OAuthRequestState: String {
-    case requestToken, accessToken
+    case requestToken
+    case accessToken
     
     var description: String {
         switch self {
@@ -60,25 +23,7 @@ private enum OAuthRequestState: String {
 }
 
 class AuthService {
-    static let shared = AuthService()
-    
-    
-    // MARK: - Parameters
-    
-    private let consumerKey = "1877653cabad94b4cd42e56f49689e6c"
-    private let consumerSecret = "f1938a9c14a1d472"
-    private let version = "1.0"
-    private let signatureMethod = "HMAC-SHA1"
-    private let callbackScheme = "kiryl"
-    private var nonce: String {
-        let temp = UUID().uuidString
-        let nonce = temp.replacingOccurrences(of: "-", with: "")
-        
-        return nonce
-    }
-    private var timestamp: String {
-        return String(Date().timeIntervalSince1970)
-    }
+    private let constants = Constants()
     private var tokenSecret: String?
     
     
@@ -120,13 +65,13 @@ class AuthService {
     private func signWithURL(path: String, state: OAuthRequestState, parameters: [OAuthParameters:String], method: HTTPMethod = .GET) -> URL? {
         print(">> \(state.description.uppercased()) SIGNATURE: ")
         let base = (path + "/" + state.description).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        var params = parameters.sorted { $0.0.description < $1.0.description }.map { (key, value) -> String in
-            return "\(key.description)%3D\(value.description)%26"
+        var params = parameters.sorted { $0.0.rawValue < $1.0.rawValue }.map { (key, value) -> String in
+            return "\(key.rawValue)%3D\(value)%26"
         }
         let string = "\(method.rawValue)&\(base)&\(params.joined().dropLast(3))"
-        let encryptString = string.hmac(key: "\(consumerSecret)&\(tokenSecret ?? "")")
+        let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret ?? "")")
         print(encryptString)
-        params.append("\(OAuthParameters.signature.description)=\(encryptString)")
+        params.append("\(OAuthParameters.oauth_signature)=\(encryptString)")
         let urlString = path + "/" + state.description + "?" + params.joined()
         let url = URL(string: urlString.removingPercentEncoding!)
         
@@ -151,12 +96,12 @@ class AuthService {
     
     // First step
     private func getARequestToken(completion: @escaping (Result<String, Error>) -> Void) {
-        let params: [OAuthParameters: String] = [.callback: "\(callbackScheme)%253A%252F%252F",
-                                                 .consumerKey: consumerKey,
-                                                 .nonce: nonce,
-                                                 .signatureMethod: signatureMethod,
-                                                 .timestamp: timestamp,
-                                                 .version: version]
+        let params: [OAuthParameters: String] = [.oauth_callback: "\(constants.callbackScheme)%253A%252F%252F",
+                                                 .oauth_consumer_key: constants.consumerKey,
+                                                 .oauth_nonce: constants.nonce,
+                                                 .oauth_signature_method: constants.signatureMethod,
+                                                 .oauth_timestamp: constants.timestamp,
+                                                 .oauth_version: constants.version]
         guard let url = signWithURL(path: "https://www.flickr.com/services/oauth", state: .requestToken, parameters: params) else { return }
         
         let urlRequest = URLRequest(url: url)
@@ -180,7 +125,7 @@ class AuthService {
     private func getTheUserAuthorization(presenter: ASWebAuthenticationPresentationContextProviding, token: String, completion: @escaping (Result<(String, String), Error>) -> Void) {
         guard let url = URL(string: "https://www.flickr.com/services/oauth/authorize?oauth_token=\(token)") else { return }
         
-        let signSession = ASWebAuthenticationSession(url: url, callbackURLScheme: callbackScheme) { callbackURL, error in
+        let signSession = ASWebAuthenticationSession(url: url, callbackURLScheme: constants.callbackScheme) { callbackURL, error in
             if let callbackURL = callbackURL {
                 let tokens = self.parsingTokens(of: callbackURL.query ?? "")
                 if let token = tokens["oauth_token"], let verifier = tokens["oauth_verifier"] {
@@ -198,13 +143,13 @@ class AuthService {
     
     // Third step
     private func exchangingTheRequestForAccess(request: String, verifier: String, completion: @escaping (Result<[String: String], Error>) -> Void) {
-        let params: [OAuthParameters: String] = [.consumerKey: consumerKey,
-                                                 .nonce: nonce,
-                                                 .signatureMethod: signatureMethod,
-                                                 .timestamp: timestamp,
-                                                 .version: version,
-                                                 .verifier: verifier,
-                                                 .token: request]
+        let params: [OAuthParameters: String] = [.oauth_consumer_key: constants.consumerKey,
+                                                 .oauth_nonce: constants.nonce,
+                                                 .oauth_signature_method: constants.signatureMethod,
+                                                 .oauth_timestamp: constants.timestamp,
+                                                 .oauth_version: constants.version,
+                                                 .oauth_verifier: verifier,
+                                                 .oauth_token: request]
         guard let url = signWithURL(path: "https://www.flickr.com/services/oauth",
                                     state: .accessToken, parameters: params) else { return }
         
