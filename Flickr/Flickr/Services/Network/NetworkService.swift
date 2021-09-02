@@ -8,11 +8,11 @@
 import Foundation
 
 class NetworkService {
-    let session = URLSession(configuration: .default)
+    private let session = URLSession(configuration: .default)
     
     let constants = Constants()
-    let tokenSecret: String
-    let accessToken: String
+    private let tokenSecret: String
+    private let accessToken: String
     
     private let path = "https://www.flickr.com/services/rest"
     
@@ -31,6 +31,7 @@ class NetworkService {
         params[OAuthParameters.oauth_signature_method.rawValue] = constants.signatureMethod
         params[OAuthParameters.oauth_timestamp.rawValue] = constants.timestamp
         params[OAuthParameters.oauth_version.rawValue] = constants.version
+        params[OAuthParameters.oauth_token.rawValue] = accessToken
         
         
         let base = path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
@@ -82,9 +83,12 @@ class NetworkService {
     
     // MARK: - Request with OAuth
     
-    func requestWithOAuth(http: HTTPMethod = .GET, parameters: [NetworkParameters: String], completion: @escaping (Result<String, Error>) -> Void) {
+    func requestWithOAuth(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: String], completion: @escaping (Result<String, Error>) -> Void) {
+        var params = parameters
+        params[.format] = "json"
+        params[.method] = method
         
-        if let url = signWithURL(parameters: parameters, method: http) {
+        if let url = signWithURL(parameters: params, method: http) {
             var request = URLRequest(url: url)
             request.httpMethod = "\(http.rawValue)"
             

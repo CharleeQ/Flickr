@@ -1,11 +1,11 @@
+////
+////  People.swift
+////  Flickr
+////
+////  Created by Кирилл Какареко on 02.09.2021.
+////
 //
-//  People.swift
-//  Flickr
-//
-//  Created by Кирилл Какареко on 02.09.2021.
-//
-
-import Foundation
+//import Foundation
 //
 //extension NetworkService {
 //    func getPhotos(userID: String,
@@ -27,7 +27,7 @@ import Foundation
 //                      "oauth_version": "1.0",
 //                      "oauth_token": accessToken,
 //                      "method": "flickr.favorites.remove"]
-//        
+//
 //        request(http: .POST, parameters: params) { result in
 //            switch result {
 //            case .success(let data):

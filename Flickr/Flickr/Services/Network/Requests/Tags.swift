@@ -16,7 +16,8 @@ extension NetworkService {
     func getTagsHotList(period: Period = .day,
                         count: Int = 20,
                         completion: @escaping (Result<String, Error>) -> Void) {
-        request(method: "flickr.tags.getHotList", parameters: [.count: count, .period: period]) { result in
+        request(method: "flickr.tags.getHotList", parameters: [.count: count,
+                                                               .period: period]) { result in
             switch result {
             case .success(let data):
                 completion(.success(data))

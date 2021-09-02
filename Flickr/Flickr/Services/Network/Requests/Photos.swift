@@ -1,50 +1,40 @@
-////
-////  Photo.swift
-////  Flickr
-////
-////  Created by Кирилл Какареко on 01.09.2021.
-////
 //
-//import Foundation
+//  Photo.swift
+//  Flickr
 //
-//extension NetworkService {
-//    func getRecentPhotos(extras: String = "",
-//                         perPage: Int = 100,
-//                         page: Int = 1,
-//                         format: String = "json",
-//                         completion: @escaping (Result<String, Error>) -> Void) {
-//        let params = ["api_key": constants.consumerKey,
-//                      "per_page": String(perPage),
-//                      "page": String(page),
-//                      "method": "flickr.photos.getRecent",
-//                      "format": format,
-//                      "extras": extras]
-//        request(parameters: params) { result in
-//            switch result {
-//            case .success(let data):
-//                completion(.success(data))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-//    
-//    func getPhotoInfo(photoID: String,
-//                      secret: String = "",
-//                      format: String = "json",
-//                      completion: @escaping (Result<String, Error>) -> Void) {
-//        let params = ["api_key": constants.consumerKey,
-//                      "photo_id": photoID,
-//                      "secret": secret,
-//                      "method": "flickr.photos.getInfo",
-//                      "format": format]
-//        request(parameters: params) { result in
-//            switch result {
-//            case .success(let data):
-//                completion(.success(data))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-//}
+//  Created by Кирилл Какареко on 01.09.2021.
+//
+
+import Foundation
+
+extension NetworkService {
+    func getRecentPhotos(extras: String = "",
+                         perPage: Int = 100,
+                         page: Int = 1,
+                         completion: @escaping (Result<String, Error>) -> Void) {
+        request(method: "flickr.photos.getRecent", parameters: [.per_page: perPage,
+                                                                .page: page,
+                                                                .extras: extras]) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func getPhotoInfo(photoID: String,
+                      secret: String = "",
+                      completion: @escaping (Result<String, Error>) -> Void) {
+        request(method: "flickr.photos.getInfo", parameters: [.photo_id: photoID,
+                                                              .secret: secret]) { result in
+            switch result {
+            case .success(let data):
+                completion(.success(data))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+}
