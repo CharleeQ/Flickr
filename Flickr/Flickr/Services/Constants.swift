@@ -22,4 +22,5 @@ struct Constants {
     var timestamp: String {
         return String(Date().timeIntervalSince1970)
     }
+    let perms = "delete"
 }

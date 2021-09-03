@@ -123,7 +123,7 @@ class AuthService {
     
     // Second step
     private func getTheUserAuthorization(presenter: ASWebAuthenticationPresentationContextProviding, token: String, completion: @escaping (Result<(String, String), Error>) -> Void) {
-        guard let url = URL(string: "https://www.flickr.com/services/oauth/authorize?oauth_token=\(token)") else { return }
+        guard let url = URL(string: "https://www.flickr.com/services/oauth/authorize?oauth_token=\(token)&\(OAuthParameters.perms.rawValue)=\(constants.perms)") else { return }
         
         let signSession = ASWebAuthenticationSession(url: url, callbackURLScheme: constants.callbackScheme) { callbackURL, error in
             if let callbackURL = callbackURL {

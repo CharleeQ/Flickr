@@ -46,7 +46,7 @@ class NetworkService {
         paramsString.append("&\(OAuthParameters.oauth_signature.rawValue)=\(encryptString)")
         let urlString = base + "?" + paramsString
         let url = URL(string: urlString.removingPercentEncoding!)
-        print(url?.absoluteString)
+        
         return url
     }
     

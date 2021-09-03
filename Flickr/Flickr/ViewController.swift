@@ -108,10 +108,19 @@ class ViewController: UIViewController {
                 //                        print(error)
                 //                    }
                 //                }
-                network.getPhotos(userID: "193759241%40N06") { result in
+                //                network.getPhotos(userID: "193759241%40N06") { result in
+                //                    switch result {
+                //                    case .success(let data):
+                //                        print("[!] Get Photos")
+                //                        print(data)
+                //                    case .failure(let error):
+                //                        print(error)
+                //                    }
+                //                }
+                network.deletePhoto(photoID: "51422206124") { result in
                     switch result {
                     case .success(let data):
-                        print("[!] Get Photos")
+                        print("[!] Delete photo")
                         print(data)
                     case .failure(let error):
                         print(error)
