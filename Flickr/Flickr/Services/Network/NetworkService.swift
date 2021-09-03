@@ -46,7 +46,7 @@ class NetworkService {
         paramsString.append("&\(OAuthParameters.oauth_signature.rawValue)=\(encryptString)")
         let urlString = base + "?" + paramsString
         let url = URL(string: urlString.removingPercentEncoding!)
-        
+        print(url?.absoluteString)
         return url
     }
     
@@ -83,7 +83,7 @@ class NetworkService {
     
     // MARK: - Request with OAuth
     
-    func requestWithOAuth(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: String], completion: @escaping (Result<String, Error>) -> Void) {
+    func requestWithOAuth(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], completion: @escaping (Result<String, Error>) -> Void) {
         var params = parameters
         params[.format] = "json"
         params[.method] = method
