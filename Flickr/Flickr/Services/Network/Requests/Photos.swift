@@ -17,7 +17,7 @@ extension NetworkService {
                                                                 .extras: extras]) { result in
             switch result {
             case .success(let data):
-                completion(.success(data))
+                completion(.success(data.base64EncodedString()))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -31,7 +31,7 @@ extension NetworkService {
                                                               .secret: secret]) { result in
             switch result {
             case .success(let data):
-                completion(.success(data))
+                completion(.success(data.base64EncodedString()))
             case .failure(let error):
                 completion(.failure(error))
             }

@@ -19,9 +19,12 @@ class ViewController: UIViewController {
                 let network = NetworkService(accessToken: authData["oauth_token"] ?? "", tokenSecret: authData["oauth_token_secret"] ?? "")
                 network.getProfile(nsid: "193759241%40N06") { result in
                     switch result {
-                    case .success(let data):
+                    case .success(let profile):
                         print("[!] Profile:")
-                        print(data)
+                        print(profile.firstName + " " + profile.lastName)
+                        print("ID: " + profile.id)
+                        guard let country = profile.country, let city = profile.city else { return }
+                        print("Location: " + country + ", " + city)
                     case .failure(let error):
                         print(error)
                     }

@@ -33,6 +33,7 @@ enum NetworkParameters: String {
     case max_taken_date
     case content_type
     case privacy_filter
+    case nojsoncallback
 }
 
 enum OAuthParameters: String {

@@ -70,7 +70,6 @@ extension NetworkService {
         data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
         
         session.uploadTask(with: urlRequest, from: data) { data, response, error in
-            print(response)
             guard error == nil else {
                 completion(.failure(error!))
                 return

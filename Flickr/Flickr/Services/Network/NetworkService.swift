@@ -53,9 +53,10 @@ class NetworkService {
     
     // MARK: - Request without OAuth
     
-    func request(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], completion: @escaping (Result<String, Error>) -> Void) {
+    func request(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], completion: @escaping (Result<Data, Error>) -> Void) {
         var params = parameters
         params[.format] = "json"
+        params[.nojsoncallback] = "1"
         params[.method] = method
         params[.api_key] = constants.consumerKey
         let paramsString = params.map { (key, value) in "\(key.rawValue)=\(value)" }
@@ -69,10 +70,7 @@ class NetworkService {
             
             session.dataTask(with: request) { data, response, error in
                 if let data = data {
-                    let string = String(data: data, encoding: .utf8)
-                    if let string = string {
-                        completion(.success(string))
-                    }
+                    completion(.success(data))
                 } else if let error = error {
                     completion(.failure(error))
                 }

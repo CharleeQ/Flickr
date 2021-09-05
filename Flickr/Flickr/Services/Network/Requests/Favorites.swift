@@ -23,7 +23,7 @@ extension NetworkService {
                                                                  .max_fave_date: maxFavoriteDate?.timeIntervalSince1970 ?? ""*/]) { result in
             switch result {
             case .success(let data):
-                completion(.success(data))
+                completion(.success(data.base64EncodedString()))
             case .failure(let error):
                 completion(.failure(error))
             }
