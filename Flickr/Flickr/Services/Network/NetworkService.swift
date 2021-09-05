@@ -11,8 +11,8 @@ class NetworkService {
     private let session = URLSession(configuration: .default)
     
     let constants = Constants()
-    private let tokenSecret: String
-    private let accessToken: String
+    let tokenSecret: String
+    let accessToken: String
     
     private let path = "https://www.flickr.com/services/rest"
     
@@ -21,7 +21,7 @@ class NetworkService {
         self.tokenSecret = tokenSecret
     }
     
-    func signWithURL(parameters: [NetworkParameters: Any], method: HTTPMethod = .GET) -> URL? {
+    private func signWithURL(parameters: [NetworkParameters: Any], method: HTTPMethod = .GET) -> URL? {
         var params: [String: Any] = [:]
         parameters.forEach { key, value in
             params[key.rawValue] = value

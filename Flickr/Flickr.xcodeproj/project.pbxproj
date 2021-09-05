@@ -16,6 +16,9 @@
 		9F8140C826E0F1DA003EE7AA /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140C726E0F1DA003EE7AA /* People.swift */; };
 		9F8140CA26E115D3003EE7AA /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140C926E115D3003EE7AA /* Parameters.swift */; };
 		9F8140CC26E11621003EE7AA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140CB26E11621003EE7AA /* Constants.swift */; };
+		9F8140D026E4BEBC003EE7AA /* UploadPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140CF26E4BEBC003EE7AA /* UploadPhoto.swift */; };
+		9F8140D326E4E66B003EE7AA /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140D226E4E66B003EE7AA /* Photo.swift */; };
+		9F8140D526E4E67A003EE7AA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140D426E4E67A003EE7AA /* User.swift */; };
 		9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */; };
 		9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */; };
 		9F92AC7126CFC2C200433CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC7026CFC2C200433CF3 /* ViewController.swift */; };
@@ -37,6 +40,9 @@
 		9F8140C726E0F1DA003EE7AA /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		9F8140C926E115D3003EE7AA /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
 		9F8140CB26E11621003EE7AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9F8140CF26E4BEBC003EE7AA /* UploadPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhoto.swift; sourceTree = "<group>"; };
+		9F8140D226E4E66B003EE7AA /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		9F8140D426E4E67A003EE7AA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9F92AC6926CFC2C200433CF3 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,8 +101,18 @@
 				9F8140C326DFACD4003EE7AA /* Photos.Comments.swift */,
 				9F8140C526DFF258003EE7AA /* Favorites.swift */,
 				9F8140C726E0F1DA003EE7AA /* People.swift */,
+				9F8140CF26E4BEBC003EE7AA /* UploadPhoto.swift */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		9F8140D126E4E657003EE7AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9F8140D226E4E66B003EE7AA /* Photo.swift */,
+				9F8140D426E4E67A003EE7AA /* User.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9F92AC6026CFC2C200433CF3 = {
@@ -118,6 +134,7 @@
 		9F92AC6B26CFC2C200433CF3 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				9F8140D126E4E657003EE7AA /* Model */,
 				9F8140B726DE734E003EE7AA /* Extensions */,
 				9F92AC8926CFDDF200433CF3 /* Services */,
 				9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */,
@@ -223,8 +240,11 @@
 				9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */,
 				9F8140C026DF9F09003EE7AA /* Tags.swift in Sources */,
 				9F8140C426DFACD4003EE7AA /* Photos.Comments.swift in Sources */,
+				9F8140D326E4E66B003EE7AA /* Photo.swift in Sources */,
 				9F92AC9126D2812B00433CF3 /* Encryption.swift in Sources */,
+				9F8140D026E4BEBC003EE7AA /* UploadPhoto.swift in Sources */,
 				9F8140C626DFF258003EE7AA /* Favorites.swift in Sources */,
+				9F8140D526E4E67A003EE7AA /* User.swift in Sources */,
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
 				9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */,
 				9F8140C826E0F1DA003EE7AA /* People.swift in Sources */,
