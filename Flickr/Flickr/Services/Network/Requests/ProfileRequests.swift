@@ -14,14 +14,9 @@ extension NetworkService {
             switch result {
             case .success(let data):
                 do {
-                    let string = String(data: data, encoding: .utf8)
-                    if let string = string {
-                        print(string)
-                    }
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let json = try decoder.decode(JsonFlickrApi.self, from: data)
-                    
+                    let json = try decoder.decode(ProfileFlickrApi.self, from: data)
                     completion(.success(json.profile))
                 } catch let error {
                     completion(.failure(error))

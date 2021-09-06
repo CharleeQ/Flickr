@@ -75,7 +75,9 @@ extension NetworkService {
                 return
             }
             guard let data = data else { return }
-            completion(.success(data.base64EncodedString()))
+            if let string = String(data: data, encoding: .utf8) {
+                completion(.success(string))
+            }
         }.resume()
     }
 }

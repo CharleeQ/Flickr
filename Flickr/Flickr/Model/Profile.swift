@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct JsonFlickrApi: Decodable {
-    let profile: Profile
+struct ProfileFlickrApi: Decodable {
     let stat: String
+    let profile: Profile
 }
 
 struct Profile: Decodable {

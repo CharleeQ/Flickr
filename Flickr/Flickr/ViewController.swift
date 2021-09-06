@@ -17,23 +17,25 @@ class ViewController: UIViewController {
             case .success(let authData):
                 print(authData)
                 let network = NetworkService(accessToken: authData["oauth_token"] ?? "", tokenSecret: authData["oauth_token_secret"] ?? "")
-                network.getProfile(nsid: "193759241%40N06") { result in
-                    switch result {
-                    case .success(let profile):
-                        print("[!] Profile:")
-                        print(profile.firstName + " " + profile.lastName)
-                        print("ID: " + profile.id)
-                        guard let country = profile.country, let city = profile.city else { return }
-                        print("Location: " + country + ", " + city)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
+//                network.getProfile(nsid: "193759241%40N06") { result in
+//                    switch result {
+//                    case .success(let profile):
+//                        print("[!] Profile:")
+//                        print(profile.firstName + " " + profile.lastName)
+//                        print("ID: " + profile.id)
+//                        guard let country = profile.country, let city = profile.city else { return }
+//                        print("Location: " + country + ", " + city)
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
 //                network.getTagsHotList(count: 5) { result in
 //                    switch result {
-//                    case .success(let data):
+//                    case .success(let hottags):
 //                        print("[!] Tags:")
-//                        print(data)
+//                        hottags.forEach { tag in
+//                            print("Tag: " + tag.content)
+//                        }
 //                    case .failure(let error):
 //                        print(error)
 //                    }
@@ -128,15 +130,15 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.uploadPhoto(fileName: "00_onboarding.png", image: UIImage(named: "00_onboarding")!, title: "Onboarding", description: "Test image") { result in
-//                    switch result {
-//                    case .success(let data):
-//                        print("[!] Upload photo")
-//                        print(data)
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//                }
+                network.uploadPhoto(fileName: "00_onboarding.png", image: UIImage(named: "00_onboarding")!, title: "Onboarding", description: "Test image") { result in
+                    switch result {
+                    case .success(let data):
+                        print("[!] Upload photo")
+                        print(data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
 //                not working upload
             case .failure(let error):
                 print(error)

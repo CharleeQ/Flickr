@@ -17,7 +17,10 @@ extension NetworkService {
                                                                        .max_comment_date: maxCommentDate?.timeIntervalSince1970 ?? "" */]) { result in
             switch result {
             case .success(let data):
-                completion(.success(data.base64EncodedString()))
+                let string = String(data: data, encoding: .utf8)
+                if let string = string {
+                    completion(.success(string))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }

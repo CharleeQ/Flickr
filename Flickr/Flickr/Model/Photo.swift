@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct PhotoFlickrApi: Decodable {
+    let photo: Photo
+    let stat: String
+}
+
+struct Photo: Decodable {
+    
+}
+
