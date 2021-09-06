@@ -40,33 +40,37 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.getRecentPhotos(extras: "geo") { result in
-//                    switch result {
-//                    case .success(let data):
-//                        print("[!] Recent:")
-//                        print(data)
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//                }
-//                network.getPhotoInfo(photoID: "51416324487") { result in
-//                    switch result {
-//                    case .success(let data):
-//                        print("[!] Info:")
-//                        print(data)
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//                }
-//                network.getCommentsList(photoID: "51370339706") { result in
-//                    switch result {
-//                    case .success(let data):
-//                        print("[!] Comments List:")
-//                        print(data)
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//                }
+                network.getRecentPhotos(extras: "geo") { result in
+                    switch result {
+                    case .success(let photos):
+                        print("[!][!] Recent photos:")
+                        photos.forEach { print($0) }
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                network.getPhotoInfo(photoID: "51416324487") { result in
+                    switch result {
+                    case .success(let photo):
+                        print("[!][!] Photo info:")
+                        print("ID photo: " + photo.id)
+                        print("Owner: " + photo.owner.username)
+                        print("Location: " + photo.owner.location)
+                        print("Title: " + photo.title.content)
+                        print("Description: " + photo.description.content)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+                network.getCommentsList(photoID: "51370339706") { result in
+                    switch result {
+                    case .success(let data):
+                        print("[!][!] GET COMMENT LIST:")
+                        print(data)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
 //                network.addComment(photoID: "51370339706", commentText: "Hello") { result in
 //                    switch result {
 //                    case .success(let data):

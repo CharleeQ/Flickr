@@ -9,7 +9,7 @@ import Foundation
 
 extension NetworkService {
     func getProfile(nsid: String,
-                    completion: @escaping (Result<Profile, Error>) -> Void) {
+                    completion: @escaping (Result<ProfileFlickrApi.Profile, Error>) -> Void) {
         request(method: "flickr.profile.getProfile", parameters: [.user_id: nsid]) { result in
             switch result {
             case .success(let data):

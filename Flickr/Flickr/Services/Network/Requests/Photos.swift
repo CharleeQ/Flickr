@@ -11,15 +11,20 @@ extension NetworkService {
     func getRecentPhotos(extras: String = "",
                          perPage: Int = 100,
                          page: Int = 1,
-                         completion: @escaping (Result<String, Error>) -> Void) {
+                         completion: @escaping (Result<[RecentFlickrApi.Photos.Photo], Error>) -> Void) {
         request(method: "flickr.photos.getRecent", parameters: [.per_page: perPage,
                                                                 .page: page,
                                                                 .extras: extras]) { result in
             switch result {
             case .success(let data):
-                let string = String(data: data, encoding: .utf8)
-                if let string = string {
-                    completion(.success(string))
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    
+                    let json = try decoder.decode(RecentFlickrApi.self, from: data)
+                    completion(.success(json.photos.photo))
+                } catch let error {
+                    completion(.failure(error))
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -29,14 +34,19 @@ extension NetworkService {
     
     func getPhotoInfo(photoID: String,
                       secret: String = "",
-                      completion: @escaping (Result<String, Error>) -> Void) {
+                      completion: @escaping (Result<PhotoFlickrApi.Photo, Error>) -> Void) {
         request(method: "flickr.photos.getInfo", parameters: [.photo_id: photoID,
                                                               .secret: secret]) { result in
             switch result {
             case .success(let data):
-                let string = String(data: data, encoding: .utf8)
-                if let string = string {
-                    completion(.success(string))
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    
+                    let json = try decoder.decode(PhotoFlickrApi.self, from: data)
+                    completion(.success(json.photo))
+                } catch let error {
+                    completion(.failure(error))
                 }
             case .failure(let error):
                 completion(.failure(error))

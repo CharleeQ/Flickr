@@ -15,7 +15,7 @@ enum Period: String {
 extension NetworkService {
     func getTagsHotList(period: Period = .day,
                         count: Int = 20,
-                        completion: @escaping (Result<[Tag], Error>) -> Void) {
+                        completion: @escaping (Result<[TagsFlickrApi.HotTags.Tag], Error>) -> Void) {
         request(method: "flickr.tags.getHotList", parameters: [.count: count,
                                                                .period: period]) { result in
             switch result {

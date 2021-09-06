@@ -21,6 +21,15 @@ extension NetworkService {
                 if let string = string {
                     completion(.success(string))
                 }
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    
+                    let json = try decoder.decode(PhotoFlickrApi.self, from: data)
+                    completion(.success(json.photo))
+                } catch let error {
+                    completion(.failure(error))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }
