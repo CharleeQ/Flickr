@@ -58,7 +58,13 @@ extension NetworkService {
         requestWithOAuth(http: .POST, method: "flickr.photos.delete", parameters: [.photo_id: photoID]) { result in
             switch result {
             case .success(let data):
-                completion(.success(data))
+                do {
+                    let decoder = JSONDecoder()
+                    let json = try decoder.decode(DeletePhotoFlickrApi.self, from: data)
+                    completion(.success(json.stat))
+                } catch let error {
+                    completion(.failure(error))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }

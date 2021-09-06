@@ -40,96 +40,102 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-                network.getRecentPhotos(extras: "geo") { result in
-                    switch result {
-                    case .success(let photos):
-                        print("[!][!] Recent photos:")
-                        photos.forEach { print($0) }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-                network.getPhotoInfo(photoID: "51416324487") { result in
-                    switch result {
-                    case .success(let photo):
-                        print("[!][!] Photo info:")
-                        print("ID photo: " + photo.id)
-                        print("Owner: " + photo.owner.username)
-                        print("Location: " + photo.owner.location)
-                        print("Title: " + photo.title.content)
-                        print("Description: " + photo.description.content)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-                network.getCommentsList(photoID: "51370339706") { result in
-                    switch result {
-                    case .success(let data):
-                        print("[!][!] GET COMMENT LIST:")
-                        print(data)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-//                network.addComment(photoID: "51370339706", commentText: "Hello") { result in
+//                network.getRecentPhotos(extras: "geo") { result in
 //                    switch result {
-//                    case .success(let data):
-//                        print("[!] Add Comment:")
-//                        print(data)
+//                    case .success(let photos):
+//                        print("[!][!] Recent photos:")
+//                        photos.forEach { print($0) }
 //                    case .failure(let error):
 //                        print(error)
 //                    }
 //                }
-//                network.deleteComment(photoID: "51370339706", commentID: "38053722-51370339706-72157719765333219") { result in
+//                network.getPhotoInfo(photoID: "51416324487") { result in
+//                    switch result {
+//                    case .success(let photo):
+//                        print("[!][!] Photo info:")
+//                        print("ID photo: " + photo.id)
+//                        print("Owner: " + photo.owner.username)
+//                        print("Location: " + photo.owner.location)
+//                        print("Title: " + photo.title.content)
+//                        print("Description: " + photo.description.content)
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
+//                network.getCommentsList(photoID: "51370339706") { result in
+//                    switch result {
+//                    case .success(let comments):
+//                        print("[!][!] Comments:")
+//                        comments.forEach { comment in
+//                            print("Comment: " + comment.content)
+//                            print("Author: " + comment.realname)
+//                            print("Comment ID: " + comment.id)
+//                            print("___________________________")
+//                        }
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
+//                network.addComment(photoID: "51370339706", commentText: "Amazing") { result in
+//                    switch result {
+//                    case .success(let comment):
+//                        print("[!] Add Comment:")
+//                        print("Comment: \(comment.content)\nID: \(comment.id)\nAuthor: \(comment.realname)")
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
+//                network.deleteComment(photoID: "51370339706", commentID: "38053722-51370339706-72157719835319750") { result in
 //                    switch result {
 //                    case .success(let data):
-//                        print("[!] Delete comment:")
-//                        print(data)
+//                        print("[!] Delete status: \(data)")
 //                    case .failure(let error):
 //                        print(error)
 //                    }
 //                }
 //                network.addFavorite(photoID: "51370339706") { result in
 //                    switch result {
-//                    case .success(let data):
-//                        print("[!] Add favorite")
-//                        print(data)
+//                    case .success(let status):
+//                        print("[!] Add favorite status: \(status)")
 //                    case .failure(let error):
 //                        print(error)
 //                    }
 //                }
 //                network.getFavoriteList(userID: "193759241%40N06") { result in
 //                    switch result {
-//                    case .success(let data):
+//                    case .success(let fave):
 //                        print("[!] Favorites")
-//                        print(data)
+//                        fave.forEach { fave in
+//                            print("ID photo: \(fave.id)\nTitle: \(fave.title)\n________")
+//                        }
 //                    case .failure(let error):
 //                        print(error)
 //                    }
 //                }
 //                network.removeFavorite(photoID: "51370339706") { result in
 //                    switch result {
-//                    case .success(let data):
-//                        print("[!] Remove favorite")
-//                        print(data)
+//                    case .success(let status):
+//                        print("[!] Remove favorite status: \(status)")
 //                    case .failure(let error):
 //                        print(error)
 //                    }
 //                }
 //                network.getPhotos(userID: "193759241%40N06") { result in
 //                    switch result {
-//                    case .success(let data):
+//                    case .success(let photos):
 //                        print("[!] Get Photos")
-//                        print(data)
+//                        photos.forEach { photo in
+//                            print("ID photo: " + photo.id)
+//                            print("Title: " + photo.title)
+//                        }
 //                    case .failure(let error):
 //                        print(error)
 //                    }
 //                }
-//                network.deletePhoto(photoID: "51422206124") { result in
+//                network.deletePhoto(photoID: "51421698278") { result in
 //                    switch result {
-//                    case .success(let data):
-//                        print("[!] Delete photo")
-//                        print(data)
+//                    case .success(let status):
+//                        print("[!] Photo delete status: \(status)")
 //                    case .failure(let error):
 //                        print(error)
 //                    }

@@ -9,24 +9,15 @@ import Foundation
 
 extension NetworkService {
     func getCommentsList(photoID: String,
-                         minCommentDate: Date? = nil,
-                         maxCommentDate: Date? = nil,
-                         completion: @escaping (Result<String, Error>) -> Void) {
-        request(method: "flickr.photos.comments.getList", parameters: [.photo_id: photoID /* ,
-                                                                       .min_comment_date: minCommentDate?.timeIntervalSince1970 ?? "",
-                                                                       .max_comment_date: maxCommentDate?.timeIntervalSince1970 ?? "" */]) { result in
+                         completion: @escaping (Result<[CommentsFlickrApi.Comments.Comment], Error>) -> Void) {
+        request(method: "flickr.photos.comments.getList",
+                parameters: [.photo_id: photoID]) { result in
             switch result {
             case .success(let data):
-                let string = String(data: data, encoding: .utf8)
-                if let string = string {
-                    completion(.success(string))
-                }
                 do {
                     let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    
-                    let json = try decoder.decode(PhotoFlickrApi.self, from: data)
-                    completion(.success(json.photo))
+                    let json = try decoder.decode(CommentsFlickrApi.self, from: data)
+                    completion(.success(json.comments.comment))
                 } catch let error {
                     completion(.failure(error))
                 }
@@ -38,12 +29,20 @@ extension NetworkService {
     
     func addComment(photoID: String,
                     commentText: String,
-                    completion: @escaping (Result<String, Error>) -> Void) {        
-        requestWithOAuth(http: .POST, method: "flickr.photos.comments.addComment", parameters: [.photo_id: photoID,
-                                                                                                .comment_text: commentText]) { result in
+                    completion: @escaping (Result<AddCommentFlickrApi.Comment, Error>) -> Void) {
+        requestWithOAuth(http: .POST, method: "flickr.photos.comments.addComment",
+                         parameters: [.photo_id: photoID,
+                                      .comment_text: commentText]) { result in
             switch result {
             case .success(let data):
-                completion(.success(data))
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let json = try decoder.decode(AddCommentFlickrApi.self, from: data)
+                    completion(.success(json.comment))
+                } catch let error {
+                    completion(.failure(error))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -53,11 +52,18 @@ extension NetworkService {
     func deleteComment(photoID: String,
                        commentID: String,
                        completion: @escaping (Result<String, Error>) -> Void) {
-        requestWithOAuth(http: .POST, method: "flickr.photos.comments.deleteComment", parameters: [.photo_id: photoID,
-                                                                                          .comment_id: commentID]) { result in
+        requestWithOAuth(http: .POST, method: "flickr.photos.comments.deleteComment",
+                         parameters: [.photo_id: photoID,
+                                      .comment_id: commentID]) { result in
             switch result {
             case .success(let data):
-                completion(.success(data))
+                do {
+                    let decoder = JSONDecoder()
+                    let json = try decoder.decode(DeleteCommentFlickrApi.self, from: data)
+                    completion(.success(json.stat))
+                } catch let error {
+                    completion(.failure(error))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }

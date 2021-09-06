@@ -109,17 +109,11 @@ struct RecentFlickrApi: Decodable {
             let owner: String
             let secret: String
             let server: String
-            let farm: Int
             let title: String
-            let ispublic: Int
-            let isfriend: Int
-            let isfamily: Int
-            let latitude: Int
-            let longitude: Int
-            let accuracy: Int
-            let context: Int
         }
     }
 }
 
-
+struct DeletePhotoFlickrApi: Decodable {
+    let stat: String
+}

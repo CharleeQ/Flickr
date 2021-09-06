@@ -40,23 +40,15 @@ enum PrivacyFilter: Int {
 extension NetworkService {
     func getPhotos(userID: String,
                    safeSearch: SafeSearch = .forSafe,
-                   minUploadDate: Date? = nil,
-                   maxUploadDate: Date? = nil,
-                   minTakenDate: Date? = nil,
-                   maxTakenDate: Date? = nil,
                    contentType: ContentType = .forAll,
                    privacyFilter: PrivacyFilter = .publicPhotos,
                    extras: String = "",
                    perPage: Int = 100,
                    page: Int = 1,
-                   completion: @escaping (Result<String, Error>) -> Void) {
+                   completion: @escaping (Result<[PeoplePhotosFlickrApi.Photos.Photo], Error>) -> Void) {
         
         requestWithOAuth(method: "flickr.people.getPhotos", parameters: [.user_id: userID,
                                                                          .safe_search: safeSearch.rawValue,
-                                                                         /*.min_upload_date: minUploadDate,
-                                                                         .max_upload_date: maxUploadDate,
-                                                                         .min_taken_date: minTakenDate,
-                                                                         .max_taken_date: maxTakenDate,*/
                                                                          .content_type: contentType.rawValue,
                                                                          .privacy_filter: privacyFilter.rawValue,
                                                                          .extras: extras,
@@ -64,7 +56,13 @@ extension NetworkService {
                                                                          .page: page]) { result in
             switch result {
             case .success(let data):
-                completion(.success(data))
+                do {
+                    let decoder = JSONDecoder()
+                    let json = try decoder.decode(PeoplePhotosFlickrApi.self, from: data)
+                    completion(.success(json.photos.photo))
+                } catch let error {
+                    completion(.failure(error))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }

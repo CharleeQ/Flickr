@@ -81,9 +81,10 @@ class NetworkService {
     
     // MARK: - Request with OAuth
     
-    func requestWithOAuth(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], completion: @escaping (Result<String, Error>) -> Void) {
+    func requestWithOAuth(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], completion: @escaping (Result<Data, Error>) -> Void) {
         var params = parameters
         params[.format] = "json"
+        params[.nojsoncallback] = "1"
         params[.method] = method
         
         if let url = signWithURL(parameters: params, method: http) {
@@ -92,10 +93,7 @@ class NetworkService {
             
             session.dataTask(with: request) { data, response, error in
                 if let data = data {
-                    let string = String(data: data, encoding: .utf8)
-                    if let string = string {
-                        completion(.success(string))
-                    }
+                    completion(.success(data))
                 } else if let error = error {
                     completion(.failure(error))
                 }
