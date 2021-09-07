@@ -21,19 +21,19 @@ struct FormData {
     
     mutating func append(name: String, filename: String, contentType: String, data: Data) {
         self.data.append("--\(boundary)\r\n".data(using: .utf8)!)
-        self.data.append("Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+        self.data.append("Content-Disposition: form-data; name=\"\(name)\"; filename=\"\(filename)\"; size=\(data.count)\r\n".data(using: .utf8)!)
         self.data.append("Content-Type: \(contentType)\r\n\r\n".data(using: .utf8)!)
         self.data.append(data)
         self.data.append("\r\n".data(using: .utf8)!)
-        
+        self.data.append("--\(boundary)\r\n".data(using: .utf8)!)
     }
 }
 
 extension NetworkService {
     private func sign(parameters: [String: Any]) -> (String, String, String) {
-        var params = [String:Any]()/*parameters*/
-        //params["nojsoncallback"] = "1"
-        //params["format"] = "json"
+        var params = parameters
+        params["nojsoncallback"] = "1"
+        params["format"] = "json"
         params[OAuthParameters.oauth_consumer_key.rawValue] = constants.consumerKey
         params[OAuthParameters.oauth_nonce.rawValue] = constants.nonce
         params[OAuthParameters.oauth_signature_method.rawValue] = constants.signatureMethod
@@ -55,7 +55,6 @@ extension NetworkService {
     }
     
     func uploadPhoto(fileName: String,
-                     image: UIImage,
                      title: String = "",
                      description: String = "",
                      tags: String = "",
@@ -69,9 +68,20 @@ extension NetworkService {
         var urlRequest = URLRequest(url: URL(string: "https://up.flickr.com/services/upload")!)
         urlRequest.httpMethod = HTTPMethod.POST.rawValue
         urlRequest.setValue("multipart/form-data; boundary=\(formdata.boundary)", forHTTPHeaderField: "Content-Type")
+        
+        let image = UIImage(named: fileName)!
         let imageToData = image.jpegData(compressionQuality: 1)!
         
-        
+        formdata.append(name: NetworkParameters.title.rawValue,
+                        data: title.data(using: .utf8)!)
+        formdata.append(name: NetworkParameters.description.rawValue,
+                        data: description.data(using: .utf8)!)
+        formdata.append(name: NetworkParameters.tags.rawValue,
+                        data: tags.data(using: .utf8)!)
+        formdata.append(name: NetworkParameters.nojsoncallback.rawValue,
+                        data: "1".data(using: .utf8)!)
+        formdata.append(name: NetworkParameters.format.rawValue,
+                        data: "json".data(using: .utf8)!)
         formdata.append(name: OAuthParameters.oauth_consumer_key.rawValue,
                         data: constants.consumerKey.data(using: .utf8)!)
         formdata.append(name: OAuthParameters.oauth_nonce.rawValue,
@@ -86,10 +96,11 @@ extension NetworkService {
                         data: accessToken.data(using: .utf8)!)
         formdata.append(name: OAuthParameters.oauth_version.rawValue,
                         data: constants.version.data(using: .utf8)!)
-        print(String(data: formdata.data, encoding: .utf8))
-        formdata.append(name: "photo", filename: fileName,
+        formdata.append(name: NetworkParameters.photo.rawValue, filename: fileName,
                         contentType: "image/jpeg", data: imageToData)
         
+        
+        urlRequest.setValue("\(formdata.data.count)", forHTTPHeaderField: "Content-Length")
         session.uploadTask(with: urlRequest, from: formdata.data) { data, response, error in
             guard error == nil else {
                 completion(.failure(error!))

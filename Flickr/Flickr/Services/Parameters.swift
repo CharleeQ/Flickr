@@ -7,6 +7,8 @@
 
 import Foundation
 
+protocol Parameters {
+}
 
 enum NetworkParameters: String {
     case api_key
@@ -34,6 +36,10 @@ enum NetworkParameters: String {
     case content_type
     case privacy_filter
     case nojsoncallback
+    case photo
+    case tags
+    case title
+    case description
 }
 
 enum OAuthParameters: String {

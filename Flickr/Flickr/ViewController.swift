@@ -140,7 +140,7 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-                network.uploadPhoto(fileName: "16520596.jpeg", image: UIImage(named: "16520596")!, title: "Onboarding", description: "Test image") { result in
+                network.uploadPhoto(fileName: "16520596.jpeg", title: "Onboarding", description: "Test") { result in
                     switch result {
                     case .success(let data):
                         print("[!] Upload photo")
