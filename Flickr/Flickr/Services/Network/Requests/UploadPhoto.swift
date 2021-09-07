@@ -54,7 +54,7 @@ extension NetworkService {
         return (encryptString, nonce, timestamp)
     }
     
-    func uploadPhoto(fileName: String,
+    func uploadPhoto(filename: String, image: UIImage,
                      title: String = "",
                      description: String = "",
                      tags: String = "",
@@ -69,8 +69,8 @@ extension NetworkService {
         urlRequest.httpMethod = HTTPMethod.POST.rawValue
         urlRequest.setValue("multipart/form-data; boundary=\(formdata.boundary)", forHTTPHeaderField: "Content-Type")
         
-        let image = UIImage(named: fileName)!
-        let imageToData = image.jpegData(compressionQuality: 1)!
+        let image = image
+        let imageToData = image.pngData()!
         
         formdata.append(name: NetworkParameters.title.rawValue,
                         data: title.data(using: .utf8)!)
@@ -96,19 +96,21 @@ extension NetworkService {
                         data: accessToken.data(using: .utf8)!)
         formdata.append(name: OAuthParameters.oauth_version.rawValue,
                         data: constants.version.data(using: .utf8)!)
-        formdata.append(name: NetworkParameters.photo.rawValue, filename: fileName,
-                        contentType: "image/jpeg", data: imageToData)
+        formdata.append(name: NetworkParameters.photo.rawValue, filename: filename,
+                        contentType: "image/png", data: imageToData)
         
         
         urlRequest.setValue("\(formdata.data.count)", forHTTPHeaderField: "Content-Length")
         session.uploadTask(with: urlRequest, from: formdata.data) { data, response, error in
-            guard error == nil else {
+            guard let data = data, error == nil else {
                 completion(.failure(error!))
                 return
             }
-            guard let data = data else { return }
-            if let string = String(data: data, encoding: .utf8) {
-                completion(.success(string))
+            guard let string = String.init(data: data, encoding: .utf8) else { return }
+            if let photoID = string.components(separatedBy: "<photoid>").last?.components(separatedBy: "</photoid>").first {
+                completion(.success(photoID))
+            } else if let error = error {
+                completion(.failure(error))
             }
         }.resume()
     }
