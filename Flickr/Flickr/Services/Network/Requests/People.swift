@@ -23,12 +23,6 @@ enum ContentType: Int {
     case forAll = 7
 }
 
-/* 1 1 public photos
- 2 private photos visible to friends
- 3 private photos visible to family
- 4 private photos visible to friends & family
- 5 completely private photos */
-
 enum PrivacyFilter: Int {
     case publicPhotos = 1
     case privatePhotosVisibleToFriends = 2

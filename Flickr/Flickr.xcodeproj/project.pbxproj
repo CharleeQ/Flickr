@@ -94,8 +94,9 @@
 		9F8140B926DE7579003EE7AA /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				9F8140B526DE7344003EE7AA /* NetworkService.swift */,
+				9F8140D126E4E657003EE7AA /* Model */,
 				9F8140BC26DE83BF003EE7AA /* Requests */,
+				9F8140B526DE7344003EE7AA /* NetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -162,7 +163,6 @@
 		9F92AC8926CFDDF200433CF3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				9F8140D126E4E657003EE7AA /* Model */,
 				9F8140B826DE756B003EE7AA /* Auth */,
 				9F8140B926DE7579003EE7AA /* Network */,
 				9F8140C926E115D3003EE7AA /* Parameters.swift */,

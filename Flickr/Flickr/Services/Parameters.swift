@@ -7,9 +7,6 @@
 
 import Foundation
 
-protocol Parameters {
-}
-
 enum NetworkParameters: String {
     case api_key
     case method

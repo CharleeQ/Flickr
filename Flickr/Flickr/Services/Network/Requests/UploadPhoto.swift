@@ -99,7 +99,6 @@ extension NetworkService {
         formdata.append(name: NetworkParameters.photo.rawValue, filename: filename,
                         contentType: "image/png", data: imageToData)
         
-        
         urlRequest.setValue("\(formdata.data.count)", forHTTPHeaderField: "Content-Length")
         session.uploadTask(with: urlRequest, from: formdata.data) { data, response, error in
             guard let data = data, error == nil else {
