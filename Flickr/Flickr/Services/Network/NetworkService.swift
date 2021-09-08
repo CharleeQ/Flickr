@@ -45,7 +45,7 @@ class NetworkService {
         print(encryptString)
         paramsString.append("&\(OAuthParameters.oauth_signature.rawValue)=\(encryptString)")
         let urlString = base + "?" + paramsString
-        let url = URL(string: urlString.removingPercentEncoding!.replacingOccurrences(of: "+", with: "%20"))
+        let url = URL(string: urlString.removingPercentEncoding!.replacingOccurrences(of: "+", with: "%2B"))
         
         return url
     }
@@ -91,6 +91,7 @@ class NetworkService {
         params[.method] = method
         
         if let url = signWithURL(parameters: params, method: http) {
+            print(url.absoluteString)
             var request = URLRequest(url: url)
             request.httpMethod = http.rawValue
             
