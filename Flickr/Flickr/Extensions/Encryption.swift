@@ -9,7 +9,6 @@ import Foundation
 import CommonCrypto
 
 extension String {
-
     func hmac(key: String) -> String {
         var digest = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
         CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA1), key, key.count, self, self.count, &digest)

@@ -13,14 +13,7 @@ struct Constants {
     let version = "1.0"
     let signatureMethod = "HMAC-SHA1"
     let callbackScheme = "kiryl"
-    var nonce: String {
-        let temp = UUID().uuidString
-        let nonce = temp.replacingOccurrences(of: "-", with: "")
-        
-        return nonce
-    }
-    var timestamp: String {
-        return String(Date().timeIntervalSince1970)
-    }
+    var nonce = UUID().uuidString
+    var timestamp = String(Date().timeIntervalSince1970)
     let perms = "delete"
 }

@@ -18,18 +18,12 @@ extension NetworkService {
                                                 .page: page]
         if let extras = extras { params[.extras] = extras }
         
-        request(method: "flickr.favorites.getList", parameters: params) { result in
+        request(method: "flickr.favorites.getList",
+                parameters: params,
+                serializer: JSONSerializer<FaveFlickrApi>()) { result in
             switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    
-                    let json = try decoder.decode(FaveFlickrApi.self, from: data)
-                    completion(.success(json.photos.photo))
-                } catch let error {
-                    completion(.failure(error))
-                }
+            case .success(let json):
+                completion(.success(json.photos.photo))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -37,11 +31,14 @@ extension NetworkService {
     }
     
     func addFavorite(photoID: String,
-                     completion: @escaping (Result<String, Error>) -> Void) {
-        requestWithOAuth(http: .POST, method: "flickr.favorites.add", parameters: [.photo_id: photoID]) { result in
+                     completion: @escaping (Result<Void, Error>) -> Void) {
+        requestWithOAuth(http: .POST,
+                         method: "flickr.favorites.add",
+                         parameters: [.photo_id: photoID],
+                         serializer: VoidSerializer()) { result in
             switch result {
-            case .success(_):
-                completion(.success("Added"))
+            case .success(let data):
+                completion(.success(data))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -49,11 +46,14 @@ extension NetworkService {
     }
     
     func removeFavorite(photoID: String,
-                        completion: @escaping (Result<String, Error>) -> Void) {
-        requestWithOAuth(http: .POST, method: "flickr.favorites.remove", parameters: [.photo_id: photoID]) { result in
+                        completion: @escaping (Result<Void, Error>) -> Void) {
+        requestWithOAuth(http: .POST,
+                         method: "flickr.favorites.remove",
+                         parameters: [.photo_id: photoID],
+                         serializer: VoidSerializer()) { result in
             switch result {
-            case .success(_):
-                completion(.success("Removed"))
+            case .success(let data):
+                completion(.success(data))
             case .failure(let error):
                 completion(.failure(error))
             }

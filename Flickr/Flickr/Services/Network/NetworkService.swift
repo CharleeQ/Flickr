@@ -45,15 +45,15 @@ class NetworkService {
         print(encryptString)
         paramsString.append("&\(OAuthParameters.oauth_signature.rawValue)=\(encryptString)")
         let urlString = base + "?" + paramsString
-        let url = URL(string: urlString.removingPercentEncoding!)
+        let url = URL(string: urlString.removingPercentEncoding!.replacingOccurrences(of: "+", with: "%20"))
         
         return url
     }
     
     
     // MARK: - Request without OAuth
-    
-    func request(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], completion: @escaping (Result<Data, Error>) -> Void) {
+
+    func request<Serializer>(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], serializer: Serializer, completion: @escaping (Result<Serializer.R, Error>) -> Void) where Serializer: SerializerProtocol {
         var params = parameters
         params[.format] = "json"
         params[.nojsoncallback] = "1"
@@ -62,15 +62,18 @@ class NetworkService {
         let paramsString = params.map { (key, value) in "\(key.rawValue)=\(value)" }
             .joined(separator: "&")
         
-        let urlString = "\(path)?\(paramsString)"
-        
-        if let url = URL(string: urlString) {
+        if let url = URL(string: "\(path)?\(paramsString)") {
             var request = URLRequest(url: url)
             request.httpMethod = http.rawValue
             
             session.dataTask(with: request) { data, response, error in
                 if let data = data {
-                    completion(.success(data))
+                    do {
+                        let result = try serializer.parse(data: data)
+                        completion(.success(result))
+                    } catch let error {
+                        completion(.failure(error))
+                    }
                 } else if let error = error {
                     completion(.failure(error))
                 }
@@ -81,7 +84,7 @@ class NetworkService {
     
     // MARK: - Request with OAuth
     
-    func requestWithOAuth(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], completion: @escaping (Result<Data, Error>) -> Void) {
+    func requestWithOAuth<Serializer>(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], serializer: Serializer, completion: @escaping (Result<Serializer.R, Error>) -> Void) where Serializer: SerializerProtocol {
         var params = parameters
         params[.format] = "json"
         params[.nojsoncallback] = "1"
@@ -89,11 +92,16 @@ class NetworkService {
         
         if let url = signWithURL(parameters: params, method: http) {
             var request = URLRequest(url: url)
-            request.httpMethod = "\(http.rawValue)"
+            request.httpMethod = http.rawValue
             
             session.dataTask(with: request) { data, response, error in
                 if let data = data {
-                    completion(.success(data))
+                    do {
+                        let result = try serializer.parse(data: data)
+                        completion(.success(result))
+                    } catch let error {
+                        completion(.failure(error))
+                    }
                 } else if let error = error {
                     completion(.failure(error))
                 }

@@ -29,6 +29,29 @@ struct Photo: Decodable {
     let comments: Comments
     let media: String
     
+    enum CodingKeys: String, CodingKey {
+        case id
+        case secret
+        case farm
+        case dateuploaded
+        case isfavorite
+        case license
+        case safetyLevel = "safety_level"
+        case rotation
+        case originalsecret
+        case originalformat
+        case owner
+        case title
+        case description
+        case visibility
+        case dates
+        case views
+        case editability
+        case publiceditability
+        case comments
+        case media
+    }
+    
     struct Owner: Decodable {
         let nsid: String
         let username: String
@@ -37,6 +60,16 @@ struct Photo: Decodable {
         let iconserver: String
         let iconfarm: Int
         let pathAlias: String
+        
+        enum CodingKeys: String, CodingKey {
+            case nsid
+            case username
+            case realname
+            case location
+            case iconserver
+            case iconfarm
+            case pathAlias = "path_alias"
+        }
     }
     
     struct Title: Decodable {

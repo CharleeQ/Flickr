@@ -13,7 +13,7 @@ struct Tag: Decodable {
     
     enum CodingKeys: String, CodingKey {
         case content = "_content"
-        case thmData
+        case thmData = "thm_data"
     }
     
     struct ThmData: Decodable {

@@ -73,7 +73,7 @@ class AuthService {
         print(encryptString)
         params.append("\(OAuthParameters.oauth_signature)=\(encryptString)")
         let urlString = path + "/" + state.description + "?" + params.joined()
-        let url = URL(string: urlString.removingPercentEncoding!)
+        let url = URL(string: urlString.removingPercentEncoding!.replacingOccurrences(of: "+", with: "%2B"))
         
         return url
     }

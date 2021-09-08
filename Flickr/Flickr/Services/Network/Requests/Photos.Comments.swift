@@ -11,16 +11,11 @@ extension NetworkService {
     func getCommentsList(photoID: String,
                          completion: @escaping (Result<[Comment], Error>) -> Void) {
         request(method: "flickr.photos.comments.getList",
-                parameters: [.photo_id: photoID]) { result in
+                parameters: [.photo_id: photoID],
+                serializer: JSONSerializer<CommentsFlickrApi>()) { result in
             switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    let json = try decoder.decode(CommentsFlickrApi.self, from: data)
-                    completion(.success(json.comments.comment))
-                } catch let error {
-                    completion(.failure(error))
-                }
+            case .success(let json):
+                completion(.success(json.comments.comment))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -30,19 +25,13 @@ extension NetworkService {
     func addComment(photoID: String,
                     commentText: String,
                     completion: @escaping (Result<AddedComment, Error>) -> Void) {
-        requestWithOAuth(http: .POST, method: "flickr.photos.comments.addComment",
-                         parameters: [.photo_id: photoID,
-                                      .comment_text: commentText]) { result in
+        requestWithOAuth(http: .POST,
+                         method: "flickr.photos.comments.addComment",
+                         parameters: [.photo_id: photoID, .comment_text: commentText],
+                         serializer: JSONSerializer<AddCommentFlickrApi>()) { result in
             switch result {
-            case .success(let data):
-                
-                do {
-                    let decoder = JSONDecoder()
-                    let json = try decoder.decode(AddCommentFlickrApi.self, from: data)
-                    completion(.success(json.comment))
-                } catch let error {
-                    completion(.failure(error))
-                }
+            case .success(let json):
+                completion(.success(json.comment))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -51,13 +40,15 @@ extension NetworkService {
     
     func deleteComment(photoID: String,
                        commentID: String,
-                       completion: @escaping (Result<String, Error>) -> Void) {
-        requestWithOAuth(http: .POST, method: "flickr.photos.comments.deleteComment",
+                       completion: @escaping (Result<Void, Error>) -> Void) {
+        requestWithOAuth(http: .POST,
+                         method: "flickr.photos.comments.deleteComment",
                          parameters: [.photo_id: photoID,
-                                      .comment_id: commentID]) { result in
+                                      .comment_id: commentID],
+                         serializer: VoidSerializer()) { result in
             switch result {
-            case .success( _):
-                completion(.success("ok"))
+            case .success(let data):
+                completion(.success(data))
             case .failure(let error):
                 completion(.failure(error))
             }

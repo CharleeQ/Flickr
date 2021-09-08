@@ -14,18 +14,13 @@ extension NetworkService {
                          completion: @escaping (Result<[RecentPhoto], Error>) -> Void) {
         var params: [NetworkParameters: Any] = [.per_page: perPage, .page: page]
         if let extras = extras { params[.extras] = extras }
-        request(method: "flickr.photos.getRecent", parameters: params) { result in
+        
+        request(method: "flickr.photos.getRecent",
+                parameters: params,
+                serializer: JSONSerializer<RecentFlickrApi>()) { result in
             switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    
-                    let json = try decoder.decode(RecentFlickrApi.self, from: data)
-                    completion(.success(json.photos.photo))
-                } catch let error {
-                    completion(.failure(error))
-                }
+            case .success(let json):
+                completion(.success(json.photos.photo))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -37,29 +32,27 @@ extension NetworkService {
                       completion: @escaping (Result<Photo, Error>) -> Void) {
         var params: [NetworkParameters: Any] = [.photo_id: photoID]
         if let secret = secret { params[.secret] = secret }
-        request(method: "flickr.photos.getInfo", parameters: params) { result in
+        
+        request(method: "flickr.photos.getInfo",
+                parameters: params,
+                serializer: JSONSerializer<PhotoFlickrApi>()) { result in
             switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    
-                    let json = try decoder.decode(PhotoFlickrApi.self, from: data)
-                    completion(.success(json.photo))
-                } catch let error {
-                    completion(.failure(error))
-                }
+            case .success(let json):
+                completion(.success(json.photo))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
     
-    func deletePhoto(photoID: String, completion: @escaping (Result<String, Error>) -> Void) {
-        requestWithOAuth(http: .POST, method: "flickr.photos.delete", parameters: [.photo_id: photoID]) { result in
+    func deletePhoto(photoID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        requestWithOAuth(http: .POST,
+                         method: "flickr.photos.delete",
+                         parameters: [.photo_id: photoID],
+                         serializer: VoidSerializer()) { result in
             switch result {
-            case .success( _):
-                completion(.success("ok"))
+            case .success(let data):
+                completion(.success(data))
             case .failure(let error):
                 completion(.failure(error))
             }

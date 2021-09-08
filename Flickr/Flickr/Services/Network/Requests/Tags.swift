@@ -16,20 +16,13 @@ extension NetworkService {
     func getTagsHotList(period: Period = .day,
                         count: Int = 20,
                         completion: @escaping (Result<[Tag], Error>) -> Void) {
-        request(method: "flickr.tags.getHotList", parameters: [.count: count,
-                                                               .period: period]) { result in
+        request(method: "flickr.tags.getHotList",
+                parameters: [.count: count,
+                             .period: period],
+                serializer: JSONSerializer<TagsFlickrApi>()) { result in
             switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    print(String.init(data: data, encoding: .utf8)!)
-                    
-                    let json = try decoder.decode(TagsFlickrApi.self, from: data)
-                    completion(.success(json.hottags.tag))
-                } catch let error {
-                    completion(.failure(error))
-                }
+            case .success(let json):
+                completion(.success(json.hottags.tag))
             case .failure(let error):
                 completion(.failure(error))
             }

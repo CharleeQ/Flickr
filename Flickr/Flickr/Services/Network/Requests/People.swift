@@ -48,16 +48,13 @@ extension NetworkService {
                                                 .page: page]
         if let extras = extras { params[.extras] = extras }
         
-        requestWithOAuth(method: "flickr.people.getPhotos", parameters: params) { result in
+        requestWithOAuth(http: .POST,
+                         method: "flickr.people.getPhotos",
+                         parameters: params,
+                         serializer: JSONSerializer<PeoplePhotosFlickrApi>()) { result in
             switch result {
-            case .success(let data):
-                do {
-                    let decoder = JSONDecoder()
-                    let json = try decoder.decode(PeoplePhotosFlickrApi.self, from: data)
-                    completion(.success(json.photos.photo))
-                } catch let error {
-                    completion(.failure(error))
-                }
+            case .success(let json):
+                completion(.success(json.photos.photo))
             case .failure(let error):
                 completion(.failure(error))
             }

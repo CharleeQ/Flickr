@@ -14,5 +14,14 @@ struct Profile: Decodable {
     let profileDescription: String
     let city: String?
     let country: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case profileDescription = "profile_description"
+        case city
+        case country
+    }
 }
 
