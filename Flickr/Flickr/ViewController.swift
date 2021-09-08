@@ -29,17 +29,17 @@ class ViewController: UIViewController {
                 //                        print(error)
                 //                    }
                 //                }
-                //                network.getTagsHotList(count: 5) { result in
-                //                    switch result {
-                //                    case .success(let hottags):
-                //                        print("[!] Tags:")
-                //                        hottags.forEach { tag in
-                //                            print("Tag: " + tag.content)
-                //                        }
-                //                    case .failure(let error):
-                //                        print(error)
-                //                    }
-                //                }
+                                network.getTagsHotList(count: 5) { result in
+                                    switch result {
+                                    case .success(let hottags):
+                                        print("[!] Tags:")
+                                        hottags.forEach { tag in
+                                            print("Tag: " + tag.content)
+                                        }
+                                    case .failure(let error):
+                                        print(error)
+                                    }
+                                }
                 //                network.getRecentPhotos(extras: "geo") { result in
                 //                    switch result {
                 //                    case .success(let photos):
@@ -141,7 +141,7 @@ class ViewController: UIViewController {
                 //                    }
                 //                }
                 let image = UIImage(named: "00_onboarding")!
-                network.uploadPhoto(filename: "Delivery", image: image, title: "Delivery", description: "Beziers") { result in
+                network.uploadPhoto(filename: "Onboarding", image: image, title: "Delivery", description: "Beziers", tags: nil) { result in
                     switch result {
                     case .success(let photo):
                         print("[!] Upload photo")

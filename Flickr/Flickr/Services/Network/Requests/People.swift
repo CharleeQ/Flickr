@@ -36,18 +36,19 @@ extension NetworkService {
                    safeSearch: SafeSearch = .forSafe,
                    contentType: ContentType = .forAll,
                    privacyFilter: PrivacyFilter = .publicPhotos,
-                   extras: String = "",
+                   extras: String?,
                    perPage: Int = 100,
                    page: Int = 1,
-                   completion: @escaping (Result<[PeoplePhotosFlickrApi.Photos.Photo], Error>) -> Void) {
+                   completion: @escaping (Result<[UsersPhoto], Error>) -> Void) {
+        var params: [NetworkParameters: Any] = [.user_id: userID,
+                                                .safe_search: safeSearch.rawValue,
+                                                .content_type: contentType.rawValue,
+                                                .privacy_filter: privacyFilter.rawValue,
+                                                .per_page: perPage,
+                                                .page: page]
+        if let extras = extras { params[.extras] = extras }
         
-        requestWithOAuth(method: "flickr.people.getPhotos", parameters: [.user_id: userID,
-                                                                         .safe_search: safeSearch.rawValue,
-                                                                         .content_type: contentType.rawValue,
-                                                                         .privacy_filter: privacyFilter.rawValue,
-                                                                         .extras: extras,
-                                                                         .per_page: perPage,
-                                                                         .page: page]) { result in
+        requestWithOAuth(method: "flickr.people.getPhotos", parameters: params) { result in
             switch result {
             case .success(let data):
                 do {
@@ -61,5 +62,18 @@ extension NetworkService {
                 completion(.failure(error))
             }
         }
+    }
+}
+
+private struct PeoplePhotosFlickrApi: Decodable {
+    let photos: Photos
+    let stat: String
+    
+    struct Photos: Decodable {
+        let page: Int
+        let pages: Int
+        let perpage: Int
+        let total: Int
+        let photo: [UsersPhoto]
     }
 }

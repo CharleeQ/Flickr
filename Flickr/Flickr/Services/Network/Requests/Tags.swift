@@ -11,11 +11,11 @@ enum Period: String {
     case day
     case week
 }
-// key not found thm_data
+
 extension NetworkService {
     func getTagsHotList(period: Period = .day,
                         count: Int = 20,
-                        completion: @escaping (Result<[TagsFlickrApi.HotTags.Tag], Error>) -> Void) {
+                        completion: @escaping (Result<[Tag], Error>) -> Void) {
         request(method: "flickr.tags.getHotList", parameters: [.count: count,
                                                                .period: period]) { result in
             switch result {
@@ -23,6 +23,7 @@ extension NetworkService {
                 do {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    print(String.init(data: data, encoding: .utf8)!)
                     
                     let json = try decoder.decode(TagsFlickrApi.self, from: data)
                     completion(.success(json.hottags.tag))
@@ -33,5 +34,16 @@ extension NetworkService {
                 completion(.failure(error))
             }
         }
+    }
+}
+
+private struct TagsFlickrApi: Decodable {
+    let stat: String
+    let period: String
+    let count: Int
+    let hottags: HotTags
+    
+    struct HotTags: Decodable {
+        let tag: [Tag]
     }
 }
