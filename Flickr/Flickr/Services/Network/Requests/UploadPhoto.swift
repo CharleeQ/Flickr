@@ -34,7 +34,7 @@ extension NetworkService {
         let charset = CharacterSet.urlHostAllowed.subtracting(CharacterSet(charactersIn: "=&"))
         let paramsString = parameters
             .sorted { $0.key < $1.key }
-            .map { (key, value) in "\(key)=\(value)" }
+            .map { (key, value) in "\(key)=\(value)".replacingOccurrences(of: " ", with: "%20") }
             .joined(separator: "&")
             .addingPercentEncoding(withAllowedCharacters: charset)!
         let string = "POST&\(base)&\(paramsString)"

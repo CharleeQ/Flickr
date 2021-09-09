@@ -76,7 +76,7 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.addComment(photoID: "51370339706", commentText: "Amazing") { result in
+//                network.addComment(photoID: "51370339706", commentText: "Amazing photo") { result in
 //                    switch result {
 //                    case .success(let comment):
 //                        print("[!] Add Comment:")
@@ -132,24 +132,24 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-                network.deletePhoto(photoID: "51440560785") { result in
-                    switch result {
-                    case .success(_):
-                        print("[!] Photo is deleted")
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-//                let image = UIImage(named: "00_onboarding")!
-//                network.uploadPhoto(filename: "Onboarding", image: image, title: "Delivery", description: "Beziers", tags: nil) { result in
+//                network.deletePhoto(photoID: "51440560785") { result in
 //                    switch result {
-//                    case .success(let photo):
-//                        print("[!] Upload photo")
-//                        print("Photo ID: " + photo)
+//                    case .success(_):
+//                        print("[!] Photo is deleted")
 //                    case .failure(let error):
 //                        print(error)
 //                    }
 //                }
+                let image = UIImage(named: "00_onboarding")!
+                network.uploadPhoto(filename: "Onboarding", image: image, title: "Delivery DHL", description: "Beziers on figma", tags: nil) { result in
+                    switch result {
+                    case .success(let photo):
+                        print("[!] Upload photo")
+                        print("Photo ID: " + photo)
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
