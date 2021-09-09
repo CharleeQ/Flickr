@@ -76,15 +76,15 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.addComment(photoID: "51370339706", commentText: "Amazing photo") { result in
-//                    switch result {
-//                    case .success(let comment):
-//                        print("[!] Add Comment:")
-//                        print("Comment: \(comment.content)\nID: \(comment.id)\nAuthor: \(comment.realname)")
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//                }
+                network.addComment(photoID: "51370339706", commentText: "Amazing photo") { result in
+                    switch result {
+                    case .success(let comment):
+                        print("[!] Add Comment:")
+                        print("Comment: \(comment.content)\nID: \(comment.id)\nAuthor: \(comment.realname)")
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
 //                network.deleteComment(photoID: "51370339706", commentID: "38053722-51370339706-72157719794330704") { result in
 //                    switch result {
 //                    case .success(_):
@@ -140,16 +140,16 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-                let image = UIImage(named: "00_onboarding")!
-                network.uploadPhoto(filename: "Onboarding", image: image, title: "Delivery DHL", description: "Beziers on figma", tags: nil) { result in
-                    switch result {
-                    case .success(let photo):
-                        print("[!] Upload photo")
-                        print("Photo ID: " + photo)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
+//                let image = UIImage(named: "00_onboarding")!
+//                network.uploadPhoto(filename: "Onboarding", image: image, title: "Delivery DHL", description: "Beziers on figma", tags: nil) { result in
+//                    switch result {
+//                    case .success(let photo):
+//                        print("[!] Upload photo")
+//                        print("Photo ID: " + photo)
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
             case .failure(let error):
                 print(error)
             }

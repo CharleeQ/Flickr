@@ -31,12 +31,11 @@ struct FormData {
 extension NetworkService {
     private func sign(url: String, parameters: [String: Any]) -> String {
         let base = url.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        let charset = CharacterSet.urlHostAllowed.subtracting(CharacterSet(charactersIn: "=&"))
         let paramsString = parameters
             .sorted { $0.key < $1.key }
             .map { (key, value) in "\(key)=\(value)".replacingOccurrences(of: " ", with: "%20") }
             .joined(separator: "&")
-            .addingPercentEncoding(withAllowedCharacters: charset)!
+            .addingPercentEncoding(withAllowedCharacters: constants.urlCharset)!
         let string = "POST&\(base)&\(paramsString)"
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret)")
         

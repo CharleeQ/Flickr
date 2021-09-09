@@ -16,4 +16,7 @@ struct Constants {
     var nonce = UUID().uuidString
     var timestamp = String(Date().timeIntervalSince1970)
     let perms = "delete"
+    
+    let urlCharset = CharacterSet.urlHostAllowed.subtracting(CharacterSet(charactersIn: "=&"))
+    
 }

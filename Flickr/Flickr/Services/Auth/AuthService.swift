@@ -63,21 +63,22 @@ class AuthService {
     // MARK: - Private functions
     
     private func signWithURL(path: String, state: OAuthRequestState, parameters: [OAuthParameters:String], method: HTTPMethod = .GET) -> URL? {
-        print(">> \(state.description.uppercased()) SIGNATURE: ")
-        let charset = CharacterSet.urlHostAllowed.subtracting(CharacterSet(charactersIn: "=&"))
-        let base = (path + "/" + state.description).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let base = (path + "/" + state.description)
+            .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         var params = parameters
             .sorted { $0.0.rawValue < $1.0.rawValue }
             .map { (key, value) -> String in "\(key.rawValue)=\(value)" }
             .joined(separator: "&")
-            .addingPercentEncoding(withAllowedCharacters: charset)!
+            .addingPercentEncoding(withAllowedCharacters: constants.urlCharset)!
         
         let string = "\(method.rawValue)&\(base)&\(params)"
             
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret ?? "")")
         params.append("&\(OAuthParameters.oauth_signature)=\(encryptString)")
         let urlString = path + "/" + state.description + "?" + params
-        let url = URL(string: urlString.removingPercentEncoding!.replacingOccurrences(of: "+", with: "%2B"))
+        let url = URL(string: urlString
+                        .removingPercentEncoding!
+                        .replacingOccurrences(of: "+", with: "%2B"))
         
         return url
     }
