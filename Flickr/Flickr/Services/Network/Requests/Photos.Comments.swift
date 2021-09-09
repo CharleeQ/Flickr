@@ -13,12 +13,7 @@ extension NetworkService {
         request(method: "flickr.photos.comments.getList",
                 parameters: [.photo_id: photoID],
                 serializer: JSONSerializer<CommentsFlickrApi>()) { result in
-            switch result {
-            case .success(let json):
-                completion(.success(json.comments.comment))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+            completion(result.map { $0.comments.comment })
         }
     }
     
@@ -29,12 +24,7 @@ extension NetworkService {
                          method: "flickr.photos.comments.addComment",
                          parameters: [.photo_id: photoID, .comment_text: commentText],
                          serializer: JSONSerializer<AddCommentFlickrApi>()) { result in
-            switch result {
-            case .success(let json):
-                completion(.success(json.comment))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+            completion(result.map { $0.comment })
         }
     }
     
@@ -45,14 +35,7 @@ extension NetworkService {
                          method: "flickr.photos.comments.deleteComment",
                          parameters: [.photo_id: photoID,
                                       .comment_id: commentID],
-                         serializer: VoidSerializer()) { result in
-            switch result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+                         serializer: VoidSerializer(), completion: completion)
     }
 }
 

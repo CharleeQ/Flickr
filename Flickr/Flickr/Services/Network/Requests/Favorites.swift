@@ -21,12 +21,7 @@ extension NetworkService {
         request(method: "flickr.favorites.getList",
                 parameters: params,
                 serializer: JSONSerializer<FaveFlickrApi>()) { result in
-            switch result {
-            case .success(let json):
-                completion(.success(json.photos.photo))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+            completion(result.map { $0.photos.photo })
         }
     }
     
@@ -35,14 +30,7 @@ extension NetworkService {
         requestWithOAuth(http: .POST,
                          method: "flickr.favorites.add",
                          parameters: [.photo_id: photoID],
-                         serializer: VoidSerializer()) { result in
-            switch result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+                         serializer: VoidSerializer(), completion: completion)
     }
     
     func removeFavorite(photoID: String,
@@ -50,14 +38,7 @@ extension NetworkService {
         requestWithOAuth(http: .POST,
                          method: "flickr.favorites.remove",
                          parameters: [.photo_id: photoID],
-                         serializer: VoidSerializer()) { result in
-            switch result {
-            case .success(let data):
-                completion(.success(data))
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
+                         serializer: VoidSerializer(), completion: completion)
     }
 }
 

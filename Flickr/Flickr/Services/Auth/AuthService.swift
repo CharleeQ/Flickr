@@ -64,15 +64,19 @@ class AuthService {
     
     private func signWithURL(path: String, state: OAuthRequestState, parameters: [OAuthParameters:String], method: HTTPMethod = .GET) -> URL? {
         print(">> \(state.description.uppercased()) SIGNATURE: ")
+        let charset = CharacterSet.urlHostAllowed.subtracting(CharacterSet(charactersIn: "=&"))
         let base = (path + "/" + state.description).addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
-        var params = parameters.sorted { $0.0.rawValue < $1.0.rawValue }.map { (key, value) -> String in
-            return "\(key.rawValue)%3D\(value)%26"
-        }
-        let string = "\(method.rawValue)&\(base)&\(params.joined().dropLast(3))"
+        var params = parameters
+            .sorted { $0.0.rawValue < $1.0.rawValue }
+            .map { (key, value) -> String in "\(key.rawValue)=\(value)" }
+            .joined(separator: "&")
+            .addingPercentEncoding(withAllowedCharacters: charset)!
+        
+        let string = "\(method.rawValue)&\(base)&\(params)"
+            
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret ?? "")")
-        print(encryptString)
-        params.append("\(OAuthParameters.oauth_signature)=\(encryptString)")
-        let urlString = path + "/" + state.description + "?" + params.joined()
+        params.append("&\(OAuthParameters.oauth_signature)=\(encryptString)")
+        let urlString = path + "/" + state.description + "?" + params
         let url = URL(string: urlString.removingPercentEncoding!.replacingOccurrences(of: "+", with: "%2B"))
         
         return url
@@ -96,7 +100,8 @@ class AuthService {
     
     // First step
     private func getARequestToken(completion: @escaping (Result<String, Error>) -> Void) {
-        let params: [OAuthParameters: String] = [.oauth_callback: "\(constants.callbackScheme)%253A%252F%252F",
+        let params: [OAuthParameters: String] = [.oauth_callback: "\(constants.callbackScheme)://"
+                                                    .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!,
                                                  .oauth_consumer_key: constants.consumerKey,
                                                  .oauth_nonce: constants.nonce,
                                                  .oauth_signature_method: constants.signatureMethod,

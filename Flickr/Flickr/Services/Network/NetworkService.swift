@@ -35,17 +35,21 @@ class NetworkService {
         
         
         let base = path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let charset = CharacterSet.urlHostAllowed.subtracting(CharacterSet(charactersIn: "=&"))
         var paramsString = params
             .sorted { $0.key < $1.key }
-            .map { (key, value) in "\(key)%3D\(value)" }
-            .joined(separator: "%26")
-        
+            .map { (key, value) in "\(key)=\(value)" }
+            .joined(separator: "&")
+            .addingPercentEncoding(withAllowedCharacters: charset)!
+        print(paramsString)
         let string = "\(method.rawValue)&\(base)&\(paramsString)"
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret)")
         print(encryptString)
         paramsString.append("&\(OAuthParameters.oauth_signature.rawValue)=\(encryptString)")
         let urlString = base + "?" + paramsString
-        let url = URL(string: urlString.removingPercentEncoding!.replacingOccurrences(of: "+", with: "%2B"))
+        let url = URL(string: urlString
+                        .removingPercentEncoding!
+                        .replacingOccurrences(of: "+", with: "%2B"))
         
         return url
     }

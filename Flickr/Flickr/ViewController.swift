@@ -112,14 +112,14 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-                network.removeFavorite(photoID: "51370339706") { result in
-                    switch result {
-                    case .success(_):
-                        print("[!] Removed to favorite")
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
+//                network.removeFavorite(photoID: "51370339706") { result in
+//                    switch result {
+//                    case .success(_):
+//                        print("[!] Removed to favorite")
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                }
 //                network.getPhotos(userID: "193759241%40N06", extras: nil) { result in
 //                    switch result {
 //                    case .success(let photos):
@@ -132,14 +132,14 @@ class ViewController: UIViewController {
 //                        print(error)
 //                    }
 //                }
-//                network.deletePhoto(photoID: "51437136559") { result in
-//                    switch result {
-//                    case .success(_):
-//                        print("[!] Photo is deleted")
-//                    case .failure(let error):
-//                        print(error)
-//                    }
-//                }
+                network.deletePhoto(photoID: "51440560785") { result in
+                    switch result {
+                    case .success(_):
+                        print("[!] Photo is deleted")
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
 //                let image = UIImage(named: "00_onboarding")!
 //                network.uploadPhoto(filename: "Onboarding", image: image, title: "Delivery", description: "Beziers", tags: nil) { result in
 //                    switch result {
