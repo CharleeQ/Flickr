@@ -7,7 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F021A1526E9190700DE9BEE /* Serializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F021A1426E9190700DE9BEE /* Serializers.swift */; };
+		9F0A19BA26EB599E0011D761 /* CharacterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A19B926EB599E0011D761 /* CharacterSet.swift */; };
 		9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140B526DE7344003EE7AA /* NetworkService.swift */; };
+		9F8140BB26DE83B1003EE7AA /* ProfileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140BA26DE83B1003EE7AA /* ProfileRequests.swift */; };
+		9F8140C026DF9F09003EE7AA /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140BF26DF9F09003EE7AA /* Tags.swift */; };
+		9F8140C226DFA2F2003EE7AA /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140C126DFA2F2003EE7AA /* Photos.swift */; };
+		9F8140C426DFACD4003EE7AA /* Photos.Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140C326DFACD4003EE7AA /* Photos.Comments.swift */; };
+		9F8140C626DFF258003EE7AA /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140C526DFF258003EE7AA /* Favorites.swift */; };
+		9F8140C826E0F1DA003EE7AA /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140C726E0F1DA003EE7AA /* People.swift */; };
+		9F8140CA26E115D3003EE7AA /* Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140C926E115D3003EE7AA /* Parameters.swift */; };
+		9F8140CC26E11621003EE7AA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140CB26E11621003EE7AA /* Constants.swift */; };
+		9F8140D026E4BEBC003EE7AA /* UploadPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140CF26E4BEBC003EE7AA /* UploadPhoto.swift */; };
+		9F8140D326E4E66B003EE7AA /* PhotoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140D226E4E66B003EE7AA /* PhotoAPI.swift */; };
+		9F8140D526E4E67A003EE7AA /* ProfileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140D426E4E67A003EE7AA /* ProfileAPI.swift */; };
+		9F8140D726E4FA74003EE7AA /* TagAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140D626E4FA74003EE7AA /* TagAPI.swift */; };
+		9F8140DE26E62BB5003EE7AA /* CommentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140DD26E62BB5003EE7AA /* CommentsAPI.swift */; };
+		9F8140E326E647FE003EE7AA /* FaveAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140E226E647FE003EE7AA /* FaveAPI.swift */; };
+		9F8140E526E64E14003EE7AA /* PeopleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140E426E64E14003EE7AA /* PeopleAPI.swift */; };
 		9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */; };
 		9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */; };
 		9F92AC7126CFC2C200433CF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC7026CFC2C200433CF3 /* ViewController.swift */; };
@@ -20,7 +37,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F021A1426E9190700DE9BEE /* Serializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serializers.swift; sourceTree = "<group>"; };
+		9F0A19B926EB599E0011D761 /* CharacterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSet.swift; sourceTree = "<group>"; };
 		9F8140B526DE7344003EE7AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		9F8140BA26DE83B1003EE7AA /* ProfileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequests.swift; sourceTree = "<group>"; };
+		9F8140BF26DF9F09003EE7AA /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
+		9F8140C126DFA2F2003EE7AA /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
+		9F8140C326DFACD4003EE7AA /* Photos.Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.Comments.swift; sourceTree = "<group>"; };
+		9F8140C526DFF258003EE7AA /* Favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favorites.swift; sourceTree = "<group>"; };
+		9F8140C726E0F1DA003EE7AA /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
+		9F8140C926E115D3003EE7AA /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
+		9F8140CB26E11621003EE7AA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9F8140CF26E4BEBC003EE7AA /* UploadPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhoto.swift; sourceTree = "<group>"; };
+		9F8140D226E4E66B003EE7AA /* PhotoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAPI.swift; sourceTree = "<group>"; };
+		9F8140D426E4E67A003EE7AA /* ProfileAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPI.swift; sourceTree = "<group>"; };
+		9F8140D626E4FA74003EE7AA /* TagAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAPI.swift; sourceTree = "<group>"; };
+		9F8140DD26E62BB5003EE7AA /* CommentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsAPI.swift; sourceTree = "<group>"; };
+		9F8140E226E647FE003EE7AA /* FaveAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaveAPI.swift; sourceTree = "<group>"; };
+		9F8140E426E64E14003EE7AA /* PeopleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleAPI.swift; sourceTree = "<group>"; };
 		9F92AC6926CFC2C200433CF3 /* Flickr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flickr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F92AC6C26CFC2C200433CF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F92AC6E26CFC2C200433CF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				9F92AC9026D2812B00433CF3 /* Encryption.swift */,
+				9F0A19B926EB599E0011D761 /* CharacterSet.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -64,9 +99,39 @@
 		9F8140B926DE7579003EE7AA /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9F8140D126E4E657003EE7AA /* Model */,
+				9F8140BC26DE83BF003EE7AA /* Requests */,
 				9F8140B526DE7344003EE7AA /* NetworkService.swift */,
+				9F021A1426E9190700DE9BEE /* Serializers.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		9F8140BC26DE83BF003EE7AA /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				9F8140BA26DE83B1003EE7AA /* ProfileRequests.swift */,
+				9F8140BF26DF9F09003EE7AA /* Tags.swift */,
+				9F8140C126DFA2F2003EE7AA /* Photos.swift */,
+				9F8140C326DFACD4003EE7AA /* Photos.Comments.swift */,
+				9F8140C526DFF258003EE7AA /* Favorites.swift */,
+				9F8140C726E0F1DA003EE7AA /* People.swift */,
+				9F8140CF26E4BEBC003EE7AA /* UploadPhoto.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		9F8140D126E4E657003EE7AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9F8140D426E4E67A003EE7AA /* ProfileAPI.swift */,
+				9F8140D626E4FA74003EE7AA /* TagAPI.swift */,
+				9F8140D226E4E66B003EE7AA /* PhotoAPI.swift */,
+				9F8140DD26E62BB5003EE7AA /* CommentsAPI.swift */,
+				9F8140E226E647FE003EE7AA /* FaveAPI.swift */,
+				9F8140E426E64E14003EE7AA /* PeopleAPI.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9F92AC6026CFC2C200433CF3 = {
@@ -104,9 +169,11 @@
 		9F92AC8926CFDDF200433CF3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				9F8140B926DE7579003EE7AA /* Network */,
 				9F8140B826DE756B003EE7AA /* Auth */,
+				9F8140B926DE7579003EE7AA /* Network */,
+				9F8140C926E115D3003EE7AA /* Parameters.swift */,
 				9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */,
+				9F8140CB26E11621003EE7AA /* Constants.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -182,12 +249,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F92AC7126CFC2C200433CF3 /* ViewController.swift in Sources */,
+				9F021A1526E9190700DE9BEE /* Serializers.swift in Sources */,
+				9F8140CA26E115D3003EE7AA /* Parameters.swift in Sources */,
+				9F8140BB26DE83B1003EE7AA /* ProfileRequests.swift in Sources */,
 				9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */,
 				9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */,
+				9F8140CC26E11621003EE7AA /* Constants.swift in Sources */,
+				9F8140C226DFA2F2003EE7AA /* Photos.swift in Sources */,
 				9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */,
+				9F8140C026DF9F09003EE7AA /* Tags.swift in Sources */,
+				9F8140C426DFACD4003EE7AA /* Photos.Comments.swift in Sources */,
+				9F8140D326E4E66B003EE7AA /* PhotoAPI.swift in Sources */,
+				9F8140D726E4FA74003EE7AA /* TagAPI.swift in Sources */,
+				9F8140E326E647FE003EE7AA /* FaveAPI.swift in Sources */,
+				9F0A19BA26EB599E0011D761 /* CharacterSet.swift in Sources */,
+				9F8140E526E64E14003EE7AA /* PeopleAPI.swift in Sources */,
 				9F92AC9126D2812B00433CF3 /* Encryption.swift in Sources */,
+				9F8140D026E4BEBC003EE7AA /* UploadPhoto.swift in Sources */,
+				9F8140C626DFF258003EE7AA /* Favorites.swift in Sources */,
+				9F8140D526E4E67A003EE7AA /* ProfileAPI.swift in Sources */,
+				9F8140DE26E62BB5003EE7AA /* CommentsAPI.swift in Sources */,
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
 				9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */,
+				9F8140C826E0F1DA003EE7AA /* People.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
