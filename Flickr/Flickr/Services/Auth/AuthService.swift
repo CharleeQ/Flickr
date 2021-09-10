@@ -69,13 +69,14 @@ class AuthService {
             .sorted { $0.0.rawValue < $1.0.rawValue }
             .map { (key, value) -> String in "\(key.rawValue)=\(value)" }
             .joined(separator: "&")
-            .addingPercentEncoding(withAllowedCharacters: constants.urlCharset)!
+            .addingPercentEncoding(withAllowedCharacters: .urlCharset)!
         
         let string = "\(method.rawValue)&\(base)&\(params)"
             
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret ?? "")")
         params.append("&\(OAuthParameters.oauth_signature)=\(encryptString)")
         let urlString = path + "/" + state.description + "?" + params
+        print(encryptString)
         let url = URL(string: urlString
                         .removingPercentEncoding!
                         .replacingOccurrences(of: "+", with: "%2B"))

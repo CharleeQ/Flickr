@@ -35,7 +35,7 @@ extension NetworkService {
             .sorted { $0.key < $1.key }
             .map { (key, value) in "\(key)=\(value)".replacingOccurrences(of: " ", with: "%20") }
             .joined(separator: "&")
-            .addingPercentEncoding(withAllowedCharacters: constants.urlCharset)!
+            .addingPercentEncoding(withAllowedCharacters: .urlCharset)!
         let string = "POST&\(base)&\(paramsString)"
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret)")
         

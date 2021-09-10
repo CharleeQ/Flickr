@@ -33,26 +33,22 @@ class NetworkService {
         params[OAuthParameters.oauth_version.rawValue] = constants.version
         params[OAuthParameters.oauth_token.rawValue] = accessToken
         
-        
-        let base = path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         var paramsString = params
             .sorted { $0.key < $1.key }
             .map { (key, value) in
                 "\(key)=\(value)".replacingOccurrences(of: " ", with: "%20")
             }
             .joined(separator: "&")
-            .addingPercentEncoding(withAllowedCharacters: constants.urlCharset)!
-        let string = "\(method.rawValue)&\(base)&\(paramsString)"
+        let string = "\(method.rawValue)&\(path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&\(paramsString.addingPercentEncoding(withAllowedCharacters: .urlCharset)!)"
+        print(string)
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret)")
         paramsString.append("&\(OAuthParameters.oauth_signature.rawValue)=\(encryptString)")
-        let urlString = base + "?" + paramsString
-        let url = URL(string: urlString
-                        .removingPercentEncoding!
-                        .replacingOccurrences(of: "+", with: "%2B"))
+        let urlString = path + "?" + paramsString.replacingOccurrences(of: "+", with: "%2B")
+        print(urlString)
+        let url = URL(string: urlString)
         
         return url
     }
-    
     
     // MARK: - Request without OAuth
 
@@ -94,7 +90,6 @@ class NetworkService {
         params[.method] = method
         
         if let url = signWithURL(parameters: params, method: http) {
-            print(url.absoluteString)
             var request = URLRequest(url: url)
             request.httpMethod = http.rawValue
             

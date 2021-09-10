@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+extension CharacterSet {
+    public static var urlCharset: CharacterSet { get {
+        return CharacterSet
+            .urlHostAllowed
+            .subtracting(CharacterSet(charactersIn: "=&"))
+    } }
+}

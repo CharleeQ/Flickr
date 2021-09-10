@@ -15,8 +15,5 @@ struct Constants {
     let callbackScheme = "kiryl"
     var nonce = UUID().uuidString
     var timestamp = String(Date().timeIntervalSince1970)
-    let perms = "delete"
-    
-    let urlCharset = CharacterSet.urlHostAllowed.subtracting(CharacterSet(charactersIn: "=&"))
-    
+    let perms = "delete"    
 }
