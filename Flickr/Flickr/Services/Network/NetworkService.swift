@@ -33,25 +33,25 @@ class NetworkService {
         params[OAuthParameters.oauth_version.rawValue] = constants.version
         params[OAuthParameters.oauth_token.rawValue] = accessToken
         
-        var paramsString = params
-            .sorted { $0.key < $1.key }
-            .map { (key, value) in
-                "\(key)=\(value)".replacingOccurrences(of: " ", with: "%20")
-            }
+        let queryString = params
+            .sorted(by: { $0.key < $1.key })
+            .map { $0.key + "=" + "\($0.value)" }
             .joined(separator: "&")
-        let string = "\(method.rawValue)&\(path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&\(paramsString.addingPercentEncoding(withAllowedCharacters: .urlCharset)!)"
-        print(string)
-        let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret)")
-        paramsString.append("&\(OAuthParameters.oauth_signature.rawValue)=\(encryptString)")
-        let urlString = path + "?" + paramsString.replacingOccurrences(of: "+", with: "%2B")
-        print(urlString)
-        let url = URL(string: urlString)
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        return url
+        let signatureString = method.rawValue
+            + "&" + path.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+            + "&" + queryString.addingPercentEncoding(withAllowedCharacters: .urlCharset)!
+        let signature = signatureString.hmac(key: constants.consumerSecret + "&" + tokenSecret)
+        let urlString = path + "?" + queryString
+            + "&" + OAuthParameters.oauth_signature.rawValue + "=" + signature.addingPercentEncoding(withAllowedCharacters: .urlQueryWithPlusAllowed)!
+
+        return URL(string: urlString)
     }
     
+    
     // MARK: - Request without OAuth
-
+    
     func request<Serializer>(http: HTTPMethod = .GET, method: String, parameters: [NetworkParameters: Any], serializer: Serializer, completion: @escaping (Result<Serializer.R, Error>) -> Void) where Serializer: SerializerProtocol {
         var params = parameters
         params[.format] = "json"

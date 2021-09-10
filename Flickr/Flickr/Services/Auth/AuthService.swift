@@ -44,6 +44,7 @@ class AuthService {
                         self.exchangingTheRequestForAccess(request: tokens.0, verifier: tokens.1) { result in
                             switch result {
                             case .success(let tokens):
+                                print(tokens)
                                 completion(.success(tokens))
                             case .failure(let error):
                                 completion(.failure(error))
@@ -69,19 +70,14 @@ class AuthService {
             .sorted { $0.0.rawValue < $1.0.rawValue }
             .map { (key, value) -> String in "\(key.rawValue)=\(value)" }
             .joined(separator: "&")
-            .addingPercentEncoding(withAllowedCharacters: .urlCharset)!
-        
-        let string = "\(method.rawValue)&\(base)&\(params)"
             
+        let string = "\(method.rawValue)&\(base)&\(params.addingPercentEncoding(withAllowedCharacters: .urlCharset)!)"
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret ?? "")")
-        params.append("&\(OAuthParameters.oauth_signature)=\(encryptString)")
-        let urlString = path + "/" + state.description + "?" + params
         print(encryptString)
-        let url = URL(string: urlString
-                        .removingPercentEncoding!
-                        .replacingOccurrences(of: "+", with: "%2B"))
+        params.append("&\(OAuthParameters.oauth_signature)=\(encryptString.addingPercentEncoding(withAllowedCharacters: .urlQueryWithPlusAllowed)!)")
+        let urlString = path + "/" + state.description + "?" + params
         
-        return url
+        return URL(string: urlString)
     }
     
     private func parsingTokens(of string: String) -> [String: String] {
@@ -100,7 +96,6 @@ class AuthService {
     
     // MARK: - Authorization steps
     
-    // First step
     private func getARequestToken(completion: @escaping (Result<String, Error>) -> Void) {
         let params: [OAuthParameters: String] = [.oauth_callback: "\(constants.callbackScheme)://"
                                                     .addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!,
@@ -128,7 +123,6 @@ class AuthService {
         }.resume()
     }
     
-    // Second step
     private func getTheUserAuthorization(presenter: ASWebAuthenticationPresentationContextProviding, token: String, completion: @escaping (Result<(String, String), Error>) -> Void) {
         guard let url = URL(string: "https://www.flickr.com/services/oauth/authorize?oauth_token=\(token)&\(OAuthParameters.perms.rawValue)=\(constants.perms)") else { return }
         
@@ -148,7 +142,6 @@ class AuthService {
         }
     }
     
-    // Third step
     private func exchangingTheRequestForAccess(request: String, verifier: String, completion: @escaping (Result<[String: String], Error>) -> Void) {
         let params: [OAuthParameters: String] = [.oauth_consumer_key: constants.consumerKey,
                                                  .oauth_nonce: constants.nonce,

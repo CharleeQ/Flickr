@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Comment: Decodable {
     let id: String
     let author: String

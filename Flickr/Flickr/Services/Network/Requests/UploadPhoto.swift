@@ -33,10 +33,10 @@ extension NetworkService {
         let base = url.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         let paramsString = parameters
             .sorted { $0.key < $1.key }
-            .map { (key, value) in "\(key)=\(value)".replacingOccurrences(of: " ", with: "%20") }
+            .map { (key, value) in "\(key)=\(value)" }
             .joined(separator: "&")
-            .addingPercentEncoding(withAllowedCharacters: .urlCharset)!
-        let string = "POST&\(base)&\(paramsString)"
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryWithPlusAllowed)!
+        let string = "POST&\(base)&\(paramsString.addingPercentEncoding(withAllowedCharacters: .urlCharset)!)"
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret)")
         
         return encryptString
