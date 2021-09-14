@@ -8,7 +8,7 @@
 import UIKit
 import AuthenticationServices
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: ASWebAuthenticationPresentationContextProviding {
+extension LoginViewController: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
         let window = UIApplication.shared.windows.first { $0.isKeyWindow }
         return window ?? ASPresentationAnchor()
