@@ -38,6 +38,7 @@
 		9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC8A26CFDE0300433CF3 /* AuthService.swift */; };
 		9F92AC9126D2812B00433CF3 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC9026D2812B00433CF3 /* Encryption.swift */; };
 		9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */; };
+		9FBC79F826F20678009A7608 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC79F726F20678009A7608 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		9F92AC8A26CFDE0300433CF3 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		9F92AC9026D2812B00433CF3 /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
 		9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		9FBC79F726F20678009A7608 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				9F0A19BF26F0E4BC0011D761 /* HomeViewController.swift */,
 				9F0A19C126F0E4C70011D761 /* GalleryViewController.swift */,
 				9F0A19C326F0E4D00011D761 /* ProfileViewController.swift */,
+				9FBC79F726F20678009A7608 /* PostViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
 				9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */,
 				9F8140C826E0F1DA003EE7AA /* People.swift in Sources */,
+				9FBC79F826F20678009A7608 /* PostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

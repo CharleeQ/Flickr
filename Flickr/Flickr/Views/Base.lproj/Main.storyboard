@@ -19,61 +19,80 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <segue destination="qe6-lI-eoa" kind="show" identifier="LogInSegue" id="Zrq-6f-CoL"/>
+                        <segue destination="qe6-lI-eoa" kind="custom" identifier="LogInSegue" id="Zrq-6f-CoL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-620" y="75"/>
         </scene>
-        <!--Gallery-->
+        <!--Gallery View Controller-->
         <scene sceneID="q27-PC-J7g">
             <objects>
-                <viewController id="0EK-dB-WbE" sceneMemberID="viewController">
+                <viewController id="0EK-dB-WbE" customClass="GalleryViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Puj-AH-OCp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="vWp-Zh-wPY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Gallery" image="star" catalog="system" id="Q6i-6k-iia"/>
+                    <navigationItem key="navigationItem" id="4CW-3o-CS9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VTv-cm-a7x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055" y="-14"/>
+            <point key="canvasLocation" x="1963.7681159420292" y="-14.0625"/>
         </scene>
-        <!--Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="TsL-Q8-n5m">
             <objects>
-                <viewController id="ime-Yt-53A" sceneMemberID="viewController">
+                <viewController id="ime-Yt-53A" customClass="ProfileViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K0C-ud-RTH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Yd1-Fx-b32"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="8ug-8P-BHb"/>
+                    <navigationItem key="navigationItem" id="dic-dH-Ush"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9td-GT-7gE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="662"/>
+            <point key="canvasLocation" x="1963.7681159420292" y="661.60714285714278"/>
         </scene>
-        <!--Home-->
+        <!--Home View Controller-->
         <scene sceneID="dkG-bj-OzA">
             <objects>
-                <viewController id="nEl-5E-nmG" sceneMemberID="viewController">
+                <viewController id="nEl-5E-nmG" customClass="HomeViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vN7-PR-hLL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Zfb-JP-3SE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="y9W-6N-uFR" userLabel="Home"/>
+                    <navigationItem key="navigationItem" id="s80-nP-XnV"/>
+                    <connections>
+                        <segue destination="VWQ-dC-yUI" kind="show" id="Fkc-kt-70X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="owc-qy-ugc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="-689"/>
+            <point key="canvasLocation" x="1963.7681159420292" y="-689.0625"/>
+        </scene>
+        <!--Post View Controller-->
+        <scene sceneID="gjS-YS-Lyo">
+            <objects>
+                <viewController id="VWQ-dC-yUI" customClass="PostViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e4T-We-dEl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="HS5-st-wnL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="F78-IU-bx8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YUD-K4-DvC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2791" y="-689"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="JVr-yg-q4z">
@@ -86,14 +105,71 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="nEl-5E-nmG" kind="relationship" relationship="viewControllers" id="qjC-T8-yMa"/>
-                        <segue destination="0EK-dB-WbE" kind="relationship" relationship="viewControllers" id="60d-QO-Oza"/>
-                        <segue destination="ime-Yt-53A" kind="relationship" relationship="viewControllers" id="8GE-GT-rcF"/>
+                        <segue destination="CfA-7C-1rc" kind="relationship" relationship="viewControllers" id="qjC-T8-yMa"/>
+                        <segue destination="EBy-Bc-RIq" kind="relationship" relationship="viewControllers" id="60d-QO-Oza"/>
+                        <segue destination="20e-F9-TCG" kind="relationship" relationship="viewControllers" id="8GE-GT-rcF"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r1s-4m-1eE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="112" y="75"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="q4c-4z-2K6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CfA-7C-1rc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="y9W-6N-uFR" userLabel="Home"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="j1b-sh-VUk">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nEl-5E-nmG" kind="relationship" relationship="rootViewController" id="IHX-Jl-qiF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Csi-lM-kC4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1053.6231884057972" y="-689.0625"/>
+        </scene>
+        <!--Gallery-->
+        <scene sceneID="TZE-VV-rGG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EBy-Bc-RIq" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Gallery" image="star" catalog="system" id="Q6i-6k-iia"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="c8c-Xs-JDi">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0EK-dB-WbE" kind="relationship" relationship="rootViewController" id="Mx6-TW-YMC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CBK-0l-anH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1053.6231884057972" y="-14.0625"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="UgV-iR-nlp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="20e-F9-TCG" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="8ug-8P-BHb"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nmy-gU-h4M">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ime-Yt-53A" kind="relationship" relationship="rootViewController" id="JSg-ak-jwc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ynW-gR-mc7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1053.6231884057972" y="661.60714285714278"/>
         </scene>
     </scenes>
     <resources>
