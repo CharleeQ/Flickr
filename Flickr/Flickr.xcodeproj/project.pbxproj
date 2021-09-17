@@ -13,6 +13,10 @@
 		9F0A19C026F0E4BC0011D761 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A19BF26F0E4BC0011D761 /* HomeViewController.swift */; };
 		9F0A19C226F0E4C70011D761 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A19C126F0E4C70011D761 /* GalleryViewController.swift */; };
 		9F0A19C426F0E4D00011D761 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A19C326F0E4D00011D761 /* ProfileViewController.swift */; };
+		9F536D1D26F4C5330077F1F9 /* LoginWithFlickr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F536D1C26F4C5330077F1F9 /* LoginWithFlickr.swift */; };
+		9F536D1F26F4C5610077F1F9 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F536D1E26F4C5610077F1F9 /* Colors.swift */; };
+		9F536D2326F4EA190077F1F9 /* Logotype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F536D2226F4EA180077F1F9 /* Logotype.swift */; };
+		9F536D2626F4F0A70077F1F9 /* SignUpLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F536D2526F4F0A70077F1F9 /* SignUpLabel.swift */; };
 		9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140B526DE7344003EE7AA /* NetworkService.swift */; };
 		9F8140BB26DE83B1003EE7AA /* ProfileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140BA26DE83B1003EE7AA /* ProfileRequests.swift */; };
 		9F8140C026DF9F09003EE7AA /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140BF26DF9F09003EE7AA /* Tags.swift */; };
@@ -48,6 +52,10 @@
 		9F0A19BF26F0E4BC0011D761 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9F0A19C126F0E4C70011D761 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		9F0A19C326F0E4D00011D761 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		9F536D1C26F4C5330077F1F9 /* LoginWithFlickr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithFlickr.swift; sourceTree = "<group>"; };
+		9F536D1E26F4C5610077F1F9 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		9F536D2226F4EA180077F1F9 /* Logotype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logotype.swift; sourceTree = "<group>"; };
+		9F536D2526F4F0A70077F1F9 /* SignUpLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpLabel.swift; sourceTree = "<group>"; };
 		9F8140B526DE7344003EE7AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		9F8140BA26DE83B1003EE7AA /* ProfileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequests.swift; sourceTree = "<group>"; };
 		9F8140BF26DF9F09003EE7AA /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
@@ -105,10 +113,29 @@
 		9F0A19BC26F0E04E0011D761 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F536D2426F4EA300077F1F9 /* Labels */,
+				9F536D2026F4D3FF0077F1F9 /* Buttons */,
 				9F92AC7226CFC2C200433CF3 /* Main.storyboard */,
 				9F92AC7726CFC2C500433CF3 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		9F536D2026F4D3FF0077F1F9 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				9F536D1C26F4C5330077F1F9 /* LoginWithFlickr.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		9F536D2426F4EA300077F1F9 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				9F536D2226F4EA180077F1F9 /* Logotype.swift */,
+				9F536D2526F4F0A70077F1F9 /* SignUpLabel.swift */,
+			);
+			path = Labels;
 			sourceTree = "<group>";
 		};
 		9F8140B726DE734E003EE7AA /* Extensions */ = {
@@ -116,6 +143,7 @@
 			children = (
 				9F92AC9026D2812B00433CF3 /* Encryption.swift */,
 				9F0A19B926EB599E0011D761 /* CharacterSet.swift */,
+				9F536D1E26F4C5610077F1F9 /* Colors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -284,6 +312,7 @@
 				9F8140CA26E115D3003EE7AA /* Parameters.swift in Sources */,
 				9F8140BB26DE83B1003EE7AA /* ProfileRequests.swift in Sources */,
 				9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */,
+				9F536D1F26F4C5610077F1F9 /* Colors.swift in Sources */,
 				9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */,
 				9F8140CC26E11621003EE7AA /* Constants.swift in Sources */,
 				9F8140C226DFA2F2003EE7AA /* Photos.swift in Sources */,
@@ -297,6 +326,7 @@
 				9F0A19C226F0E4C70011D761 /* GalleryViewController.swift in Sources */,
 				9F0A19BA26EB599E0011D761 /* CharacterSet.swift in Sources */,
 				9F8140E526E64E14003EE7AA /* PeopleAPI.swift in Sources */,
+				9F536D2626F4F0A70077F1F9 /* SignUpLabel.swift in Sources */,
 				9F0A19C426F0E4D00011D761 /* ProfileViewController.swift in Sources */,
 				9F92AC9126D2812B00433CF3 /* Encryption.swift in Sources */,
 				9F8140D026E4BEBC003EE7AA /* UploadPhoto.swift in Sources */,
@@ -304,7 +334,9 @@
 				9F8140C626DFF258003EE7AA /* Favorites.swift in Sources */,
 				9F8140D526E4E67A003EE7AA /* ProfileAPI.swift in Sources */,
 				9F8140DE26E62BB5003EE7AA /* CommentsAPI.swift in Sources */,
+				9F536D1D26F4C5330077F1F9 /* LoginWithFlickr.swift in Sources */,
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
+				9F536D2326F4EA190077F1F9 /* Logotype.swift in Sources */,
 				9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */,
 				9F8140C826E0F1DA003EE7AA /* People.swift in Sources */,
 				9FBC79F826F20678009A7608 /* PostViewController.swift in Sources */,

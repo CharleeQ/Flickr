@@ -15,16 +15,66 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSW-zT-Dvw" customClass="LoginWithFlickrButton" customModule="Flickr" customModuleProvider="target">
+                                <rect key="frame" x="34" y="700" width="346" height="44"/>
+                                <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="W6v-l0-LO2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Log in with flickr.com"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flickr" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znb-uS-g71" customClass="LogotypeLabel" customModule="Flickr" customModuleProvider="target">
+                                <rect key="frame" x="112.5" y="138" width="189" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="189" id="Alq-O5-Qmd"/>
+                                    <constraint firstAttribute="height" constant="64" id="wIL-cs-RRr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s86-fJ-Pj2">
+                                <rect key="frame" x="0.0" y="790" width="414" height="1"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="ZNS-Ek-dHQ"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KEm-N3-dTa" customClass="SignUpLabel" customModule="Flickr" customModuleProvider="target">
+                                <rect key="frame" x="186" y="809" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KEm-N3-dTa" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1Hs-nj-mC7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HSW-zT-Dvw" secondAttribute="trailing" constant="34" id="4Pk-dI-cKM"/>
+                            <constraint firstItem="s86-fJ-Pj2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Bn4-WL-9Oc"/>
+                            <constraint firstItem="s86-fJ-Pj2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Jgf-CY-fwt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="KEm-N3-dTa" secondAttribute="bottom" constant="32" id="M7g-L7-Paa"/>
+                            <constraint firstItem="KEm-N3-dTa" firstAttribute="top" secondItem="s86-fJ-Pj2" secondAttribute="bottom" constant="18" id="Quj-fl-4rX"/>
+                            <constraint firstItem="znb-uS-g71" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="ZDf-Yu-9M2"/>
+                            <constraint firstItem="znb-uS-g71" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="94" id="add-vo-fKu"/>
+                            <constraint firstAttribute="trailing" secondItem="s86-fJ-Pj2" secondAttribute="trailing" id="mg7-Kt-GeG"/>
+                            <constraint firstItem="s86-fJ-Pj2" firstAttribute="top" secondItem="HSW-zT-Dvw" secondAttribute="bottom" constant="46" id="pyQ-E4-bhC"/>
+                            <constraint firstItem="HSW-zT-Dvw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="34" id="rsJ-K1-fwx"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="HSW-zT-Dvw" id="D5O-Ic-xMU"/>
+                        <outlet property="logotype" destination="znb-uS-g71" id="YgG-fe-OZ0"/>
+                        <outlet property="signUpLabel" destination="KEm-N3-dTa" id="9Ig-j6-5aI"/>
                         <segue destination="qe6-lI-eoa" kind="custom" identifier="LogInSegue" id="Zrq-6f-CoL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-620" y="75"/>
+            <point key="canvasLocation" x="-620.28985507246387" y="75"/>
         </scene>
         <!--Gallery View Controller-->
         <scene sceneID="q27-PC-J7g">
@@ -176,8 +226,14 @@
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
