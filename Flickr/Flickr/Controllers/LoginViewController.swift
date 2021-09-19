@@ -7,22 +7,13 @@
 
 import UIKit
 import AuthenticationServices
-import WebKit
 
-class LoginViewController: UIViewController, WKUIDelegate {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var logotype: LogotypeLabel!
     @IBOutlet weak var signUpLabel: SignUpLabel!
     @IBOutlet weak var loginButton: LoginWithFlickrButton!
-    var webView: WKWebView!
-    
-    override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
-        view = webView
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -43,11 +34,6 @@ class LoginViewController: UIViewController, WKUIDelegate {
                                buttonTitle: "Sure")
             }
         }
-    }
-    
-    private func showSignUp(url: URL) {
-        let myRequest = URLRequest(url: url)
-        webView.load(myRequest)
     }
     
     private func showAlert(title: String, message: String, buttonTitle: String) {
