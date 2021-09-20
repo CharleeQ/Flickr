@@ -7,6 +7,7 @@
 
 import UIKit
 import AuthenticationServices
+import SafariServices
 
 class LoginViewController: UIViewController {
     
@@ -16,6 +17,9 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showSignUp))
+        signUpLabel.addGestureRecognizer(tapGesture)
     }
     
     @IBAction func login(_ sender: Any) {
@@ -33,6 +37,14 @@ class LoginViewController: UIViewController {
                                message: "Please try again.",
                                buttonTitle: "Sure")
             }
+        }
+    }
+    
+    @objc private func showSignUp() {
+        guard let characterCount = signUpLabel.text?.count else { return }
+        if let url = signUpLabel.attributedText?.attribute(.attachment, at: characterCount - 2 , effectiveRange: nil) as? URL {
+            let safariVC = SFSafariViewController(url: url)
+            self.show(safariVC, sender: nil)
         }
     }
     

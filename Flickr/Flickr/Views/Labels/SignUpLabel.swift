@@ -15,11 +15,12 @@ class SignUpLabel: UILabel {
         let attrbs: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor.label,
             .font: UIFont.systemFont(ofSize: fontSize, weight: .semibold),
-            .link: URL(string: "https://identity.flickr.com/sign-up")!,
+            .attachment: URL(string: "https://identity.flickr.com/sign-up")!,
             .underlineStyle: 0,
             .underlineColor: UIColor.clear]
         textString.addAttributes(attrbs, range: NSRange(location: 23, length: 7))
         attributedText = textString
+        isUserInteractionEnabled = true
     }
     
     override func awakeFromNib() {
