@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct AuthUser {
+    let token: String
+    let tokenSecret: String
+    let nsid: String
+    let username: String
+    let fullname: String
+}

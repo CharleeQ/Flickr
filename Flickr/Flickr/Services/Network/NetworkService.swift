@@ -69,12 +69,18 @@ class NetworkService {
                 if let data = data {
                     do {
                         let result = try serializer.parse(data: data)
-                        completion(.success(result))
+                        DispatchQueue.main.async {
+                            completion(.success(result))
+                        }
                     } catch let error {
-                        completion(.failure(error))
+                        DispatchQueue.main.async {
+                            completion(.failure(error))
+                        }
                     }
                 } else if let error = error {
-                    completion(.failure(error))
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
                 }
             }.resume()
         }
@@ -97,12 +103,18 @@ class NetworkService {
                 if let data = data {
                     do {
                         let result = try serializer.parse(data: data)
-                        completion(.success(result))
+                        DispatchQueue.main.async {
+                            completion(.success(result))
+                        }
                     } catch let error {
-                        completion(.failure(error))
+                        DispatchQueue.main.async {
+                            completion(.failure(error))
+                        }
                     }
                 } else if let error = error {
-                    completion(.failure(error))
+                    DispatchQueue.main.async {
+                        completion(.failure(error))
+                    }
                 }
             }.resume()
         }

@@ -27,8 +27,13 @@ class LogotypeLabel: UILabel {
         font = roundedFont
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         setup()
     }
 }

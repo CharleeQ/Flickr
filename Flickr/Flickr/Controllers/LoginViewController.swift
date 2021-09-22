@@ -14,7 +14,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var logotype: LogotypeLabel!
     @IBOutlet weak var signUpLabel: SignUpLabel!
     @IBOutlet weak var loginButton: LoginWithFlickrButton!
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,13 +26,10 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: Any) {
         AuthService().login(presenter: self) { result in
             switch result {
-            case .success(let data):
-                print("login \(data)")
-                DispatchQueue.main.async {
-                    self.showAlert(title: "Welcome!",
-                                   message: "Hello, \(data["fullname"]?.removingPercentEncoding ?? "User")",
-                                   buttonTitle: "Start")
-                }
+            case .success(let user):
+                self.showAlert(title: "Welcome!",
+                               message: "Hello, \(user.fullname)",
+                               buttonTitle: "Start")
             case .failure(_):
                 self.showAlert(title: "Login failed",
                                message: "Please try again.",
