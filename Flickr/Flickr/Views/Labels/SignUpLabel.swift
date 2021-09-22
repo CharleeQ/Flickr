@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import SafariServices
 
 class SignUpLabel: UILabel {
+    var delegate: UIViewController?
+    
     func setup() {
         let fontSize: CGFloat = 14
         let textString = NSMutableAttributedString(string: "Don’t have an account? Sign up.",
@@ -21,6 +24,16 @@ class SignUpLabel: UILabel {
         textString.addAttributes(attrbs, range: NSRange(location: 23, length: 7))
         attributedText = textString
         isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showSignUp))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func showSignUp() {
+        guard let characterCount = self.text?.count else { return }
+        if let url = self.attributedText?.attribute(.attachment, at: characterCount - 2 , effectiveRange: nil) as? URL {
+            let safariVC = SFSafariViewController(url: url)
+            delegate?.show(safariVC, sender: nil)
+        }
     }
     
     override func awakeFromNib() {
