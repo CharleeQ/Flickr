@@ -21,7 +21,7 @@ class SignUpLabel: UILabel {
             .attachment: URL(string: "https://identity.flickr.com/sign-up")!,
             .underlineStyle: 0,
             .underlineColor: UIColor.clear]
-        textString.addAttributes(attrbs, range: NSRange(location: 23, length: 7))
+        textString.addAttributes(attrbs, range: NSRange(location: 23, length: 8))
         attributedText = textString
         isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showSignUp))
@@ -30,7 +30,8 @@ class SignUpLabel: UILabel {
     
     @objc private func showSignUp() {
         guard let characterCount = self.text?.count else { return }
-        if let url = self.attributedText?.attribute(.attachment, at: characterCount - 2 , effectiveRange: nil) as? URL {
+        if let url = self.attributedText?.attribute(.attachment, at: characterCount - 1, effectiveRange: nil) as? URL {
+            // characterCount - 1, because we want to get last index in self.text
             let safariVC = SFSafariViewController(url: url)
             delegate?.show(safariVC, sender: nil)
         }

@@ -18,6 +18,7 @@
 		9F536D2326F4EA190077F1F9 /* Logotype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F536D2226F4EA180077F1F9 /* Logotype.swift */; };
 		9F536D2626F4F0A70077F1F9 /* SignUpLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F536D2526F4F0A70077F1F9 /* SignUpLabel.swift */; };
 		9F536D2926FB4DC90077F1F9 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F536D2826FB4DC90077F1F9 /* AuthUser.swift */; };
+		9F65586026FC8104008D54AD /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F65585F26FC8104008D54AD /* UserSettings.swift */; };
 		9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140B526DE7344003EE7AA /* NetworkService.swift */; };
 		9F8140BB26DE83B1003EE7AA /* ProfileRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140BA26DE83B1003EE7AA /* ProfileRequests.swift */; };
 		9F8140C026DF9F09003EE7AA /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8140BF26DF9F09003EE7AA /* Tags.swift */; };
@@ -58,6 +59,7 @@
 		9F536D2226F4EA180077F1F9 /* Logotype.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logotype.swift; sourceTree = "<group>"; };
 		9F536D2526F4F0A70077F1F9 /* SignUpLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpLabel.swift; sourceTree = "<group>"; };
 		9F536D2826FB4DC90077F1F9 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
+		9F65585F26FC8104008D54AD /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		9F8140B526DE7344003EE7AA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		9F8140BA26DE83B1003EE7AA /* ProfileRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequests.swift; sourceTree = "<group>"; };
 		9F8140BF26DF9F09003EE7AA /* Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				9F536D2826FB4DC90077F1F9 /* AuthUser.swift */,
+				9F65585F26FC8104008D54AD /* UserSettings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				9F8140D726E4FA74003EE7AA /* TagAPI.swift in Sources */,
 				9F8140E326E647FE003EE7AA /* FaveAPI.swift in Sources */,
 				9F0A19C226F0E4C70011D761 /* GalleryViewController.swift in Sources */,
+				9F65586026FC8104008D54AD /* UserSettings.swift in Sources */,
 				9F0A19BA26EB599E0011D761 /* CharacterSet.swift in Sources */,
 				9F8140E526E64E14003EE7AA /* PeopleAPI.swift in Sources */,
 				9F536D2626F4F0A70077F1F9 /* SignUpLabel.swift in Sources */,

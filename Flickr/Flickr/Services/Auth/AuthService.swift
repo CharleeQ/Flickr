@@ -172,6 +172,7 @@ class AuthService {
                                         nsid: tokens["user_nsid"] ?? "unknown",
                                         username: tokens["username"] ?? "unknown",
                                         fullname: tokens["fullname"]?.removingPercentEncoding ?? "unknown")
+                UserSettings.authUser = userInfo
                 completion(.success(userInfo))
                 
             } else if let error = error {
