@@ -8,11 +8,11 @@
 import Foundation
 
 class AuthUser: NSObject, NSCoding {
-    var token: String
-    var tokenSecret: String
-    var nsid: String
-    var username: String
-    var fullname: String
+    let token: String
+    let tokenSecret: String
+    let nsid: String
+    let username: String
+    let fullname: String
     
     init(token: String, tokenSecret: String, nsid: String, username: String, fullname: String) {
         self.token = token
