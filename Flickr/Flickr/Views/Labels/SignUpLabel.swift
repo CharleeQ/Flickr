@@ -33,6 +33,7 @@ class SignUpLabel: UILabel {
         if let url = self.attributedText?.attribute(.attachment, at: characterCount - 1, effectiveRange: nil) as? URL {
             // characterCount - 1, because we want to get last index in self.text
             let safariVC = SFSafariViewController(url: url)
+            safariVC.modalPresentationStyle = .popover
             delegate?.show(safariVC, sender: nil)
         }
     }

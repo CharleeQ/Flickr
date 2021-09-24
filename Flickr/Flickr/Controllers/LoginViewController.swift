@@ -23,10 +23,10 @@ class LoginViewController: UIViewController {
     @IBAction func login(_ sender: Any) {
         AuthService().login(presenter: self) { result in
             switch result {
-            case .success(let user):
-                self.showAlert(title: "Welcome!",
-                               message: "Hello, \(user.fullname)",
-                               buttonTitle: "Start")
+            case .success(_):
+                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarC") else { return }
+                vc.modalPresentationStyle = .currentContext
+                self.present(vc, animated: true, completion: nil)
             case .failure(_):
                 self.showAlert(title: "Login failed",
                                message: "Please try again.",
