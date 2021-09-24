@@ -30,12 +30,20 @@ class SignUpLabel: UILabel {
     
     @objc private func showSignUp() {
         guard let characterCount = self.text?.count else { return }
-        if let url = self.attributedText?.attribute(.attachment, at: characterCount - 1, effectiveRange: nil) as? URL {
-            // characterCount - 1, because we want to get last index in self.text
-            let safariVC = SFSafariViewController(url: url)
-            safariVC.modalPresentationStyle = .popover
-            delegate?.show(safariVC, sender: nil)
-        }
+        guard let url = self.attributedText?.attribute(.attachment, at: characterCount - 1, effectiveRange: nil) as? URL else { return } // characterCount - 1, because we want to get last index in self.text
+        let signUpVC = SignUpViewController()
+        signUpVC.url = url
+        signUpVC.title = "Sign Up"
+        let barButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(closeScreen))
+        signUpVC.navigationItem.rightBarButtonItem = barButton
+        let vc = UINavigationController(rootViewController: signUpVC)
+        vc.modalPresentationStyle = .popover
+        delegate?.show(vc, sender: nil)
+        
+    }
+    
+    @objc private func closeScreen() {
+        delegate?.dismiss(animated: true, completion: nil)
     }
     
     override func awakeFromNib() {
