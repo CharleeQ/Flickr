@@ -7,16 +7,6 @@
 
 import UIKit
 
-struct RecentPhotos {
-    let avatar: UIImage
-    let fullname: String
-    let username: String
-    let location: String
-    let postImage: UIImage
-    let description: String
-    let dateUpload: Date
-}
-
 class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -30,9 +20,9 @@ class PostTableViewCell: UITableViewCell {
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var postsTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Flickr"
     }
     
 }
@@ -45,7 +35,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
         
-        cell.usernameLabel.text = "Kiryl Kakareka (kirykakareka)"
+        cell.usernameLabel.text = "User (kirykakareka)"
         cell.locationLabel.text = "Hrodna, Belarus"
         cell.usernameDescriptionLabel.text = "kirykakareka"
         cell.descriptionLabel.text = "Delivery DHL"
