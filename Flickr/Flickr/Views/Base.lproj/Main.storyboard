@@ -129,7 +129,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" rowHeight="517" id="cdM-cY-1qf">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postCell" rowHeight="517" id="cdM-cY-1qf" customClass="PostTableViewCell" customModule="Flickr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="517"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cdM-cY-1qf" id="paz-O8-D1Y">
@@ -137,13 +137,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="00_onboarding" translatesAutoresizingMaskIntoConstraints="NO" id="7KF-vO-mJN">
-                                                    <rect key="frame" x="0.0" y="51" width="414" height="411.5"/>
+                                                    <rect key="frame" x="0.0" y="51" width="414" height="414"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="411.5" id="Is1-Yu-De5"/>
+                                                        <constraint firstAttribute="width" secondItem="7KF-vO-mJN" secondAttribute="height" multiplier="138:138" id="rRh-na-QZ6"/>
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="75h-pb-VsL">
-                                                    <rect key="frame" x="15" y="473.5" width="384" height="32.5"/>
+                                                    <rect key="frame" x="15" y="476" width="384" height="30"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aQi-Cn-0ip">
                                                             <rect key="frame" x="0.0" y="0.0" width="134.5" height="16"/>
@@ -166,7 +166,7 @@
                                                             </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2004 September 21 00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4j-iO-rIo">
-                                                            <rect key="frame" x="0.0" y="19" width="155.5" height="13.5"/>
+                                                            <rect key="frame" x="0.0" y="19" width="155.5" height="11"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                             <color key="textColor" systemColor="separatorColor"/>
                                                             <nil key="highlightedColor"/>
@@ -211,18 +211,28 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="75h-pb-VsL" secondAttribute="trailing" constant="15" id="00s-sy-ESc"/>
+                                                <constraint firstAttribute="trailing" secondItem="7KF-vO-mJN" secondAttribute="trailing" id="473-xc-Lzy"/>
                                                 <constraint firstItem="75h-pb-VsL" firstAttribute="leading" secondItem="paz-O8-D1Y" secondAttribute="leading" constant="15" id="5mK-xV-JVm"/>
                                                 <constraint firstItem="75h-pb-VsL" firstAttribute="top" secondItem="7KF-vO-mJN" secondAttribute="bottom" constant="11" id="942-aZ-IE9"/>
                                                 <constraint firstItem="7KF-vO-mJN" firstAttribute="top" secondItem="cyv-lf-C32" secondAttribute="bottom" constant="8" id="GIB-JP-R6j"/>
-                                                <constraint firstItem="7KF-vO-mJN" firstAttribute="leading" secondItem="paz-O8-D1Y" secondAttribute="leading" id="JBM-fC-d1g"/>
                                                 <constraint firstItem="cyv-lf-C32" firstAttribute="top" secondItem="paz-O8-D1Y" secondAttribute="top" constant="11" id="JCK-Vx-M3E"/>
                                                 <constraint firstAttribute="bottom" secondItem="75h-pb-VsL" secondAttribute="bottom" constant="11" id="Mdh-0y-2e4"/>
                                                 <constraint firstAttribute="bottom" secondItem="75h-pb-VsL" secondAttribute="bottom" constant="11" id="RAO-tB-ba9"/>
                                                 <constraint firstItem="75h-pb-VsL" firstAttribute="leading" secondItem="paz-O8-D1Y" secondAttribute="leading" constant="15" id="hIn-US-p7W"/>
+                                                <constraint firstItem="7KF-vO-mJN" firstAttribute="leading" secondItem="paz-O8-D1Y" secondAttribute="leading" id="hrC-Lc-fgz"/>
                                                 <constraint firstItem="cyv-lf-C32" firstAttribute="leading" secondItem="paz-O8-D1Y" secondAttribute="leading" constant="10" id="iig-lS-Nhb"/>
                                                 <constraint firstItem="7KF-vO-mJN" firstAttribute="centerX" secondItem="75h-pb-VsL" secondAttribute="centerX" id="sNg-a2-51W"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImage" destination="fnx-qp-xHc" id="6NL-W5-krf"/>
+                                            <outlet property="dateUploadLabel" destination="G4j-iO-rIo" id="wZb-4c-Get"/>
+                                            <outlet property="descriptionLabel" destination="YoI-yz-zJ0" id="Uok-Dx-tj2"/>
+                                            <outlet property="locationLabel" destination="45C-ZC-deb" id="d5d-vE-X2I"/>
+                                            <outlet property="postImage" destination="7KF-vO-mJN" id="3cW-1C-3vt"/>
+                                            <outlet property="usernameDescriptionLabel" destination="pi2-d5-gwd" id="T2c-S1-eOK"/>
+                                            <outlet property="usernameLabel" destination="1vT-g2-hEz" id="mCt-4E-nxQ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
