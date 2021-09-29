@@ -16,8 +16,6 @@ struct Photo: Decodable {
     let license: String
     let safetyLevel: String
     let rotation: Int
-    let originalsecret: String
-    let originalformat: String
     let owner: Owner
     let title: Title
     let description: Description
@@ -28,6 +26,7 @@ struct Photo: Decodable {
     let publiceditability: Publiceditability
     let comments: Comments
     let media: String
+    let urls: URLs
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -38,8 +37,6 @@ struct Photo: Decodable {
         case license
         case safetyLevel = "safety_level"
         case rotation
-        case originalsecret
-        case originalformat
         case owner
         case title
         case description
@@ -50,16 +47,16 @@ struct Photo: Decodable {
         case publiceditability
         case comments
         case media
+        case urls
     }
     
     struct Owner: Decodable {
         let nsid: String
         let username: String
         let realname: String
-        let location: String
+        let location: String?
         let iconserver: String
         let iconfarm: Int
-        let pathAlias: String
         
         enum CodingKeys: String, CodingKey {
             case nsid
@@ -68,7 +65,6 @@ struct Photo: Decodable {
             case location
             case iconserver
             case iconfarm
-            case pathAlias = "path_alias"
         }
     }
     
@@ -97,7 +93,6 @@ struct Photo: Decodable {
     struct Dates: Decodable {
         let posted: String
         let taken: String
-        let takengranularity: Int
         let takenunknown: String
         let lastupdate: String
     }
@@ -119,12 +114,44 @@ struct Photo: Decodable {
             case content = "_content"
         }
     }
+    
+    struct URLs: Decodable {
+        let url: [JSONURL]
+        
+        struct JSONURL: Decodable {
+            let type: String
+            let content: String
+            
+            enum CodingKeys: String, CodingKey {
+                case type
+                case content = "_content"
+            }
+        }
+    }
 }
 
 struct RecentPhoto: Decodable {
     let id: String
     let owner: String
     let secret: String
+    let farm: Int
     let server: String
     let title: String
+    let ownername: String
+    let dateupload: String
+    let iconserver: String
+    let iconfarm: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case owner
+        case secret
+        case farm
+        case server
+        case title
+        case ownername
+        case dateupload
+        case iconserver
+        case iconfarm
+    }
 }

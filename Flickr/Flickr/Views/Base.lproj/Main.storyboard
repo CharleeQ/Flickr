@@ -161,9 +161,6 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <constraints>
-                                                                <constraint firstItem="YoI-yz-zJ0" firstAttribute="leading" secondItem="pi2-d5-gwd" secondAttribute="trailing" constant="8" id="9jc-Xd-JeJ"/>
-                                                            </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2004 September 21 00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4j-iO-rIo">
                                                             <rect key="frame" x="0.0" y="19" width="155.5" height="11"/>
@@ -274,7 +271,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="JVr-yg-q4z">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarC" id="qe6-lI-eoa" customClass="TabBarController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarC" id="qe6-lI-eoa" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="dmA-RW-PAQ"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nKe-Ck-JWP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
