@@ -25,8 +25,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let network = NetworkService(accessToken: UserSettings.authUser.token,
-                                     tokenSecret: UserSettings.authUser.tokenSecret)
+        let network = NetworkService(accessToken: UserSettings.get().token,
+                                     tokenSecret: UserSettings.get().tokenSecret)
         
         network.getRecentPhotos(extras: "date_upload,owner_name,icon_server") { result in
             switch result {

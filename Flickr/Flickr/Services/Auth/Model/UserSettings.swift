@@ -7,19 +7,21 @@
 
 import Foundation
 
-class UserSettings {
-    static var authUser: AuthUser! {
-        get {
-            guard let data = UserDefaults.standard.object(forKey: "authUser") as? Data,
-                  let model = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? AuthUser else { return nil }
-            return model
+struct UserSettings {
+    static let key = "authUser"
+    static func save(_ value: AuthUser) {
+         UserDefaults.standard.set(try? PropertyListEncoder().encode(value), forKey: key)
+    }
+    static func get() -> AuthUser! {
+        var userData: AuthUser!
+        if let data = UserDefaults.standard.value(forKey: key) as? Data {
+            userData = try? PropertyListDecoder().decode(AuthUser.self, from: data)
+            return userData
+        } else {
+            return userData
         }
-        set {
-            let defaults = UserDefaults.standard
-            guard let value = newValue else { return }
-            if let data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false) {
-                defaults.set(data, forKey: "authUser")
-            }
-        }
+    }
+    static func remove() {
+        UserDefaults.standard.removeObject(forKey: key)
     }
 }

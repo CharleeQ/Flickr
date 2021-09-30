@@ -16,7 +16,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         signUpLabel.delegate = self
     }
     
@@ -25,8 +24,7 @@ class LoginViewController: UIViewController {
             switch result {
             case .success(_):
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarC") else { return }
-                vc.modalPresentationStyle = .currentContext
-                self.present(vc, animated: true, completion: nil)
+                UIApplication.shared.windows.first?.rootViewController = vc
             case .failure(_):
                 self.showAlert(title: "Login failed",
                                message: "Please try again.",

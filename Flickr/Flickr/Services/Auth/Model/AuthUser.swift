@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AuthUser: NSObject, NSCoding {
+struct AuthUser: Codable {
     let token: String
     let tokenSecret: String
     let nsid: String
@@ -20,21 +20,5 @@ class AuthUser: NSObject, NSCoding {
         self.nsid = nsid
         self.username = username
         self.fullname = fullname
-    }
-    
-    func encode(with coder: NSCoder) {
-        coder.encode(token, forKey: "token")
-        coder.encode(tokenSecret, forKey: "tokenSecret")
-        coder.encode(nsid, forKey: "nsid")
-        coder.encode(username, forKey: "username")
-        coder.encode(fullname, forKey: "fullname")
-    }
-    
-    required init?(coder: NSCoder) {
-        token = coder.decodeObject(forKey: "token") as? String ?? ""
-        tokenSecret = coder.decodeObject(forKey: "tokenSecret") as? String ?? ""
-        nsid = coder.decodeObject(forKey: "nsid") as? String ?? ""
-        username = coder.decodeObject(forKey: "username") as? String ?? ""
-        fullname = coder.decodeObject(forKey: "fullname") as? String ?? ""
     }
 }

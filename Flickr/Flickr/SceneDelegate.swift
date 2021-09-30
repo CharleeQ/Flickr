@@ -50,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: - Private functions
     
     private func checkLogin(storyboard: UIStoryboard) -> UIViewController {
-        if UserSettings.authUser == nil {
+        if UserSettings.get() == nil {
             return storyboard.instantiateViewController(withIdentifier: "LoginVC")
         } else {
             return storyboard.instantiateViewController(withIdentifier: "TabBarC")
