@@ -24,7 +24,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Flickr"
+        
+        // logo image in navbar
+        let logo = UIImage(named: "logoSmall.png")
+        let imageView = UIImageView(image: logo)
+        self.navigationItem.titleView = imageView
         
         let network = NetworkService(accessToken: UserSettings.get().token,
                                      tokenSecret: UserSettings.get().tokenSecret)
