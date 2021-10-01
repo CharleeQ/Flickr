@@ -8,7 +8,6 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
-    
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!

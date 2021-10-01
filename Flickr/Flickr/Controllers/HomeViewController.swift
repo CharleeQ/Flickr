@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Flickr"
         
         let network = NetworkService(accessToken: UserSettings.get().token,
                                      tokenSecret: UserSettings.get().tokenSecret)

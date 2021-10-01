@@ -23,8 +23,7 @@ class LoginViewController: UIViewController {
         AuthService().login(presenter: self) { result in
             switch result {
             case .success(_):
-                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarC") else { return }
-                UIApplication.shared.windows.first?.rootViewController = vc
+                UIApplication.shared.windows.first?.rootViewController = TabBarController()
             case .failure(_):
                 self.showAlert(title: "Login failed",
                                message: "Please try again.",

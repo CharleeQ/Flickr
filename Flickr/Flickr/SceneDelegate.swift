@@ -53,7 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if UserSettings.get() == nil {
             return storyboard.instantiateViewController(withIdentifier: "LoginVC")
         } else {
-            return storyboard.instantiateViewController(withIdentifier: "TabBarC")
+            return TabBarController()
         }
         
     }

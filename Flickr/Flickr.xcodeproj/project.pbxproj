@@ -45,6 +45,7 @@
 		9F92AC9126D2812B00433CF3 /* Encryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC9026D2812B00433CF3 /* Encryption.swift */; };
 		9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */; };
 		9FB9B4642704D41F00D7A2CE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */; };
+		9FB9B46D270711DC00D7A2CE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B46C270711DC00D7A2CE /* TabBarController.swift */; };
 		9FBC79F826F20678009A7608 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC79F726F20678009A7608 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		9F92AC9026D2812B00433CF3 /* Encryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encryption.swift; sourceTree = "<group>"; };
 		9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		9FB9B46C270711DC00D7A2CE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9FBC79F726F20678009A7608 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				9F0A19C326F0E4D00011D761 /* ProfileViewController.swift */,
 				9FBC79F726F20678009A7608 /* PostViewController.swift */,
 				9F65586126FE0FD9008D54AD /* SignUpViewController.swift */,
+				9FB9B46C270711DC00D7A2CE /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				9F536D1D26F4C5330077F1F9 /* LoginWithFlickr.swift in Sources */,
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
 				9F536D2326F4EA190077F1F9 /* Logotype.swift in Sources */,
+				9FB9B46D270711DC00D7A2CE /* TabBarController.swift in Sources */,
 				9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */,
 				9F8140C826E0F1DA003EE7AA /* People.swift in Sources */,
 				9FBC79F826F20678009A7608 /* PostViewController.swift in Sources */,
