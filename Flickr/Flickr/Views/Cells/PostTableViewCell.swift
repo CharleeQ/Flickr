@@ -12,7 +12,6 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var postImage: UIImageView!
-    @IBOutlet weak var usernameDescriptionLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateUploadLabel: UILabel!
     
@@ -21,11 +20,15 @@ class PostTableViewCell: UITableViewCell {
             guard let datas = datas else { return }
             usernameLabel.text = "\(datas.fullname) (\(datas.username))"
             locationLabel.text = datas.location
-            usernameDescriptionLabel.text = datas.username
-            descriptionLabel.text = datas.description
             dateUploadLabel.text = datas.dateUpload
             postImage.image = datas.image
             avatarImage.image = datas.profileAvatar
+            
+            // description
+            let text = NSMutableAttributedString(string: datas.username + " ", attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .semibold)])
+            let description = NSMutableAttributedString(string: datas.description, attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .regular)])
+            text.append(description)
+            descriptionLabel.attributedText = text
         }
     }
     
