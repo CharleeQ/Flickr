@@ -8,7 +8,7 @@
 import UIKit
 
 struct Recent {
-    var profileAvatar: UIImage = UIImage(systemName: "person.fill")!
+    var profileAvatar: UIImage = UIImage(named: "stockAvatar.png")!
     var username: String = "Unknown"
     var fullname: String = "Unknown user"
     var location: String = "No location"
@@ -20,6 +20,7 @@ struct Recent {
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var postsTableView: UITableView!
+    let activityView = UIActivityIndicatorView(style: .large)
     var recents = [Recent]()
     
     override func viewDidLoad() {
@@ -29,6 +30,8 @@ class HomeViewController: UIViewController {
         let logo = UIImage(named: "logoSmall.png")
         let imageView = UIImageView(image: logo)
         self.navigationItem.titleView = imageView
+        
+        showActivityIndicator()
         
         let network = NetworkService(accessToken: UserSettings.get().token,
                                      tokenSecret: UserSettings.get().tokenSecret)
@@ -56,11 +59,13 @@ class HomeViewController: UIViewController {
                         photo.image = image
                     }
                     
-                    let avaStaticURL: String = "https://farm\(item.iconfarm).staticflickr.com/\(item.iconserver)/buddyicons/\(item.owner).jpg"
-                    guard let url = URL(string: avaStaticURL) else { return }
-                    guard let data = try? Data(contentsOf: url) else { return }
-                    if let image = UIImage(data: data) {
-                        photo.profileAvatar = image
+                    DispatchQueue.global().async {
+                        let avaStaticURL: String = "https://farm\(item.iconfarm).staticflickr.com/\(item.iconserver)/buddyicons/\(item.owner).jpg"
+                        guard let url = URL(string: avaStaticURL) else { return }
+                        guard let data = try? Data(contentsOf: url) else { return }
+                        if let image = UIImage(data: data) {
+                            photo.profileAvatar = image
+                        }
                     }
                     
                     network.getPhotoInfo(photoID: item.id, secret: nil) { result in
@@ -70,6 +75,7 @@ class HomeViewController: UIViewController {
                             photo.fullname = info.owner.realname
                             
                             self.recents.append(photo)
+                            
                         case .failure(let error):
                             print(error)
                         }
@@ -77,12 +83,19 @@ class HomeViewController: UIViewController {
                 }
                 DispatchQueue.main.async {
                     self.postsTableView.reloadData()
+                    self.activityView.stopAnimating()
                 }
                 
             case .failure(let error):
                 print(error)
             }
         }
+    }
+    
+    private func showActivityIndicator() {
+        activityView.center = self.view.center
+        self.view.addSubview(activityView)
+        activityView.startAnimating()
     }
 }
 
