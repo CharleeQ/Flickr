@@ -15,30 +15,20 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateUploadLabel: UILabel!
     
-    var datas: Recent? {
-        didSet {
-            guard let datas = datas else { return }
-            usernameLabel.text = "\(datas.fullname) (\(datas.username))"
-            locationLabel.text = datas.location
-            dateUploadLabel.text = datas.dateUpload
-            postImage.image = datas.image
-            avatarImage.image = datas.profileAvatar
-            
-            // description
-            let text = NSMutableAttributedString(string: datas.username + " ", attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .semibold)])
-            let description = NSMutableAttributedString(string: datas.description, attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .regular)])
-            text.append(description)
-            descriptionLabel.attributedText = text
-        }
-    }
-    
-    func setup() {
+    func setup(data: Recent?) {
+        guard let datas = data else { return }
+        usernameLabel.text = "\(datas.fullname) (\(datas.username))"
+        locationLabel.text = datas.location
+        dateUploadLabel.text = datas.dateUpload
+        postImage.image = datas.image
+        avatarImage.image = datas.profileAvatar
+        
+        // description
+        let text = NSMutableAttributedString(string: datas.username + " ", attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .semibold)])
+        let description = NSMutableAttributedString(string: datas.description, attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .regular)])
+        text.append(description)
+        descriptionLabel.attributedText = text
         self.avatarImage.layer.cornerRadius = 16
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setup()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

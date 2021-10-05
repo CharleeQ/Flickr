@@ -13,12 +13,4 @@ struct AuthUser: Codable {
     let nsid: String
     let username: String
     let fullname: String
-    
-    init(token: String, tokenSecret: String, nsid: String, username: String, fullname: String) {
-        self.token = token
-        self.tokenSecret = tokenSecret
-        self.nsid = nsid
-        self.username = username
-        self.fullname = fullname
-    }
 }

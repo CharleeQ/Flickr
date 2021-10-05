@@ -7,35 +7,41 @@
 
 import UIKit
 
-struct Recent {
-    var profileAvatar: UIImage = UIImage(named: "stockAvatar.png")!
-    var username: String = "Unknown"
-    var fullname: String = "Unknown user"
-    var location: String = "No location"
-    var image: UIImage = UIImage(systemName: "photo")!
-    var description: String = ""
-    var dateUpload: String = "2004 September 19 00:01:23"
-}
-
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var postsTableView: UITableView!
-    let activityView = UIActivityIndicatorView(style: .large)
+    @IBOutlet weak var scrollView: UIScrollView!
+    let control = UIRefreshControl()
     var recents = [Recent]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // MARK: - Configuration VC
+        // refreshing
+        postsTableView.refreshControl = control
         // logo image in navbar
         let logo = UIImage(named: "logoSmall.png")
         let imageView = UIImageView(image: logo)
         self.navigationItem.titleView = imageView
         
-        showActivityIndicator()
         
+        // MARK: - Get recent photos on TableView
         let network = NetworkService(accessToken: UserSettings.get().token,
                                      tokenSecret: UserSettings.get().tokenSecret)
+        control.beginRefreshing()
+        postsTableView.contentOffset = CGPoint(x: -60, y: 0)
+        getRecent(network: network)
         
+        
+        // MARK: - Pull to refresh action
+        let action = UIAction.init { action in
+            self.getRecent(network: network)
+        }
+        control.addAction(action, for: .valueChanged)
+    }
+    
+    private func getRecent(network: NetworkService) {
+        self.recents = []
         network.getRecentPhotos(extras: "date_upload,owner_name,icon_server") { result in
             switch result {
             case .success(let photos):
@@ -75,7 +81,6 @@ class HomeViewController: UIViewController {
                             photo.fullname = info.owner.realname
                             
                             self.recents.append(photo)
-                            
                         case .failure(let error):
                             print(error)
                         }
@@ -83,19 +88,13 @@ class HomeViewController: UIViewController {
                 }
                 DispatchQueue.main.async {
                     self.postsTableView.reloadData()
-                    self.activityView.stopAnimating()
+                    self.control.endRefreshing()
                 }
                 
             case .failure(let error):
                 print(error)
             }
         }
-    }
-    
-    private func showActivityIndicator() {
-        activityView.center = self.view.center
-        self.view.addSubview(activityView)
-        activityView.startAnimating()
     }
 }
 
@@ -106,7 +105,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-        cell.datas = recents[indexPath.row]
+        cell.setup(data: recents[indexPath.row])
         
         return cell
     }
