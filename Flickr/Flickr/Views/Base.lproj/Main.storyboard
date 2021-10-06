@@ -130,12 +130,12 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" id="SCU-bn-V0s">
+                                <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" id="SCU-bn-V0s">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="beU-HK-zbd">
-                                            <rect key="frame" x="-8" y="10" width="394" height="80"/>
+                                            <rect key="frame" x="8" y="10" width="394" height="80"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4uE-95-WrR" userLabel="Faves">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -273,9 +273,9 @@
                                     <constraints>
                                         <constraint firstItem="beU-HK-zbd" firstAttribute="top" secondItem="zea-ai-Ojr" secondAttribute="top" constant="10" id="4Ir-5p-dPw"/>
                                         <constraint firstItem="zea-ai-Ojr" firstAttribute="bottom" secondItem="beU-HK-zbd" secondAttribute="bottom" constant="8" id="9f5-DF-dpj"/>
-                                        <constraint firstItem="beU-HK-zbd" firstAttribute="leading" secondItem="zea-ai-Ojr" secondAttribute="leading" constant="8" id="P6q-ba-MOR"/>
-                                        <constraint firstAttribute="trailing" secondItem="beU-HK-zbd" secondAttribute="trailing" constant="8" id="ecE-Nb-YWL"/>
-                                        <constraint firstItem="beU-HK-zbd" firstAttribute="width" secondItem="EU8-jB-qLJ" secondAttribute="width" id="rSV-bS-UFY"/>
+                                        <constraint firstItem="beU-HK-zbd" firstAttribute="bottom" secondItem="SCU-bn-V0s" secondAttribute="bottomMargin" id="C8e-2d-CHm"/>
+                                        <constraint firstItem="beU-HK-zbd" firstAttribute="leading" secondItem="SCU-bn-V0s" secondAttribute="leadingMargin" id="pqK-eW-N9O"/>
+                                        <constraint firstItem="beU-HK-zbd" firstAttribute="width" secondItem="EU8-jB-qLJ" secondAttribute="width" multiplier="0.95" id="rSV-bS-UFY"/>
                                     </constraints>
                                     <viewLayoutGuide key="contentLayoutGuide" id="EU8-jB-qLJ"/>
                                     <viewLayoutGuide key="frameLayoutGuide" id="zea-ai-Ojr"/>
