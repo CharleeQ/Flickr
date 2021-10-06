@@ -82,32 +82,35 @@
             </objects>
             <point key="canvasLocation" x="874" y="-14"/>
         </scene>
-        <!--Gallery View Controller-->
+        <!--Gallery-->
         <scene sceneID="q27-PC-J7g">
             <objects>
-                <viewController storyboardIdentifier="GalleryVCID" id="0EK-dB-WbE" customClass="GalleryViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GalleryVCID" title="Gallery" id="0EK-dB-WbE" customClass="GalleryViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Puj-AH-OCp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="vWp-Zh-wPY"/>
                         <color key="backgroundColor" systemColor="systemBrownColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Gallery" image="star" catalog="system" id="G6V-TX-sHD"/>
                     <navigationItem key="navigationItem" id="4CW-3o-CS9"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VTv-cm-a7x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1963.7681159420292" y="-14.0625"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="TsL-Q8-n5m">
             <objects>
-                <viewController storyboardIdentifier="ProfileVCID" id="ime-Yt-53A" customClass="ProfileViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileVCID" title="Profile" id="ime-Yt-53A" customClass="ProfileViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K0C-ud-RTH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Yd1-Fx-b32"/>
                         <color key="backgroundColor" systemColor="systemPinkColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="xiz-Lf-sZj"/>
                     <navigationItem key="navigationItem" id="dic-dH-Ush"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -115,10 +118,10 @@
             </objects>
             <point key="canvasLocation" x="1963.7681159420292" y="661.60714285714278"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Home-->
         <scene sceneID="dkG-bj-OzA">
             <objects>
-                <viewController storyboardIdentifier="HomeVCID" id="nEl-5E-nmG" customClass="HomeViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeVCID" title="Home" id="nEl-5E-nmG" customClass="HomeViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vN7-PR-hLL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -351,7 +354,9 @@
                             <constraint firstItem="ph0-v1-UIU" firstAttribute="top" secondItem="Zfb-JP-3SE" secondAttribute="top" id="az6-mZ-VVA"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="2Cu-t1-u6L"/>
                     <navigationItem key="navigationItem" id="s80-nP-XnV"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="postsTableView" destination="ph0-v1-UIU" id="Kky-3F-gs1"/>
                         <outlet property="scrollView" destination="SCU-bn-V0s" id="6jf-AB-JjJ"/>
@@ -360,7 +365,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="owc-qy-ugc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1962.3188405797102" y="-1083.4821428571429"/>
+            <point key="canvasLocation" x="1964" y="-689"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="gjS-YS-Lyo">
@@ -384,7 +389,10 @@
         <image name="16520596" width="403" height="403"/>
         <image name="comments" width="198" height="160"/>
         <image name="faves" width="160" height="160"/>
+        <image name="house" catalog="system" width="128" height="106"/>
         <image name="interesting" width="750" height="750"/>
+        <image name="person" catalog="system" width="128" height="117"/>
+        <image name="star" catalog="system" width="128" height="116"/>
         <image name="views" width="160" height="160"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
