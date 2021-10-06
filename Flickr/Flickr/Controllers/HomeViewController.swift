@@ -30,17 +30,17 @@ class HomeViewController: UIViewController {
                                      tokenSecret: UserSettings.get().tokenSecret)
         control.beginRefreshing()
         postsTableView.contentOffset = CGPoint(x: -60, y: 0)
-        getRecent(network: network)
+        showRecent(network: network)
         
         
         // MARK: - Pull to refresh action
         let action = UIAction.init { action in
-            self.getRecent(network: network)
+            self.showRecent(network: network)
         }
         control.addAction(action, for: .valueChanged)
     }
     
-    private func getRecent(network: NetworkService) {
+    private func showRecent(network: NetworkService) {
         self.recents = []
         network.getRecentPhotos(extras: "date_upload,owner_name,icon_server") { result in
             switch result {
