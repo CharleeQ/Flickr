@@ -15,8 +15,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateUploadLabel: UILabel!
     
-    func setup(data: Recent?) {
-        guard let datas = data else { return }
+    func setup(datas: Recent) {
         usernameLabel.text = "\(datas.fullname) (\(datas.username))"
         locationLabel.text = datas.location
         dateUploadLabel.text = datas.dateUpload

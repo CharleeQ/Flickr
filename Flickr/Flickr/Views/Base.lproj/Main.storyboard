@@ -130,7 +130,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" id="SCU-bn-V0s">
+                                <scrollView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" id="SCU-bn-V0s">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="98"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
@@ -278,8 +278,8 @@
                                         <constraint firstItem="beU-HK-zbd" firstAttribute="top" secondItem="zea-ai-Ojr" secondAttribute="top" constant="10" id="4Ir-5p-dPw"/>
                                         <constraint firstItem="zea-ai-Ojr" firstAttribute="bottom" secondItem="beU-HK-zbd" secondAttribute="bottom" constant="8" id="9f5-DF-dpj"/>
                                         <constraint firstItem="beU-HK-zbd" firstAttribute="bottom" secondItem="SCU-bn-V0s" secondAttribute="bottomMargin" id="C8e-2d-CHm"/>
+                                        <constraint firstItem="EU8-jB-qLJ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="beU-HK-zbd" secondAttribute="trailing" constant="12" id="dxp-dA-gCd"/>
                                         <constraint firstItem="beU-HK-zbd" firstAttribute="leading" secondItem="SCU-bn-V0s" secondAttribute="leadingMargin" id="pqK-eW-N9O"/>
-                                        <constraint firstItem="beU-HK-zbd" firstAttribute="width" secondItem="EU8-jB-qLJ" secondAttribute="width" multiplier="0.95" id="rSV-bS-UFY"/>
                                     </constraints>
                                     <viewLayoutGuide key="contentLayoutGuide" id="EU8-jB-qLJ"/>
                                     <viewLayoutGuide key="frameLayoutGuide" id="zea-ai-Ojr"/>
@@ -370,6 +370,29 @@
                                             <outlet property="usernameLabel" destination="1vT-g2-hEz" id="mCt-4E-nxQ"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="spinnerCell" rowHeight="120" id="jZm-BF-QK3" customClass="SpinnerTableViewCell" customModule="Flickr" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="659.5" width="414" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jZm-BF-QK3" id="SwA-ah-3kN">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="TqL-F6-TDZ">
+                                                    <rect key="frame" x="188.5" y="41.5" width="37" height="37"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TqL-F6-TDZ" firstAttribute="centerX" secondItem="SwA-ah-3kN" secondAttribute="centerX" id="7vz-bS-g3j"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="TqL-F6-TDZ" secondAttribute="bottom" constant="30.5" id="iXg-W6-I5P"/>
+                                                <constraint firstItem="TqL-F6-TDZ" firstAttribute="top" secondItem="SwA-ah-3kN" secondAttribute="topMargin" constant="30.5" id="m0N-eR-86L"/>
+                                                <constraint firstItem="TqL-F6-TDZ" firstAttribute="centerY" secondItem="SwA-ah-3kN" secondAttribute="centerY" id="nQw-3a-U1p"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="spinner" destination="TqL-F6-TDZ" id="8I5-eT-xMS"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <sections/>
                                 <connections>
@@ -398,7 +421,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="owc-qy-ugc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="-689"/>
+            <point key="canvasLocation" x="1963.7681159420292" y="-689.0625"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="gjS-YS-Lyo">
@@ -429,6 +452,9 @@
         <image name="views" width="160" height="160"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

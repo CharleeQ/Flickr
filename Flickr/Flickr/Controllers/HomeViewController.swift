@@ -9,10 +9,15 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    enum DataSourceItem {
+        case loading
+        case recent(Recent)
+    }
+    
     @IBOutlet weak var postsTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     let control = UIRefreshControl()
-    var recents = [Recent]()
+    var recents = [DataSourceItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +36,6 @@ class HomeViewController: UIViewController {
         control.beginRefreshing()
         postsTableView.contentOffset = CGPoint(x: -60, y: 0)
         showRecent(network: network)
-        
         
         // MARK: - Pull to refresh action
         let action = UIAction.init { action in
@@ -80,13 +84,14 @@ class HomeViewController: UIViewController {
                             photo.location = info.owner.location ?? ""
                             photo.fullname = info.owner.realname
                             
-                            self.recents.append(photo)
+                            self.recents.append(.recent(photo))
                         case .failure(let error):
                             print(error)
                         }
                     }
                 }
                 DispatchQueue.main.async {
+                    self.recents.append(.loading)
                     self.postsTableView.reloadData()
                     self.control.endRefreshing()
                 }
@@ -104,9 +109,30 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-        cell.setup(data: recents[indexPath.row])
-        
-        return cell
+        switch recents[indexPath.row] {
+        case .loading:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "spinnerCell", for: indexPath) as? SpinnerTableViewCell else { return UITableViewCell() }
+            
+            return cell
+        case .recent(let recent):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
+            cell.setup(datas: recent)
+            
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch recents[indexPath.row] {
+        case .loading:
+            return
+        case .recent(let recent):
+            let item = recent
+            // present vc of detail photo
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // тут будет код когда на экране отобразилась ячейка со спиннером надо запустить метод который показывает следующую страницу картинок и удаляет ячейку со спиннером (метод находится в сервисе)
     }
 }
