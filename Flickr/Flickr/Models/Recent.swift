@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Recent {
+struct Recent: Equatable {
     var profileAvatar: UIImage = UIImage(named: "stockAvatar.png")!
     var username: String = "Unknown"
     var fullname: String = "Unknown user"

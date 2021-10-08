@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    enum DataSourceItem {
+    enum DataSourceItem: Equatable {
         case loading
         case recent(Recent)
     }
@@ -39,25 +39,40 @@ class HomeViewController: UIViewController {
         
         
         // MARK: - Get recent photos on TableView
-        
-        control.beginRefreshing()
-        postsTableView.contentOffset = CGPoint(x: -60, y: 0)
-        showRecent()
+        refresh()
         
         
         // MARK: - Pull to refresh action
         let action = UIAction.init { action in
-            self.recents = []
-            self.showRecent()
+            self.refresh()
         }
         control.addAction(action, for: .valueChanged)
     }
     
-    private func showRecent(page: Int = 1) {
-        network.getRecentPhotos(extras: "date_upload,owner_name,icon_server", page: page) { result in
+    private func refresh() {
+        recents = []
+        currentPage = 1
+        if !control.isRefreshing {
+            control.beginRefreshing()
+            postsTableView.contentOffset = CGPoint(x: -60, y: 0)
+        }
+        self.showRecent {
+            self.control.endRefreshing()
+        }
+    }
+    
+    private func nextPage() {
+        if currentPage != totalPages {
+            self.currentPage += 1
+        }
+        self.showRecent(completion: {})
+    }
+    
+    private func showRecent(completion: @escaping () -> ()) {
+        if recents.last == DataSourceItem.loading { recents.removeLast() }
+        network.getRecentPhotos(extras: "date_upload,owner_name,icon_server", page: currentPage) { result in
             switch result {
             case .success(let photos):
-                let serialQueue = DispatchQueue(label: "Loading Photos")
                 let queueGroup = DispatchGroup()
                 self.totalPages = photos.pages
                 photos.photo.forEach { item in
@@ -74,16 +89,13 @@ class HomeViewController: UIViewController {
                         photo.dateUpload = dateFormatter.string(from: date)
                     }
                     
-                    serialQueue.async(group: queueGroup) {
+                    DispatchQueue(label: "Serial").async(group: queueGroup) {
                         let photoStaticURL: String = "https://farm\(item.farm).staticflickr.com/\(item.server)/\(item.id)_\(item.secret)_b.jpg"
                         guard let url = URL(string: photoStaticURL) else { return }
                         guard let data = try? Data(contentsOf: url) else { return }
                         if let image = UIImage(data: data) {
                             photo.image = image
                         }
-                    }
-                    
-                    serialQueue.async(group: queueGroup) {
                         let avaStaticURL: String = "https://farm\(item.iconfarm).staticflickr.com/\(item.iconserver)/buddyicons/\(item.owner).jpg"
                         guard let url = URL(string: avaStaticURL) else { return }
                         guard let data = try? Data(contentsOf: url) else { return }
@@ -92,23 +104,23 @@ class HomeViewController: UIViewController {
                         }
                     }
                     
-                    serialQueue.async(group: queueGroup) {
-                        self.network.getPhotoInfo(photoID: item.id, secret: nil) { result in
-                            switch result {
-                            case .success(let info):
-                                photo.location = info.owner.location ?? ""
-                                photo.fullname = info.owner.realname
-                                self.recents.append(.recent(photo))
-                            case .failure(let error):
-                                print(error)
-                            }
+                    queueGroup.enter()
+                    self.network.getPhotoInfo(photoID: item.id, secret: nil) { result in
+                        switch result {
+                        case .success(let info):
+                            photo.location = info.owner.location ?? ""
+                            photo.fullname = info.owner.realname
+                            self.recents.append(.recent(photo))
+                        case .failure(let error):
+                            print(error)
                         }
+                        queueGroup.leave()
                     }
                 }
                 queueGroup.notify(queue: .main) {
                     self.recents.append(.loading)
                     self.postsTableView.reloadData()
-                    self.control.endRefreshing()
+                    completion()
                 }
                 
             case .failure(let error):
@@ -124,6 +136,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard indexPath.row != recents.count else { return UITableViewCell() }
         switch recents[indexPath.row] {
         case .loading:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "spinnerCell", for: indexPath) as? SpinnerTableViewCell else { return UITableViewCell() }
@@ -149,19 +162,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         switch recents[indexPath.row] {
         case .loading:
-            if currentPage != totalPages {
-                let queueGroup = DispatchGroup()
-                let serialQueue = DispatchQueue(label: "Show images")
-                serialQueue.async(group: queueGroup) {
-                    self.showRecent(page: self.currentPage)
-                    self.currentPage += 1
-                }
-                
-                queueGroup.notify(queue: .main) {
-                    self.recents.remove(at: indexPath.row)
-                    self.postsTableView.reloadData()
-                }
-            }
+            nextPage()
         case .recent(_):
             return
         }

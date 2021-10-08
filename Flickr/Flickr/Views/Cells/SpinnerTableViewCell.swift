@@ -10,12 +10,13 @@ import UIKit
 class SpinnerTableViewCell: UITableViewCell {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
-    private func config() {
+    override func awakeFromNib() {
+        super.awakeFromNib()
         spinner.startAnimating()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        config()
+    override func prepareForReuse() {
+        spinner.startAnimating()
     }
+    
 }
