@@ -14,16 +14,24 @@ class HomeViewController: UIViewController {
         case recent(Recent)
     }
     
+    // MARK: - Views
     @IBOutlet weak var postsTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
-    let control = UIRefreshControl()
-    var recents = [DataSourceItem]()
+    private let control = UIRefreshControl()
+    
+    // MARK: - Global properties
+    private var recents = [DataSourceItem]()
+    private var totalPages = 1
+    private var currentPage = 1
+    private let network = NetworkService(accessToken: UserSettings.get().token,
+                                         tokenSecret: UserSettings.get().tokenSecret)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // MARK: - Configuration VC
         // refreshing
         postsTableView.refreshControl = control
+        
         // logo image in navbar
         let logo = UIImage(named: "logoSmall.png")
         let imageView = UIImageView(image: logo)
@@ -31,28 +39,32 @@ class HomeViewController: UIViewController {
         
         
         // MARK: - Get recent photos on TableView
-        let network = NetworkService(accessToken: UserSettings.get().token,
-                                     tokenSecret: UserSettings.get().tokenSecret)
+        
         control.beginRefreshing()
         postsTableView.contentOffset = CGPoint(x: -60, y: 0)
-        showRecent(network: network)
+        showRecent()
+        
         
         // MARK: - Pull to refresh action
         let action = UIAction.init { action in
-            self.showRecent(network: network)
+            self.recents = []
+            self.showRecent()
         }
         control.addAction(action, for: .valueChanged)
     }
     
-    private func showRecent(network: NetworkService) {
-        self.recents = []
-        network.getRecentPhotos(extras: "date_upload,owner_name,icon_server") { result in
+    private func showRecent(page: Int = 1) {
+        network.getRecentPhotos(extras: "date_upload,owner_name,icon_server", page: page) { result in
             switch result {
             case .success(let photos):
-                photos.forEach { item in
+                let serialQueue = DispatchQueue(label: "Loading Photos")
+                let queueGroup = DispatchGroup()
+                self.totalPages = photos.pages
+                photos.photo.forEach { item in
                     var photo = Recent()
                     photo.username = item.ownername
                     photo.description = item.title
+                    
                     
                     if let time = Double(item.dateupload) {
                         let date = Date(timeIntervalSince1970: time)
@@ -62,14 +74,16 @@ class HomeViewController: UIViewController {
                         photo.dateUpload = dateFormatter.string(from: date)
                     }
                     
-                    let photoStaticURL: String = "https://farm\(item.farm).staticflickr.com/\(item.server)/\(item.id)_\(item.secret)_b.jpg"
-                    guard let url = URL(string: photoStaticURL) else { return }
-                    guard let data = try? Data(contentsOf: url) else { return }
-                    if let image = UIImage(data: data) {
-                        photo.image = image
+                    serialQueue.async(group: queueGroup) {
+                        let photoStaticURL: String = "https://farm\(item.farm).staticflickr.com/\(item.server)/\(item.id)_\(item.secret)_b.jpg"
+                        guard let url = URL(string: photoStaticURL) else { return }
+                        guard let data = try? Data(contentsOf: url) else { return }
+                        if let image = UIImage(data: data) {
+                            photo.image = image
+                        }
                     }
                     
-                    DispatchQueue.global().async {
+                    serialQueue.async(group: queueGroup) {
                         let avaStaticURL: String = "https://farm\(item.iconfarm).staticflickr.com/\(item.iconserver)/buddyicons/\(item.owner).jpg"
                         guard let url = URL(string: avaStaticURL) else { return }
                         guard let data = try? Data(contentsOf: url) else { return }
@@ -78,19 +92,20 @@ class HomeViewController: UIViewController {
                         }
                     }
                     
-                    network.getPhotoInfo(photoID: item.id, secret: nil) { result in
-                        switch result {
-                        case .success(let info):
-                            photo.location = info.owner.location ?? ""
-                            photo.fullname = info.owner.realname
-                            
-                            self.recents.append(.recent(photo))
-                        case .failure(let error):
-                            print(error)
+                    serialQueue.async(group: queueGroup) {
+                        self.network.getPhotoInfo(photoID: item.id, secret: nil) { result in
+                            switch result {
+                            case .success(let info):
+                                photo.location = info.owner.location ?? ""
+                                photo.fullname = info.owner.realname
+                                self.recents.append(.recent(photo))
+                            case .failure(let error):
+                                print(error)
+                            }
                         }
                     }
                 }
-                DispatchQueue.main.async {
+                queueGroup.notify(queue: .main) {
                     self.recents.append(.loading)
                     self.postsTableView.reloadData()
                     self.control.endRefreshing()
@@ -112,12 +127,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch recents[indexPath.row] {
         case .loading:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "spinnerCell", for: indexPath) as? SpinnerTableViewCell else { return UITableViewCell() }
-            
             return cell
         case .recent(let recent):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
             cell.setup(datas: recent)
-            
             return cell
         }
     }
@@ -126,13 +139,31 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch recents[indexPath.row] {
         case .loading:
             return
-        case .recent(let recent):
-            let item = recent
-            // present vc of detail photo
+        case .recent(_/* let recent */):
+            // let item = recent
+            let detailVC = PostViewController()
+            self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // тут будет код когда на экране отобразилась ячейка со спиннером надо запустить метод который показывает следующую страницу картинок и удаляет ячейку со спиннером (метод находится в сервисе)
+        switch recents[indexPath.row] {
+        case .loading:
+            if currentPage != totalPages {
+                let queueGroup = DispatchGroup()
+                let serialQueue = DispatchQueue(label: "Show images")
+                serialQueue.async(group: queueGroup) {
+                    self.showRecent(page: self.currentPage)
+                    self.currentPage += 1
+                }
+                
+                queueGroup.notify(queue: .main) {
+                    self.recents.remove(at: indexPath.row)
+                    self.postsTableView.reloadData()
+                }
+            }
+        case .recent(_):
+            return
+        }
     }
 }

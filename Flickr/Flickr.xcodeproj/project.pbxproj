@@ -11,7 +11,6 @@
 		9F045D0C270C84C6002317F3 /* Recent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F045D0B270C84C6002317F3 /* Recent.swift */; };
 		9F045D0E270DBFCB002317F3 /* TabBarCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F045D0D270DBFCB002317F3 /* TabBarCreator.swift */; };
 		9F045D11270F14EA002317F3 /* SpinnerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F045D10270F14E9002317F3 /* SpinnerTableViewCell.swift */; };
-		9F045D13270F1EB2002317F3 /* PostsDisplayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F045D12270F1EB2002317F3 /* PostsDisplayService.swift */; };
 		9F0A19BA26EB599E0011D761 /* CharacterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A19B926EB599E0011D761 /* CharacterSet.swift */; };
 		9F0A19C026F0E4BC0011D761 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A19BF26F0E4BC0011D761 /* HomeViewController.swift */; };
 		9F0A19C226F0E4C70011D761 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A19C126F0E4C70011D761 /* GalleryViewController.swift */; };
@@ -57,7 +56,6 @@
 		9F045D0B270C84C6002317F3 /* Recent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recent.swift; sourceTree = "<group>"; };
 		9F045D0D270DBFCB002317F3 /* TabBarCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCreator.swift; sourceTree = "<group>"; };
 		9F045D10270F14E9002317F3 /* SpinnerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerTableViewCell.swift; sourceTree = "<group>"; };
-		9F045D12270F1EB2002317F3 /* PostsDisplayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsDisplayService.swift; sourceTree = "<group>"; };
 		9F0A19B926EB599E0011D761 /* CharacterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSet.swift; sourceTree = "<group>"; };
 		9F0A19BF26F0E4BC0011D761 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9F0A19C126F0E4C70011D761 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				9F045D0D270DBFCB002317F3 /* TabBarCreator.swift */,
-				9F045D12270F1EB2002317F3 /* PostsDisplayService.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -364,7 +361,6 @@
 				9F021A1526E9190700DE9BEE /* Serializers.swift in Sources */,
 				9F8140CA26E115D3003EE7AA /* Parameters.swift in Sources */,
 				9F8140BB26DE83B1003EE7AA /* ProfileRequests.swift in Sources */,
-				9F045D13270F1EB2002317F3 /* PostsDisplayService.swift in Sources */,
 				9F92AC6D26CFC2C200433CF3 /* AppDelegate.swift in Sources */,
 				9F536D1F26F4C5610077F1F9 /* Colors.swift in Sources */,
 				9F65586226FE0FD9008D54AD /* SignUpViewController.swift in Sources */,

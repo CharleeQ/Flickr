@@ -416,19 +416,18 @@
                     <connections>
                         <outlet property="postsTableView" destination="ph0-v1-UIU" id="Kky-3F-gs1"/>
                         <outlet property="scrollView" destination="SCU-bn-V0s" id="6jf-AB-JjJ"/>
-                        <segue destination="VWQ-dC-yUI" kind="show" identifier="postDetailSegue" id="Fkc-kt-70X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="owc-qy-ugc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1963.7681159420292" y="-689.0625"/>
         </scene>
-        <!--Post View Controller-->
+        <!--Post-->
         <scene sceneID="gjS-YS-Lyo">
             <objects>
-                <viewController id="VWQ-dC-yUI" customClass="PostViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostVCID" title="Post" id="VWQ-dC-yUI" customClass="PostViewController" customModule="Flickr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e4T-We-dEl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="HS5-st-wnL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

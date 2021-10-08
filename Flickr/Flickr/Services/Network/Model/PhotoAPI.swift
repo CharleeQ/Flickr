@@ -130,28 +130,38 @@ struct Photo: Decodable {
     }
 }
 
-struct RecentPhoto: Decodable {
-    let id: String
-    let owner: String
-    let secret: String
-    let farm: Int
-    let server: String
-    let title: String
-    let ownername: String
-    let dateupload: String
-    let iconserver: String
-    let iconfarm: Int
+struct Photos: Decodable {
+    let page: Int
+    let pages: Int
+    let perpage: Int
+    let total: Int
+    let photo: [RecentPhoto]
     
-    enum CodingKeys: String, CodingKey {
-        case id
-        case owner
-        case secret
-        case farm
-        case server
-        case title
-        case ownername
-        case dateupload
-        case iconserver
-        case iconfarm
+    struct RecentPhoto: Decodable {
+        let id: String
+        let owner: String
+        let secret: String
+        let farm: Int
+        let server: String
+        let title: String
+        let ownername: String
+        let dateupload: String
+        let iconserver: String
+        let iconfarm: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case owner
+            case secret
+            case farm
+            case server
+            case title
+            case ownername
+            case dateupload
+            case iconserver
+            case iconfarm
+        }
     }
 }
+
+
