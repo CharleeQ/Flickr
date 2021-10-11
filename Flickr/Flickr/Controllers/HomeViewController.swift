@@ -18,10 +18,16 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var postsTableView: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     private let control = UIRefreshControl()
+    //Filters
+    @IBOutlet weak var favesFilter: FilterButton!
+    @IBOutlet weak var viewsFilter: FilterButton!
+    @IBOutlet weak var commentsFilter: FilterButton!
+    @IBOutlet weak var interestingFilter: FilterButton!
     
     // MARK: - Global properties
     private var recents = [DataSourceItem]()
     private var totalPages = 1
+    private var perPage = 20
     private var currentPage = 1
     private let network = NetworkService(accessToken: UserSettings.get().token,
                                          tokenSecret: UserSettings.get().tokenSecret)
@@ -43,10 +49,48 @@ class HomeViewController: UIViewController {
         
         
         // MARK: - Pull to refresh action
-        let action = UIAction.init { action in
+        let refreshAction = UIAction.init { action in
             self.refresh()
         }
-        control.addAction(action, for: .valueChanged)
+        control.addAction(refreshAction, for: .valueChanged)
+        
+        // MARK: - Configuration filters
+        // faves
+        let favesAction = UIAction.init { action in
+            self.changePerPage(perPage: 15)
+            self.favesFilter.alpha = 1
+            self.viewsFilter.alpha = 0.5
+            self.commentsFilter.alpha = 0.5
+            self.interestingFilter.alpha = 0.5
+        }
+        favesFilter.addAction(favesAction, for: .touchUpInside)
+        // views
+        let viewsAction = UIAction.init { action in
+            self.changePerPage(perPage: 50)
+            self.favesFilter.alpha = 0.5
+            self.viewsFilter.alpha = 1
+            self.commentsFilter.alpha = 0.5
+            self.interestingFilter.alpha = 0.5
+        }
+        viewsFilter.addAction(viewsAction, for: .touchUpInside)
+        // comments
+        let commsAction = UIAction.init { action in
+            self.changePerPage(perPage: 100)
+            self.favesFilter.alpha = 0.5
+            self.viewsFilter.alpha = 0.5
+            self.commentsFilter.alpha = 1
+            self.interestingFilter.alpha = 0.5
+        }
+        commentsFilter.addAction(commsAction, for: .touchUpInside)
+        // interesting
+        let interestAction = UIAction.init { action in
+            self.changePerPage(perPage: 200)
+            self.favesFilter.alpha = 0.5
+            self.viewsFilter.alpha = 0.5
+            self.commentsFilter.alpha = 0.5
+            self.interestingFilter.alpha = 1
+        }
+        interestingFilter.addAction(interestAction, for: .touchUpInside)
     }
     
     private func refresh() {
@@ -56,9 +100,26 @@ class HomeViewController: UIViewController {
             control.beginRefreshing()
             postsTableView.contentOffset = CGPoint(x: -60, y: 0)
         }
-        self.showRecent {
+        self.showRecent() {
             self.control.endRefreshing()
+            self.favesFilter.alpha = 1
+            self.viewsFilter.alpha = 1
+            self.commentsFilter.alpha = 1
+            self.interestingFilter.alpha = 1
         }
+    }
+    
+    private func changePerPage(perPage: Int) {
+        recents = []
+        currentPage = 1
+        self.perPage = perPage
+        if !control.isRefreshing {
+            control.beginRefreshing()
+            postsTableView.contentOffset = CGPoint(x: 0, y: -60)
+        }
+        self.showRecent(completion: {
+            self.control.endRefreshing()
+        })
     }
     
     private func nextPage() {
@@ -70,7 +131,7 @@ class HomeViewController: UIViewController {
     
     private func showRecent(completion: @escaping () -> ()) {
         if recents.last == DataSourceItem.loading { recents.removeLast() }
-        network.getRecentPhotos(extras: "date_upload,owner_name,icon_server", page: currentPage) { result in
+        network.getRecentPhotos(extras: "date_upload,owner_name,icon_server", perPage: perPage, page: currentPage) { result in
             switch result {
             case .success(let photos):
                 let queueGroup = DispatchGroup()
@@ -80,7 +141,6 @@ class HomeViewController: UIViewController {
                     photo.username = item.ownername
                     photo.description = item.title
                     
-                    
                     if let time = Double(item.dateupload) {
                         let date = Date(timeIntervalSince1970: time)
                         let dateFormatter = DateFormatter()
@@ -88,8 +148,8 @@ class HomeViewController: UIViewController {
                         dateFormatter.timeZone = .current
                         photo.dateUpload = dateFormatter.string(from: date)
                     }
-                    
-                    DispatchQueue(label: "Serial").async(group: queueGroup) {
+                
+                    DispatchQueue(label: "Loading photos").sync {
                         let photoStaticURL: String = "https://farm\(item.farm).staticflickr.com/\(item.server)/\(item.id)_\(item.secret)_b.jpg"
                         guard let url = URL(string: photoStaticURL) else { return }
                         guard let data = try? Data(contentsOf: url) else { return }
