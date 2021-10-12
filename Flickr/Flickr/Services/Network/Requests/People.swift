@@ -32,6 +32,17 @@ enum PrivacyFilter: Int {
 }
 
 extension NetworkService {
+    func getHumanInfo(userID: String, completion: @escaping (Result<Person, Error>) -> Void) {
+        let params: [NetworkParameters: Any] = [.user_id: userID]
+        request(method: "flickr.people.getInfo", parameters: params, serializer: JSONSerializer<UserInfoFlickrApi>()) { result in
+            switch result {
+            case .success(let personInfo):
+                completion(.success(personInfo.person))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     func getPhotos(userID: String,
                    safeSearch: SafeSearch = .forSafe,
                    contentType: ContentType = .forAll,
@@ -73,4 +84,9 @@ private struct PeoplePhotosFlickrApi: Decodable {
         let total: Int
         let photo: [UsersPhoto]
     }
+}
+
+private struct UserInfoFlickrApi: Decodable {
+    let person: Person
+    let stat: String
 }

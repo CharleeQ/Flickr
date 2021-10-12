@@ -188,6 +188,9 @@ Everything is designed.</string>
                                                         <integer key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="logOutTapped:" destination="ime-Yt-53A" eventType="touchUpInside" id="HuG-2I-dGz"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -218,6 +221,12 @@ Everything is designed.</string>
                     <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="xiz-Lf-sZj"/>
                     <navigationItem key="navigationItem" id="dic-dH-Ush"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="uHk-ih-VjE" id="LDA-pS-YvT"/>
+                        <outlet property="fullnameLabel" destination="CIf-mx-oZk" id="HZv-vK-fJk"/>
+                        <outlet property="logOutButton" destination="tbB-DK-AmI" id="Vr0-9h-RuZ"/>
+                        <outlet property="profileAvatar" destination="sVV-Rg-hZ0" id="1rW-te-epy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9td-GT-7gE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

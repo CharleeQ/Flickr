@@ -14,3 +14,9 @@ struct UsersPhoto: Decodable {
     let server: String
     let title: String
 }
+
+struct Person: Decodable {
+    let id: String
+    let iconserver: String
+    let iconfarm: Int
+}
