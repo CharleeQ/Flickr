@@ -29,6 +29,7 @@ class ProfileViewController: UIViewController {
         // button logout bgcolor
         logOutButton.backgroundColor = UIColor.shineBlue
         
+        // MARK: - Return datas
         profileInfo()
     }
     
@@ -38,7 +39,7 @@ class ProfileViewController: UIViewController {
             case .success(let profileInfo):
                 self.fullnameLabel.text = "\(profileInfo.firstName) \(profileInfo.lastName)"
                 self.descriptionLabel.text = profileInfo.profileDescription
-                
+
                 self.network.getHumanInfo(userID: profileInfo.id) { result in
                     switch result {
                     case .success(let info):
@@ -59,5 +60,16 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func logOutTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Log Out", message: "Are you sure?", preferredStyle: .actionSheet)
+        let removeAction = UIAlertAction(title: "Sure", style: .destructive) { action in
+            UserSettings.remove()
+            
+            UIApplication.shared.windows.first?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
+        }
+        alert.addAction(removeAction)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

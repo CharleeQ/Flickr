@@ -184,7 +184,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return
         case .recent(_/* let recent */):
             // let item = recent
-            let detailVC = PostViewController()
+            guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVCID") else { return }
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
