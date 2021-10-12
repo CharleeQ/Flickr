@@ -61,6 +61,8 @@ class HomeViewController: UIViewController {
     @IBAction func filterButtonTapped(_ sender: UIButton) {
         filterButtonChanged(sender: sender)
         refresh()
+        postsTableView.contentOffset = CGPoint(x: 0, y: -60)
+        // coordinate Y, because tableview with X move right (but need bottom)
     }
     
     private func filterButtonChanged(sender: UIButton) {
