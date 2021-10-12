@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -107,8 +108,112 @@
                     <view key="view" contentMode="scaleToFill" id="K0C-ud-RTH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ChB-9u-6fQ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="57" translatesAutoresizingMaskIntoConstraints="NO" id="NVb-wN-4OC">
+                                        <rect key="frame" x="0.0" y="57" width="414" height="273"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="Eyn-54-Gd0">
+                                                <rect key="frame" x="95" y="0.0" width="224.5" height="172"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IcB-nW-d6S">
+                                                        <rect key="frame" x="64" y="0.0" width="96" height="96"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Oval" translatesAutoresizingMaskIntoConstraints="NO" id="hlb-TH-kV5">
+                                                                <rect key="frame" x="0.0" y="0.0" width="96" height="96"/>
+                                                            </imageView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stockAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="sVV-Rg-hZ0">
+                                                                <rect key="frame" x="5" y="5" width="86" height="86"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="86" id="s7V-Bj-ps7"/>
+                                                                    <constraint firstAttribute="width" constant="86" id="w6x-3X-RVx"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="43"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="96" id="0gh-Tl-DeZ"/>
+                                                            <constraint firstItem="hlb-TH-kV5" firstAttribute="top" secondItem="IcB-nW-d6S" secondAttribute="top" id="BhG-qH-4dY"/>
+                                                            <constraint firstItem="sVV-Rg-hZ0" firstAttribute="centerX" secondItem="IcB-nW-d6S" secondAttribute="centerX" id="ICs-tW-PTB"/>
+                                                            <constraint firstAttribute="bottom" secondItem="hlb-TH-kV5" secondAttribute="bottom" id="LCd-Pg-VWY"/>
+                                                            <constraint firstItem="sVV-Rg-hZ0" firstAttribute="centerY" secondItem="IcB-nW-d6S" secondAttribute="centerY" id="Z3y-SY-Nz9"/>
+                                                            <constraint firstItem="hlb-TH-kV5" firstAttribute="leading" secondItem="IcB-nW-d6S" secondAttribute="leading" id="hvf-rB-cVv"/>
+                                                            <constraint firstAttribute="height" constant="96" id="qyM-Vx-d7b"/>
+                                                            <constraint firstAttribute="trailing" secondItem="hlb-TH-kV5" secondAttribute="trailing" id="r7K-om-ceN"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="m5l-JO-wsd">
+                                                        <rect key="frame" x="0.0" y="118" width="224.5" height="54"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jacob West" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIf-mx-oZk">
+                                                                <rect key="frame" x="73" y="0.0" width="78.5" height="17"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHk-ih-VjE">
+                                                                <rect key="frame" x="0.0" y="18" width="224.5" height="36"/>
+                                                                <string key="text">Digital goodies designer @pixsellz 
+Everything is designed.</string>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbB-DK-AmI">
+                                                <rect key="frame" x="34" y="229" width="346" height="44"/>
+                                                <color key="backgroundColor" name="AccentColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="vaA-v4-DXi"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Log out">
+                                                    <color key="titleColor" red="1" green="1" blue="0.99999994039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="tbB-DK-AmI" secondAttribute="trailing" constant="34" id="19A-Qf-wGb"/>
+                                            <constraint firstItem="tbB-DK-AmI" firstAttribute="leading" secondItem="NVb-wN-4OC" secondAttribute="leading" constant="34" id="5gW-tj-9Fu"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="NVb-wN-4OC" firstAttribute="top" secondItem="hIi-PK-O5g" secondAttribute="top" constant="57" id="GAp-cN-IIC"/>
+                                    <constraint firstItem="5T9-Dl-1EZ" firstAttribute="trailing" secondItem="NVb-wN-4OC" secondAttribute="trailing" id="ZK5-aR-9I5"/>
+                                    <constraint firstItem="NVb-wN-4OC" firstAttribute="leading" secondItem="5T9-Dl-1EZ" secondAttribute="leading" id="ncO-QL-5xh"/>
+                                    <constraint firstItem="hIi-PK-O5g" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NVb-wN-4OC" secondAttribute="bottom" constant="57" id="sRB-e0-ArO"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="hIi-PK-O5g"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="5T9-Dl-1EZ"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Yd1-Fx-b32"/>
-                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Yd1-Fx-b32" firstAttribute="trailing" secondItem="ChB-9u-6fQ" secondAttribute="trailing" id="Nsb-Sd-Ola"/>
+                            <constraint firstItem="ChB-9u-6fQ" firstAttribute="top" secondItem="Yd1-Fx-b32" secondAttribute="top" id="RYK-GC-1GZ"/>
+                            <constraint firstItem="Yd1-Fx-b32" firstAttribute="bottom" secondItem="ChB-9u-6fQ" secondAttribute="bottom" id="jOd-k2-eIk"/>
+                            <constraint firstItem="ChB-9u-6fQ" firstAttribute="leading" secondItem="Yd1-Fx-b32" secondAttribute="leading" id="yrE-S6-XJR"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="xiz-Lf-sZj"/>
                     <navigationItem key="navigationItem" id="dic-dH-Ush"/>
@@ -146,13 +251,16 @@
                                                     <color key="tintColor" red="1" green="1" blue="0.99999994039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="8"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Faves" backgroundImage="faves"/>
+                                                    <state key="normal" title="15" backgroundImage="faves"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="filterButtonTapped:" destination="nEl-5E-nmG" eventType="touchUpInside" id="X29-Kb-MBK"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pt5-Sa-ugu" userLabel="Views" customClass="FilterButton" customModule="Flickr" customModuleProvider="target">
                                                     <rect key="frame" x="88" y="0.0" width="80" height="80"/>
@@ -163,13 +271,16 @@
                                                     <color key="tintColor" red="1" green="1" blue="0.99999994039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="8"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Views" backgroundImage="views"/>
+                                                    <state key="normal" title="50" backgroundImage="views"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="filterButtonTapped:" destination="nEl-5E-nmG" eventType="touchUpInside" id="l8w-qp-d1H"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJg-7G-T3a" userLabel="Comments" customClass="FilterButton" customModule="Flickr" customModuleProvider="target">
                                                     <rect key="frame" x="176" y="0.0" width="105" height="80"/>
@@ -180,13 +291,16 @@
                                                     <color key="tintColor" red="1" green="1" blue="0.99999994039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="8"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Comments" backgroundImage="comments"/>
+                                                    <state key="normal" title="100" backgroundImage="comments"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="filterButtonTapped:" destination="nEl-5E-nmG" eventType="touchUpInside" id="Elp-ss-x1r"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yes-QC-GCW" userLabel="Interesting" customClass="FilterButton" customModule="Flickr" customModuleProvider="target">
                                                     <rect key="frame" x="289" y="0.0" width="111" height="80"/>
@@ -197,13 +311,16 @@
                                                     <color key="tintColor" red="1" green="1" blue="0.99999994039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="8"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Interesting" backgroundImage="interesting"/>
+                                                    <state key="normal" title="200" backgroundImage="interesting"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="8"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="filterButtonTapped:" destination="nEl-5E-nmG" eventType="touchUpInside" id="LuY-n4-Wfh"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -383,13 +500,18 @@
     <resources>
         <image name="00_onboarding" width="1600" height="1200"/>
         <image name="16520596" width="403" height="403"/>
+        <image name="Oval" width="96" height="96"/>
         <image name="comments" width="198" height="160"/>
         <image name="faves" width="160" height="160"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="interesting" width="750" height="750"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <image name="stockAvatar" width="300" height="300"/>
         <image name="views" width="160" height="160"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -401,9 +523,6 @@
         </systemColor>
         <systemColor name="systemBrownColor">
             <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPurpleColor">
             <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

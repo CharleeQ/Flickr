@@ -43,10 +43,9 @@ class HomeViewController: UIViewController {
         let imageView = UIImageView(image: logo)
         self.navigationItem.titleView = imageView
         
-        
-        // MARK: - Get recent photos on TableView
-        refresh()
-        
+        // MARK: - Config filter events
+        filterButtonChanged(sender: favesFilter)
+
         
         // MARK: - Pull to refresh action
         let refreshAction = UIAction.init { action in
@@ -54,44 +53,32 @@ class HomeViewController: UIViewController {
         }
         control.addAction(refreshAction, for: .valueChanged)
         
-        // MARK: - Configuration filters
-        // faves
-        let favesAction = UIAction.init { action in
-            self.changePerPage(perPage: 15)
-            self.favesFilter.alpha = 1
-            self.viewsFilter.alpha = 0.5
-            self.commentsFilter.alpha = 0.5
-            self.interestingFilter.alpha = 0.5
-        }
-        favesFilter.addAction(favesAction, for: .touchUpInside)
-        // views
-        let viewsAction = UIAction.init { action in
-            self.changePerPage(perPage: 50)
-            self.favesFilter.alpha = 0.5
-            self.viewsFilter.alpha = 1
-            self.commentsFilter.alpha = 0.5
-            self.interestingFilter.alpha = 0.5
-        }
-        viewsFilter.addAction(viewsAction, for: .touchUpInside)
-        // comments
-        let commsAction = UIAction.init { action in
-            self.changePerPage(perPage: 100)
-            self.favesFilter.alpha = 0.5
-            self.viewsFilter.alpha = 0.5
-            self.commentsFilter.alpha = 1
-            self.interestingFilter.alpha = 0.5
-        }
-        commentsFilter.addAction(commsAction, for: .touchUpInside)
-        // interesting
-        let interestAction = UIAction.init { action in
-            self.changePerPage(perPage: 200)
-            self.favesFilter.alpha = 0.5
-            self.viewsFilter.alpha = 0.5
-            self.commentsFilter.alpha = 0.5
-            self.interestingFilter.alpha = 1
-        }
-        interestingFilter.addAction(interestAction, for: .touchUpInside)
+
+        // MARK: - Get recent photos on TableView
+        refresh()
     }
+    
+    @IBAction func filterButtonTapped(_ sender: UIButton) {
+        filterButtonChanged(sender: sender)
+        refresh()
+    }
+    
+    private func filterButtonChanged(sender: UIButton) {
+        favesFilter.alpha = sender == favesFilter ? 1 : 0.5
+        viewsFilter.alpha = sender == viewsFilter ? 1 : 0.5
+        commentsFilter.alpha = sender == commentsFilter ? 1 : 0.5
+        interestingFilter.alpha = sender == interestingFilter ? 1 : 0.5
+        
+        switch sender {
+        case favesFilter: perPage = 15
+        case viewsFilter: perPage = 50
+        case commentsFilter: perPage = 100
+        case interestingFilter: perPage = 200
+        default:
+            return
+        }
+    }
+    
     
     private func refresh() {
         recents = []
@@ -102,24 +89,7 @@ class HomeViewController: UIViewController {
         }
         self.showRecent() {
             self.control.endRefreshing()
-            self.favesFilter.alpha = 1
-            self.viewsFilter.alpha = 1
-            self.commentsFilter.alpha = 1
-            self.interestingFilter.alpha = 1
         }
-    }
-    
-    private func changePerPage(perPage: Int) {
-        recents = []
-        currentPage = 1
-        self.perPage = perPage
-        if !control.isRefreshing {
-            control.beginRefreshing()
-            postsTableView.contentOffset = CGPoint(x: 0, y: -60)
-        }
-        self.showRecent(completion: {
-            self.control.endRefreshing()
-        })
     }
     
     private func nextPage() {
@@ -148,7 +118,7 @@ class HomeViewController: UIViewController {
                         dateFormatter.timeZone = .current
                         photo.dateUpload = dateFormatter.string(from: date)
                     }
-                
+                    
                     DispatchQueue(label: "Loading photos").sync {
                         let photoStaticURL: String = "https://farm\(item.farm).staticflickr.com/\(item.server)/\(item.id)_\(item.secret)_b.jpg"
                         guard let url = URL(string: photoStaticURL) else { return }

@@ -132,8 +132,8 @@
 			children = (
 				9F92AC7026CFC2C200433CF3 /* LoginViewController.swift */,
 				9F0A19BF26F0E4BC0011D761 /* HomeViewController.swift */,
-				9F0A19C126F0E4C70011D761 /* GalleryViewController.swift */,
 				9F0A19C326F0E4D00011D761 /* ProfileViewController.swift */,
+				9F0A19C126F0E4C70011D761 /* GalleryViewController.swift */,
 				9FBC79F726F20678009A7608 /* PostViewController.swift */,
 				9F65586126FE0FD9008D54AD /* SignUpViewController.swift */,
 			);
