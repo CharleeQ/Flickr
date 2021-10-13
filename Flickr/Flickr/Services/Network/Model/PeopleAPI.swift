@@ -19,4 +19,7 @@ struct Person: Decodable {
     let id: String
     let iconserver: String
     let iconfarm: Int
+    var link: String {
+        "https://farm\(iconfarm).staticflickr.com/\(iconserver)/buddyicons/\(id)_l.jpg"
+    }
 }

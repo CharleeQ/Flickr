@@ -112,6 +112,8 @@ class HomeViewController: UIViewController {
                     var photo = Recent()
                     photo.username = item.ownername
                     photo.description = item.title
+                    photo.link = item.link
+                    photo.profileAvatarLink = item.profileImageLink
                     
                     if let time = Double(item.dateupload) {
                         let date = Date(timeIntervalSince1970: time)
@@ -119,21 +121,6 @@ class HomeViewController: UIViewController {
                         dateFormatter.dateFormat = "YYYY MMMM dd, hh:mm:ss"
                         dateFormatter.timeZone = .current
                         photo.dateUpload = dateFormatter.string(from: date)
-                    }
-                    
-                    DispatchQueue(label: "Loading photos").sync {
-                        let photoStaticURL: String = "https://farm\(item.farm).staticflickr.com/\(item.server)/\(item.id)_\(item.secret)_b.jpg"
-                        guard let url = URL(string: photoStaticURL) else { return }
-                        guard let data = try? Data(contentsOf: url) else { return }
-                        if let image = UIImage(data: data) {
-                            photo.image = image
-                        }
-                        let avaStaticURL: String = "https://farm\(item.iconfarm).staticflickr.com/\(item.iconserver)/buddyicons/\(item.owner).jpg"
-                        guard let url = URL(string: avaStaticURL) else { return }
-                        guard let data = try? Data(contentsOf: url) else { return }
-                        if let image = UIImage(data: data) {
-                            photo.profileAvatar = image
-                        }
                     }
                     
                     queueGroup.enter()

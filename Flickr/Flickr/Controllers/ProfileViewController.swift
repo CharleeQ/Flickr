@@ -21,19 +21,10 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // MARK: - Configuration
-        // logo image in navbar
-        let logo = UIImage(named: "logoSmall.png")
-        let imageView = UIImageView(image: logo)
-        self.navigationItem.titleView = imageView
-        // button logout bgcolor
-        logOutButton.backgroundColor = UIColor.shineBlue
-        
-        // MARK: - Return datas
-        profileInfo()
+        loadProfileInfo()
     }
     
-    private func profileInfo() {
+    private func loadProfileInfo() {
         network.getProfile(nsid: UserSettings.get().nsid) { result in
             switch result {
             case .success(let profileInfo):
@@ -43,12 +34,7 @@ class ProfileViewController: UIViewController {
                 self.network.getHumanInfo(userID: profileInfo.id) { result in
                     switch result {
                     case .success(let info):
-                        let avaStaticURL: String = "https://farm\(info.iconfarm).staticflickr.com/\(info.iconserver)/buddyicons/\(info.id)_l.jpg"
-                        guard let url = URL(string: avaStaticURL) else { return }
-                        guard let data = try? Data(contentsOf: url) else { return }
-                        if let image = UIImage(data: data) {
-                            self.profileAvatar.image = image
-                        }
+                        self.profileAvatar.setPhoto(link: info.link)
                     case .failure(let error):
                         print(error)
                     }
@@ -63,7 +49,6 @@ class ProfileViewController: UIViewController {
         let alert = UIAlertController(title: "Log Out", message: "Are you sure?", preferredStyle: .actionSheet)
         let removeAction = UIAlertAction(title: "Sure", style: .destructive) { action in
             UserSettings.remove()
-            
             UIApplication.shared.windows.first?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
         }
         alert.addAction(removeAction)

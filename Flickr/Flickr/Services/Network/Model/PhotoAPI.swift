@@ -148,6 +148,12 @@ struct Photos: Decodable {
         let dateupload: String
         let iconserver: String
         let iconfarm: Int
+        var link: String {
+            "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg"
+        }
+        var profileImageLink: String {
+            "https://farm\(iconfarm).staticflickr.com/\(iconserver)/buddyicons/\(owner).jpg"
+        }
         
         enum CodingKeys: String, CodingKey {
             case id

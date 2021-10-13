@@ -19,8 +19,8 @@ class PostTableViewCell: UITableViewCell {
         usernameLabel.text = "\(datas.fullname) (\(datas.username))"
         locationLabel.text = datas.location
         dateUploadLabel.text = datas.dateUpload
-        postImage.image = datas.image
-        avatarImage.image = datas.profileAvatar
+        postImage.setPhoto(link: datas.link)
+        avatarImage.setPhoto(link: datas.profileAvatarLink)
         
         // description
         let text = NSMutableAttributedString(string: datas.username + " ", attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .semibold)])
