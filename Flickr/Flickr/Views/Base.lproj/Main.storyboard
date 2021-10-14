@@ -94,7 +94,23 @@
                         <color key="backgroundColor" systemColor="systemBrownColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Gallery" image="star" catalog="system" id="G6V-TX-sHD"/>
-                    <navigationItem key="navigationItem" id="4CW-3o-CS9"/>
+                    <navigationItem key="navigationItem" id="bDu-7B-eFv">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="Cca-qH-ybB">
+                            <rect key="frame" x="207" y="22" width="0.0" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoSmall" translatesAutoresizingMaskIntoConstraints="NO" id="cyW-ev-o8K"/>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="cyW-ev-o8K" firstAttribute="leading" secondItem="Cca-qH-ybB" secondAttribute="leading" id="I2u-It-4oz"/>
+                                <constraint firstAttribute="bottom" secondItem="cyW-ev-o8K" secondAttribute="bottom" id="KDu-wj-dEL"/>
+                                <constraint firstAttribute="trailing" secondItem="cyW-ev-o8K" secondAttribute="trailing" id="U05-Em-S5M"/>
+                                <constraint firstItem="cyW-ev-o8K" firstAttribute="top" secondItem="Cca-qH-ybB" secondAttribute="top" id="sLj-h6-SSK"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VTv-cm-a7x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -506,7 +522,23 @@ Everything is designed.</string>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="2Cu-t1-u6L"/>
-                    <navigationItem key="navigationItem" id="s80-nP-XnV"/>
+                    <navigationItem key="navigationItem" id="aRw-7G-7eb">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="nG1-WZ-LZ8">
+                            <rect key="frame" x="207" y="22" width="0.0" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoSmall" translatesAutoresizingMaskIntoConstraints="NO" id="AKt-6G-UG8"/>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="AKt-6G-UG8" firstAttribute="top" secondItem="nG1-WZ-LZ8" secondAttribute="top" id="6m0-NM-oPR"/>
+                                <constraint firstAttribute="trailing" secondItem="AKt-6G-UG8" secondAttribute="trailing" id="KiX-Zc-Yn4"/>
+                                <constraint firstItem="AKt-6G-UG8" firstAttribute="leading" secondItem="nG1-WZ-LZ8" secondAttribute="leading" id="TMd-3N-dWG"/>
+                                <constraint firstAttribute="bottom" secondItem="AKt-6G-UG8" secondAttribute="bottom" id="cGD-7u-Ykg"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="commentsFilter" destination="vJg-7G-T3a" id="7Ea-BW-uRa"/>

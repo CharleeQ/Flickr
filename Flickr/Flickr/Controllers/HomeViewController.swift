@@ -35,17 +35,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // MARK: - Configuration VC
-        // refreshing
         postsTableView.refreshControl = control
         
-        // logo image in navbar
-        let logo = UIImage(named: "logoSmall.png")
-        let imageView = UIImageView(image: logo)
-        self.navigationItem.titleView = imageView
         
         // MARK: - Config filter events
         filterButtonChanged(sender: favesFilter)
-
+        
         
         // MARK: - Pull to refresh action
         let refreshAction = UIAction.init { action in
@@ -53,8 +48,8 @@ class HomeViewController: UIViewController {
         }
         control.addAction(refreshAction, for: .valueChanged)
         
-
-        // MARK: - Get recent photos on TableView
+        
+        // MARK: - Get recent photos on the TableView
         refresh()
     }
     
@@ -76,8 +71,7 @@ class HomeViewController: UIViewController {
         case viewsFilter: perPage = 50
         case commentsFilter: perPage = 100
         case interestingFilter: perPage = 200
-        default:
-            return
+        default: return
         }
     }
     
@@ -109,27 +103,18 @@ class HomeViewController: UIViewController {
                 let queueGroup = DispatchGroup()
                 self.totalPages = photos.pages
                 photos.photo.forEach { item in
-                    var photo = Recent()
-                    photo.username = item.ownername
-                    photo.description = item.title
-                    photo.link = item.link
-                    photo.profileAvatarLink = item.profileImageLink
-                    
-                    if let time = Double(item.dateupload) {
-                        let date = Date(timeIntervalSince1970: time)
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "YYYY MMMM dd, hh:mm:ss"
-                        dateFormatter.timeZone = .current
-                        photo.dateUpload = dateFormatter.string(from: date)
-                    }
-                    
                     queueGroup.enter()
                     self.network.getPhotoInfo(photoID: item.id, secret: nil) { result in
                         switch result {
                         case .success(let info):
-                            photo.location = info.owner.location ?? ""
-                            photo.fullname = info.owner.realname
-                            self.recents.append(.recent(photo))
+                            let post = Recent(profileAvatarLink: item.profileImageLink,
+                                              username: item.ownername,
+                                              fullname: info.owner.realname,
+                                              location: info.owner.location ?? "",
+                                              link: item.link,
+                                              description: item.title,
+                                              dateUpload: item.date)
+                            self.recents.append(.recent(post))
                         case .failure(let error):
                             print(error)
                         }
@@ -141,7 +126,6 @@ class HomeViewController: UIViewController {
                     self.postsTableView.reloadData()
                     completion()
                 }
-                
             case .failure(let error):
                 print(error)
             }
