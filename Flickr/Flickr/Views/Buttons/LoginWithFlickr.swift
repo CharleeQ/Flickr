@@ -9,7 +9,7 @@ import UIKit
 
 class LoginWithFlickrButton: UIButton {
     func setup() {
-        backgroundColor = UIColor.superPink
+        backgroundColor = UIColor(named: "superPink")
         layer.cornerRadius = 6
         clipsToBounds = true
         let titleString = NSMutableAttributedString(string: "Log in with flickr.com",

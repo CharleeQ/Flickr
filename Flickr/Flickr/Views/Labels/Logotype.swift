@@ -10,9 +10,9 @@ import UIKit
 class LogotypeLabel: UILabel {
     func setup() {
         let textString = NSMutableAttributedString(string: "Flickr",
-                                                   attributes: [.foregroundColor: UIColor.deepBlue])
+                                                   attributes: [.foregroundColor: UIColor(named: "deepBlue")!])
         textString.addAttribute(.foregroundColor,
-                                value: UIColor.shineCoral,
+                                value: UIColor(named: "shineCoral")!,
                                 range: NSRange(location: 3, length: 3))
         
         attributedText = textString

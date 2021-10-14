@@ -15,12 +15,4 @@ extension UIColor {
     class var deepBlue: UIColor {
         return UIColor(red: 41.0/255.0, green: 97.0/255.0, blue: 212.0/255.0, alpha: 1.0)
     }
-    
-    class var shineCoral: UIColor {
-        return UIColor(red: 234.0/255.0, green: 51.0/255.0, blue: 131.0/255.0, alpha: 1.0)
-    }
-    
-    class var shineBlue: UIColor {
-        return UIColor(red: 55.0/255.0, green: 151.0/255.0, blue: 239.0/255.0, alpha: 1.0)
-    }
 }
