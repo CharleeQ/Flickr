@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var profileAvatar: UIImageView!
     @IBOutlet weak var logOutButton: UIButton!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     // MARK: - Global properties
     private let network = NetworkService(accessToken: UserSettings.get().token,
@@ -28,12 +29,14 @@ class ProfileViewController: UIViewController {
         network.getProfile(nsid: UserSettings.get().nsid) { result in
             switch result {
             case .success(let profileInfo):
-                self.fullnameLabel.text = "\(profileInfo.firstName) \(profileInfo.lastName)"
-                self.descriptionLabel.text = profileInfo.profileDescription
-
                 self.network.getHumanInfo(userID: profileInfo.id) { result in
                     switch result {
                     case .success(let info):
+                        self.fullnameLabel.text = "\(profileInfo.firstName) \(profileInfo.lastName)"
+                        self.descriptionLabel.text = profileInfo.profileDescription
+                        self.fullnameLabel.backgroundColor = .systemBackground
+                        self.descriptionLabel.backgroundColor = .systemBackground
+                        self.spinner.stopAnimating()
                         self.profileAvatar.setPhoto(link: info.link)
                     case .failure(let error):
                         print(error)
@@ -49,7 +52,7 @@ class ProfileViewController: UIViewController {
         let alert = UIAlertController(title: "Log Out", message: "Are you sure?", preferredStyle: .actionSheet)
         let removeAction = UIAlertAction(title: "Sure", style: .destructive) { action in
             UserSettings.remove()
-            UIApplication.shared.windows.first?.rootViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC")
+            UIApplication.shared.windows.first?.rootViewController = RootCoordinator().checkLogin()
         }
         alert.addAction(removeAction)
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

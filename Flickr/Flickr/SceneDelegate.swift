@@ -14,8 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.window?.rootViewController = checkLogin(storyboard: storyboard)
+        self.window?.rootViewController = RootCoordinator().checkLogin()
         self.window?.makeKeyAndVisible()
     }
     
@@ -45,17 +44,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-    }
-    
-    // MARK: - Private functions
-    
-    private func checkLogin(storyboard: UIStoryboard) -> UIViewController {
-        if UserSettings.get() == nil {
-            return storyboard.instantiateViewController(withIdentifier: "LoginVC")
-        } else {
-            return TabBarCreator().configuration()
-        }
-        
     }
 }
 
