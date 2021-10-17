@@ -102,6 +102,7 @@ class HomeViewController: UIViewController {
             case .success(let photos):
                 let queueGroup = DispatchGroup()
                 self.totalPages = photos.pages
+                print("getRecentPhotos")
                 photos.photo.forEach { item in
                     queueGroup.enter()
                     self.network.getPhotoInfo(photoID: item.id, secret: nil) { result in
@@ -114,6 +115,7 @@ class HomeViewController: UIViewController {
                                               link: item.link,
                                               description: item.title,
                                               dateUpload: item.date)
+                            print("getPhotoInfo")
                             self.recents.append(.recent(post))
                         case .failure(let error):
                             print(error)
@@ -122,6 +124,7 @@ class HomeViewController: UIViewController {
                     }
                 }
                 queueGroup.notify(queue: .main) {
+                    print("Append last item in array and reload data")
                     self.recents.append(.loading)
                     self.postsTableView.reloadData()
                     completion()
