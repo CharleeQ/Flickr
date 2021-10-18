@@ -8,11 +8,11 @@
 import UIKit
 
 struct Recent: Equatable {
-    var profileAvatarLink: String
-    var username: String
-    var fullname: String
-    var location: String
-    var link: String
-    var description: String
-    var dateUpload: String
+    let profileAvatarLink: String
+    let username: String
+    let fullname: String
+    let location: String
+    let link: String
+    let description: String
+    let dateUpload: String
 }

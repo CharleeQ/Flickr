@@ -415,8 +415,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="517"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="00_onboarding" translatesAutoresizingMaskIntoConstraints="NO" id="7KF-vO-mJN">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7KF-vO-mJN">
                                                     <rect key="frame" x="0.0" y="54" width="414" height="414"/>
+                                                    <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="7KF-vO-mJN" secondAttribute="height" multiplier="1:1" id="YHL-V8-sPx"/>
                                                     </constraints>
@@ -435,8 +436,9 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cyv-lf-C32">
                                                     <rect key="frame" x="10" y="11" width="394" height="32"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="16520596" translatesAutoresizingMaskIntoConstraints="NO" id="fnx-qp-xHc">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fnx-qp-xHc">
                                                             <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="32" id="W1G-2S-G2c"/>
                                                                 <constraint firstAttribute="height" constant="32" id="opX-ya-VQV"/>
@@ -583,8 +585,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="00_onboarding" width="1600" height="1200"/>
-        <image name="16520596" width="403" height="403"/>
         <image name="Oval" width="96" height="96"/>
         <image name="comments" width="198" height="160"/>
         <image name="faves" width="160" height="160"/>

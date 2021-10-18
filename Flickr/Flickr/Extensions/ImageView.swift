@@ -9,12 +9,17 @@ import UIKit
 
 extension UIImageView {
     func setPhoto(link: String) {
-        guard let url = URL(string: link),
-              let data = try? Data(contentsOf: url)
-        else {
-            self.image = nil
-            return
+        DispatchQueue(label: "Set photo").async {
+            guard let url = URL(string: link),
+                  let data = try? Data(contentsOf: url)
+            else {
+                self.image = nil
+                return
+            }
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data)
+            }
+            
         }
-        self.image = UIImage(data: data)
     }
 }
