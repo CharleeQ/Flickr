@@ -50,6 +50,8 @@
 		9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */; };
 		9FB9B4642704D41F00D7A2CE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */; };
 		9FBC79F826F20678009A7608 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC79F726F20678009A7608 /* PostViewController.swift */; };
+		9FF32898271EE7E300D42087 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */; };
+		9FF3289A271EF03000D42087 /* NewItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF32899271EF03000D42087 /* NewItemCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		9FBC79F726F20678009A7608 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		9FF32899271EF03000D42087 /* NewItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				9F92AC7026CFC2C200433CF3 /* LoginViewController.swift */,
-				9F0A19BF26F0E4BC0011D761 /* HomeViewController.swift */,
 				9F0A19C326F0E4D00011D761 /* ProfileViewController.swift */,
+				9F0A19BF26F0E4BC0011D761 /* HomeViewController.swift */,
 				9F0A19C126F0E4C70011D761 /* GalleryViewController.swift */,
 				9FBC79F726F20678009A7608 /* PostViewController.swift */,
 				9F65586126FE0FD9008D54AD /* SignUpViewController.swift */,
@@ -286,6 +290,8 @@
 			children = (
 				9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */,
 				9F045D10270F14E9002317F3 /* SpinnerTableViewCell.swift */,
+				9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */,
+				9FF32899271EF03000D42087 /* NewItemCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -392,9 +398,11 @@
 				9F045D0E270DBFCB002317F3 /* RootCoordinator.swift in Sources */,
 				9F8140C626DFF258003EE7AA /* Favorites.swift in Sources */,
 				9F8140D526E4E67A003EE7AA /* ProfileAPI.swift in Sources */,
+				9FF3289A271EF03000D42087 /* NewItemCollectionViewCell.swift in Sources */,
 				9F8140DE26E62BB5003EE7AA /* CommentsAPI.swift in Sources */,
 				9F536D1D26F4C5330077F1F9 /* LoginWithFlickr.swift in Sources */,
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
+				9FF32898271EE7E300D42087 /* PhotoCollectionViewCell.swift in Sources */,
 				9F536D2326F4EA190077F1F9 /* Logotype.swift in Sources */,
 				9F8140B626DE7344003EE7AA /* NetworkService.swift in Sources */,
 				9F8140C826E0F1DA003EE7AA /* People.swift in Sources */,

@@ -44,19 +44,14 @@ extension NetworkService {
         }
     }
     func getPhotos(userID: String,
-                   safeSearch: SafeSearch = .forSafe,
-                   contentType: ContentType = .forAll,
-                   privacyFilter: PrivacyFilter = .publicPhotos,
                    extras: String?,
                    perPage: Int = 100,
                    page: Int = 1,
                    completion: @escaping (Result<[UsersPhoto], Error>) -> Void) {
         var params: [NetworkParameters: Any] = [.user_id: userID,
-                                                .safe_search: safeSearch.rawValue,
-                                                .content_type: contentType.rawValue,
-                                                .privacy_filter: privacyFilter.rawValue,
                                                 .per_page: perPage,
-                                                .page: page]
+                                                .page: page,
+                                                .privacy_filter: "1"]
         if let extras = extras { params[.extras] = extras }
         
         requestWithOAuth(http: .POST,

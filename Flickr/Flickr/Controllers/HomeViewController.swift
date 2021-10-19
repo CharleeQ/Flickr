@@ -146,7 +146,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case .recent(let recent):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
-            cell.setup(datas: recent) // сетает только при скролле, а должно заранее - поэтому фризы
+            cell.setup(datas: recent)
 
             return cell
         }

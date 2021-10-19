@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct UsersPhoto: Decodable {
+struct UsersPhoto: Decodable, Equatable {
     let id: String
     let owner: String
     let secret: String
     let server: String
     let title: String
+    var link: String {
+        "https://live.staticflickr.com/\(server)/\(id)_\(secret).jpg"
+    }
 }
 
 struct Person: Decodable {

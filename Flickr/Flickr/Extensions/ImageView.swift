@@ -13,7 +13,9 @@ extension UIImageView {
             guard let url = URL(string: link),
                   let data = try? Data(contentsOf: url)
             else {
-                self.image = nil
+                DispatchQueue.main.async {
+                    self.image = nil
+                }
                 return
             }
             DispatchQueue.main.async {
