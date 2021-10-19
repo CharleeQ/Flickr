@@ -51,7 +51,6 @@
 		9FB9B4642704D41F00D7A2CE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */; };
 		9FBC79F826F20678009A7608 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC79F726F20678009A7608 /* PostViewController.swift */; };
 		9FF32898271EE7E300D42087 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */; };
-		9FF3289A271EF03000D42087 /* NewItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF32899271EF03000D42087 /* NewItemCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,7 +100,6 @@
 		9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		9FBC79F726F20678009A7608 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
-		9FF32899271EF03000D42087 /* NewItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,7 +289,6 @@
 				9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */,
 				9F045D10270F14E9002317F3 /* SpinnerTableViewCell.swift */,
 				9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */,
-				9FF32899271EF03000D42087 /* NewItemCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -398,7 +395,6 @@
 				9F045D0E270DBFCB002317F3 /* RootCoordinator.swift in Sources */,
 				9F8140C626DFF258003EE7AA /* Favorites.swift in Sources */,
 				9F8140D526E4E67A003EE7AA /* ProfileAPI.swift in Sources */,
-				9FF3289A271EF03000D42087 /* NewItemCollectionViewCell.swift in Sources */,
 				9F8140DE26E62BB5003EE7AA /* CommentsAPI.swift in Sources */,
 				9F536D1D26F4C5330077F1F9 /* LoginWithFlickr.swift in Sources */,
 				9F92AC8B26CFDE0300433CF3 /* AuthService.swift in Sources */,
@@ -484,7 +480,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -539,7 +535,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

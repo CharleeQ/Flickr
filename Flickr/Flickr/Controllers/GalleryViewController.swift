@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Photos
+import PhotosUI
 
 class GalleryViewController: UIViewController {
     
@@ -15,6 +17,8 @@ class GalleryViewController: UIViewController {
     }
     
     @IBOutlet weak var photoCollectionView: UICollectionView!
+    let imagePicker = UIImagePickerController()
+    var photoPicker: PHPickerViewController!
     
     private var gallery = [DataSourceItem]()
     private let network = NetworkService(accessToken: UserSettings.get().token,
@@ -24,6 +28,21 @@ class GalleryViewController: UIViewController {
         super.viewDidLoad()
         // MARK: - Config default values
         gallery.append(.newItem)
+        
+        if #available(iOS 14, *) {
+            // MARK: - Config PHPickerViewController
+            print("PH picker load")
+            var config = PHPickerConfiguration(photoLibrary: .shared())
+            config.selectionLimit = 1
+            config.filter = .images
+            photoPicker = PHPickerViewController(configuration: config)
+            photoPicker.delegate = self
+        } else {
+            // MARK: - Config UIImagePickerController
+            print("Image picker load")
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+        }
         
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
@@ -38,6 +57,25 @@ class GalleryViewController: UIViewController {
                 photos.forEach { photo in
                     self.gallery.append(.photo(photo))
                     self.photoCollectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func refresh() {
+        gallery = [.newItem]
+        showGallery()
+    }
+    
+    private func upload(image: UIImage) {
+        network.uploadPhoto(filename: "photo", image: image, title: "test", description: "test", tags: "test") { result in
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    self.refresh()
+                    self.dismiss(animated: true, completion: nil)
                 }
             case .failure(let error):
                 print(error)
@@ -62,11 +100,47 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
             return cell
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch gallery[indexPath.row] {
+        case .newItem:
+            if #available(iOS 14, *) {
+                print("PH picker present")
+                self.present(photoPicker, animated: true, completion: nil)
+            } else {
+                print("image picker present")
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        case .photo(_):
+            // this may be code for present selected photo in future
+            return
+        }
+    }
 }
 
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (view.frame.size.width/3) - 1,
                       height: (view.frame.size.width/3) - 1)
+    }
+}
+
+extension GalleryViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("Image picker finish picking")
+        guard let image = info[.editedImage] as? UIImage else { return }
+        upload(image: image)
+    }
+}
+
+extension GalleryViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        print("PH picker finish picking")
+        results.forEach { result in
+            result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
+                guard let image = reading as? UIImage, error == nil else { return }
+                self.upload(image: image)
+            }
+        }
     }
 }
