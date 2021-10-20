@@ -27,15 +27,14 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // MARK: - Config default values
-        gallery.append(.newItem)
-        
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
-        showGallery()
+        refresh()
     }
     
-    private func showGallery() {
+    private func refresh() {
+        gallery = [.newItem]
         network.getPhotos(userID: UserSettings.get().nsid.removingPercentEncoding!, extras: nil) { result in
             switch result {
             case .success(let photos):
@@ -47,11 +46,6 @@ class GalleryViewController: UIViewController {
                 print(error)
             }
         }
-    }
-    
-    private func refresh() {
-        gallery = [.newItem]
-        showGallery()
     }
     
     private func upload(image: UIImage) {
