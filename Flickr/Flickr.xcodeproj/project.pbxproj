@@ -50,6 +50,7 @@
 		9F92AC9A26D7C44D00433CF3 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */; };
 		9FB9B4642704D41F00D7A2CE /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */; };
 		9FBC79F826F20678009A7608 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBC79F726F20678009A7608 /* PostViewController.swift */; };
+		9FC4BA4E272050B1002A8D3A /* ImagePickerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC4BA4D272050B1002A8D3A /* ImagePickerService.swift */; };
 		9FF32898271EE7E300D42087 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		9F92AC9926D7C44D00433CF3 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		9FB9B4632704D41F00D7A2CE /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		9FBC79F726F20678009A7608 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		9FC4BA4D272050B1002A8D3A /* ImagePickerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerService.swift; sourceTree = "<group>"; };
 		9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +126,7 @@
 		9F045D0F270DC007002317F3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9FC4BA4D272050B1002A8D3A /* ImagePickerService.swift */,
 				9F045D0D270DBFCB002317F3 /* RootCoordinator.swift */,
 			);
 			path = UI;
@@ -378,6 +381,7 @@
 				9F8140C226DFA2F2003EE7AA /* Photos.swift in Sources */,
 				9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */,
 				9F8140C026DF9F09003EE7AA /* Tags.swift in Sources */,
+				9FC4BA4E272050B1002A8D3A /* ImagePickerService.swift in Sources */,
 				9F8140C426DFACD4003EE7AA /* Photos.Comments.swift in Sources */,
 				9F0A19C026F0E4BC0011D761 /* HomeViewController.swift in Sources */,
 				9F8140D326E4E66B003EE7AA /* PhotoAPI.swift in Sources */,
