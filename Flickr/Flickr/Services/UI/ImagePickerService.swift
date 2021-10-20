@@ -41,12 +41,20 @@ extension ImagePickerService: UIImagePickerControllerDelegate & UINavigationCont
             self.completion?(image)
         }
     }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
 
 
 // MARK: - PHPickerView
 extension ImagePickerService: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        if results == [] {
+            picker.dismiss(animated: true, completion: nil)
+            return
+        }
         picker.dismiss(animated: true) {
             results.forEach { result in
                 result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
