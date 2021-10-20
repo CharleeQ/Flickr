@@ -31,7 +31,6 @@ class GalleryViewController: UIViewController {
         
         if #available(iOS 14, *) {
             // MARK: - Config PHPickerViewController
-            print("PH picker load")
             var config = PHPickerConfiguration(photoLibrary: .shared())
             config.selectionLimit = 1
             config.filter = .images
@@ -39,7 +38,6 @@ class GalleryViewController: UIViewController {
             photoPicker.delegate = self
         } else {
             // MARK: - Config UIImagePickerController
-            print("Image picker load")
             imagePicker.delegate = self
             imagePicker.allowsEditing = true
         }
@@ -84,6 +82,7 @@ class GalleryViewController: UIViewController {
     }
 }
 
+// MARK: - CollectionView
 extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return gallery.count
@@ -105,19 +104,18 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
         switch gallery[indexPath.row] {
         case .newItem:
             if #available(iOS 14, *) {
-                print("PH picker present")
                 self.present(photoPicker, animated: true, completion: nil)
             } else {
                 print("image picker present")
                 self.present(imagePicker, animated: true, completion: nil)
             }
         case .photo(_):
-            // this may be code for present selected photo in future
             return
         }
     }
 }
 
+// MARK: - CollectionView Flow
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (view.frame.size.width/3) - 1,
@@ -125,17 +123,17 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UIImagePicker
 extension GalleryViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print("Image picker finish picking")
         guard let image = info[.editedImage] as? UIImage else { return }
         upload(image: image)
     }
 }
 
+// MARK: - PHPickerView
 extension GalleryViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        print("PH picker finish picking")
         results.forEach { result in
             result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
                 guard let image = reading as? UIImage, error == nil else { return }

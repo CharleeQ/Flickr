@@ -14,4 +14,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     func config(data: UsersPhoto) {
         photo.setPhoto(link: data.link)
     }
+    
+    override func prepareForReuse() {
+        photo.image = nil
+    }
 }
