@@ -15,4 +15,6 @@ struct Recent: Equatable {
     let link: String
     let description: String
     let dateUpload: String
+    let id: String
+    let title: String
 }

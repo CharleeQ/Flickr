@@ -112,8 +112,10 @@ class HomeViewController: UIViewController {
                                               fullname: info.owner.realname,
                                               location: info.owner.location ?? "",
                                               link: item.link,
-                                              description: item.title,
-                                              dateUpload: item.date)
+                                              description: info.description.content,
+                                              dateUpload: item.date,
+                                              id: item.id,
+                                              title: item.title)
                             self.recents.append(.recent(post))
                         case .failure(let error):
                             print(error)
@@ -156,9 +158,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch recents[indexPath.row] {
         case .loading:
             return
-        case .recent(_/* let recent */):
-            // let item = recent
-            guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVCID") else { return }
+        case .recent(let recent):
+            guard let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "PostVCID") as? PostViewController else { return }
+            detailVC.item = recent
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }

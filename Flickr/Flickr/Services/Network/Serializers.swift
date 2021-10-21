@@ -15,6 +15,7 @@ protocol SerializerProtocol {
 struct JSONSerializer<R>: SerializerProtocol where R: Decodable {
     func parse(data: Data) throws -> R {
         let decoder = JSONDecoder()
+        print(String(data: data, encoding: .utf8)!)
         return try decoder.decode(R.self, from: data)
     }
 }

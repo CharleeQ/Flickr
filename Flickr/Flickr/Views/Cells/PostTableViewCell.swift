@@ -24,7 +24,7 @@ class PostTableViewCell: UITableViewCell {
         
         // description
         let text = NSMutableAttributedString(string: datas.username + " ", attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .semibold)])
-        let description = NSMutableAttributedString(string: datas.description, attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .regular)])
+        let description = NSMutableAttributedString(string: datas.title, attributes: [.font: UIFont.systemFont(ofSize: 13, weight: .regular)])
         text.append(description)
         descriptionLabel.attributedText = text
         self.avatarImage.layer.cornerRadius = 16
