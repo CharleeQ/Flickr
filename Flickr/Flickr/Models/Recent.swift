@@ -17,4 +17,5 @@ struct Recent: Equatable {
     let dateUpload: String
     let id: String
     let title: String
+    var isFavorite: Bool
 }

@@ -27,6 +27,13 @@ struct Photo: Decodable {
     let comments: Comments
     let media: String
     let urls: URLs
+    var isFave: Bool {
+        if isfavorite == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
     
     enum CodingKeys: String, CodingKey {
         case id

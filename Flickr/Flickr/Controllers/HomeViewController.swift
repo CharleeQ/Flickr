@@ -115,7 +115,8 @@ class HomeViewController: UIViewController {
                                               description: info.description.content,
                                               dateUpload: item.dateupload,
                                               id: item.id,
-                                              title: item.title)
+                                              title: item.title,
+                                              isFavorite: info.isFave)
                             self.recents.append(.recent(post))
                         case .failure(let error):
                             print(error)

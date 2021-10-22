@@ -14,6 +14,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var postImage: UIImageView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateUploadLabel: UILabel!
+
     
     func setup(datas: Recent) {
         usernameLabel.text = "\(datas.fullname) (\(datas.username))"

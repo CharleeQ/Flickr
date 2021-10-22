@@ -81,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="874" y="-14"/>
+            <point key="canvasLocation" x="2645" y="-27"/>
         </scene>
         <!--Gallery-->
         <scene sceneID="q27-PC-J7g">
@@ -233,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VTv-cm-a7x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1963.7681159420292" y="-14.0625"/>
+            <point key="canvasLocation" x="2645" y="-689"/>
         </scene>
         <!--Profile-->
         <scene sceneID="TsL-Q8-n5m">
@@ -408,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9td-GT-7gE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="670"/>
+            <point key="canvasLocation" x="3313" y="-689"/>
         </scene>
         <!--Home-->
         <scene sceneID="dkG-bj-OzA">
@@ -742,13 +742,16 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7A-4H-atV">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7A-4H-atV" customClass="FavoriteButton" customModule="Flickr" customModuleProvider="target">
                                                     <rect key="frame" x="369" y="427" width="30" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="B4i-N5-8h8"/>
                                                         <constraint firstAttribute="width" constant="30" id="WDW-ND-9S0"/>
                                                     </constraints>
                                                     <buttonConfiguration key="configuration" style="plain" image="Save"/>
+                                                    <connections>
+                                                        <action selector="favoriteButtonTapped:" destination="VWQ-dC-yUI" eventType="touchUpInside" id="pPH-vq-t3u"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -766,20 +769,22 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateUpload" destination="lD6-qF-kyJ" id="JoS-RG-BGt"/>
+                                            <outlet property="faveButton" destination="v7A-4H-atV" id="F04-V5-fts"/>
                                             <outlet property="postDescription" destination="zTi-PC-vd9" id="qQT-jO-HJX"/>
                                             <outlet property="postImage" destination="hgb-Hi-dVr" id="Fyh-AK-CGN"/>
                                             <outlet property="postTitle" destination="Ptr-WX-Ouo" id="2Td-gl-RuZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentCell" id="Unc-fT-8H2" customClass="CommentTableViewCell" customModule="Flickr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="551.5" width="414" height="56"/>
+                                        <rect key="frame" x="0.0" y="551.5" width="414" height="84.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Unc-fT-8H2" id="cLO-Iy-Ilj">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="84.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="16520596" translatesAutoresizingMaskIntoConstraints="NO" id="59a-y8-zd4">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="59a-y8-zd4">
                                                     <rect key="frame" x="15" y="10" width="32" height="32"/>
+                                                    <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="32" id="YaT-xV-UcC"/>
                                                         <constraint firstAttribute="width" constant="32" id="suT-An-qWQ"/>
@@ -792,16 +797,16 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZwM-wB-MOS">
-                                                    <rect key="frame" x="66" y="10" width="333" height="36"/>
+                                                    <rect key="frame" x="66" y="10" width="333" height="64.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="55" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abV-Kq-8m1">
-                                                            <rect key="frame" x="0.0" y="0.0" width="333" height="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="55" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abV-Kq-8m1">
+                                                            <rect key="frame" x="0.0" y="0.0" width="333" height="0.0"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2004 September 16" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ne4-Pu-ct5">
-                                                            <rect key="frame" x="0.0" y="22" width="333" height="14"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ne4-Pu-ct5">
+                                                            <rect key="frame" x="0.0" y="6" width="333" height="58.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" systemColor="tertiaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
@@ -837,18 +842,17 @@
                             <constraint firstItem="A5T-9Y-Uvo" firstAttribute="top" secondItem="HS5-st-wnL" secondAttribute="top" id="j5j-w5-X8d"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="F78-IU-bx8"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="F78-IU-bx8"/>
                     <connections>
                         <outlet property="postDetailTableView" destination="A5T-9Y-Uvo" id="LFa-am-x9M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUD-K4-DvC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2789.8550724637685" y="-689.0625"/>
+            <point key="canvasLocation" x="1964" y="-1360"/>
         </scene>
     </scenes>
     <resources>
-        <image name="16520596" width="403" height="403"/>
         <image name="Oval" width="96" height="96"/>
         <image name="Save" width="22" height="24"/>
         <image name="comments" width="198" height="160"/>

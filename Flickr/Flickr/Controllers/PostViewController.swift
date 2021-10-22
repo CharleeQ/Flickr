@@ -14,6 +14,7 @@ class PostViewController: UIViewController {
         case comment(CommentPhoto)
     }
     
+
     @IBOutlet weak var postDetailTableView: UITableView!
     
     var item: Recent?
@@ -51,6 +52,41 @@ class PostViewController: UIViewController {
             self.postDetailTableView.reloadData()
         }
     }
+    
+    private func addFave() {
+        guard let fave = item else { return }
+        network.addFavorite(photoID: fave.id) { result in
+            switch result {
+            case .success(_):
+                self.item?.isFavorite = true
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func removeFave() {
+        guard let fave = item else { return }
+        network.removeFavorite(photoID: fave.id) { result in
+            switch result {
+            case .success(_):
+                self.item?.isFavorite = false
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    @IBAction func favoriteButtonTapped(_ sender: FavoriteButton) {
+        if sender.isFavorite {
+            removeFave()
+        } else {
+            addFave()
+        }
+        sender.changeStatus()
+    }
+    
 }
 
 extension PostViewController: UITableViewDelegate, UITableViewDataSource {

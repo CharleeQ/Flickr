@@ -55,6 +55,7 @@
 		9FEAE94D2721DB0D00658B18 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEAE94C2721DB0D00658B18 /* CommentTableViewCell.swift */; };
 		9FEAE94F2721DC8C00658B18 /* CommentPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEAE94E2721DC8C00658B18 /* CommentPhoto.swift */; };
 		9FEAE9512722ACCC00658B18 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEAE9502722ACCC00658B18 /* Label.swift */; };
+		9FEAE9532722B02300658B18 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEAE9522722B02300658B18 /* FavoriteButton.swift */; };
 		9FF32898271EE7E300D42087 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +110,7 @@
 		9FEAE94C2721DB0D00658B18 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		9FEAE94E2721DC8C00658B18 /* CommentPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPhoto.swift; sourceTree = "<group>"; };
 		9FEAE9502722ACCC00658B18 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		9FEAE9522722B02300658B18 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
 		9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,6 +173,7 @@
 			children = (
 				9F536D1C26F4C5330077F1F9 /* LoginWithFlickr.swift */,
 				9F045D1427142E93002317F3 /* FilterButton.swift */,
+				9FEAE9522722B02300658B18 /* FavoriteButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				9F8140CC26E11621003EE7AA /* Constants.swift in Sources */,
 				9F8140C226DFA2F2003EE7AA /* Photos.swift in Sources */,
 				9F92AC6F26CFC2C200433CF3 /* SceneDelegate.swift in Sources */,
+				9FEAE9532722B02300658B18 /* FavoriteButton.swift in Sources */,
 				9F8140C026DF9F09003EE7AA /* Tags.swift in Sources */,
 				9FC4BA4E272050B1002A8D3A /* ImagePickerService.swift in Sources */,
 				9F8140C426DFACD4003EE7AA /* Photos.Comments.swift in Sources */,
