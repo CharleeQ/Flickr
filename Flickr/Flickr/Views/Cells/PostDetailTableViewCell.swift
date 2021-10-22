@@ -17,7 +17,7 @@ class PostDetailTableViewCell: UITableViewCell {
     func config(item: Recent) {
         postImage.setPhoto(link: item.link)
         postDescription.text = item.description
-        dateUpload.text = item.dateUpload
+        dateUpload.setDate(timestamp: item.dateUpload)
         postTitle.text = item.title
     }
 }

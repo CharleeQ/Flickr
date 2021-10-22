@@ -151,16 +151,6 @@ struct Photos: Decodable {
         var link: String {
             "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg"
         }
-        var date: String {
-            if let time = Double(dateupload) {
-                let date = Date(timeIntervalSince1970: time)
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "YYYY MMMM dd, hh:mm:ss"
-                dateFormatter.timeZone = .current
-                return dateFormatter.string(from: date)
-            }
-            return dateupload
-        }
         var profileImageLink: String {
             "https://farm\(iconfarm).staticflickr.com/\(iconserver)/buddyicons/\(owner).jpg"
         }

@@ -18,7 +18,7 @@ class PostTableViewCell: UITableViewCell {
     func setup(datas: Recent) {
         usernameLabel.text = "\(datas.fullname) (\(datas.username))"
         locationLabel.text = datas.location
-        dateUploadLabel.text = datas.dateUpload
+        dateUploadLabel.setDate(timestamp: datas.dateUpload)
         postImage.setPhoto(link: datas.link)
         avatarImage.setPhoto(link: datas.profileAvatarLink)
         

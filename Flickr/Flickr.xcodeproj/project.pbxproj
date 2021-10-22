@@ -54,6 +54,7 @@
 		9FEAE94B272199FC00658B18 /* PostDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEAE94A272199FC00658B18 /* PostDetailTableViewCell.swift */; };
 		9FEAE94D2721DB0D00658B18 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEAE94C2721DB0D00658B18 /* CommentTableViewCell.swift */; };
 		9FEAE94F2721DC8C00658B18 /* CommentPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEAE94E2721DC8C00658B18 /* CommentPhoto.swift */; };
+		9FEAE9512722ACCC00658B18 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FEAE9502722ACCC00658B18 /* Label.swift */; };
 		9FF32898271EE7E300D42087 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,7 @@
 		9FEAE94A272199FC00658B18 /* PostDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewCell.swift; sourceTree = "<group>"; };
 		9FEAE94C2721DB0D00658B18 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		9FEAE94E2721DC8C00658B18 /* CommentPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentPhoto.swift; sourceTree = "<group>"; };
+		9FEAE9502722ACCC00658B18 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		9FF32897271EE7E300D42087 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +199,7 @@
 				9F92AC9026D2812B00433CF3 /* Encryption.swift */,
 				9F0A19B926EB599E0011D761 /* CharacterSet.swift */,
 				9F878C4E2717220300E92764 /* ImageView.swift */,
+				9FEAE9502722ACCC00658B18 /* Label.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				9F8140D026E4BEBC003EE7AA /* UploadPhoto.swift in Sources */,
 				9F045D0E270DBFCB002317F3 /* RootCoordinator.swift in Sources */,
 				9F8140C626DFF258003EE7AA /* Favorites.swift in Sources */,
+				9FEAE9512722ACCC00658B18 /* Label.swift in Sources */,
 				9F8140D526E4E67A003EE7AA /* ProfileAPI.swift in Sources */,
 				9F8140DE26E62BB5003EE7AA /* CommentsAPI.swift in Sources */,
 				9FEAE94F2721DC8C00658B18 /* CommentPhoto.swift in Sources */,

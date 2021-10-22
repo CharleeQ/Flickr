@@ -24,5 +24,6 @@ class CommentTableViewCell: UITableViewCell {
         commentLabel.attributedText = nick
         
         // date
+        dateCommented.setDate(timestamp: item.dateCommented, format: "YYYY MMMM dd")
     }
 }

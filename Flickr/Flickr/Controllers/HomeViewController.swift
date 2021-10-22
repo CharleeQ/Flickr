@@ -113,7 +113,7 @@ class HomeViewController: UIViewController {
                                               location: info.owner.location ?? "",
                                               link: item.link,
                                               description: info.description.content,
-                                              dateUpload: item.date,
+                                              dateUpload: item.dateupload,
                                               id: item.id,
                                               title: item.title)
                             self.recents.append(.recent(post))
