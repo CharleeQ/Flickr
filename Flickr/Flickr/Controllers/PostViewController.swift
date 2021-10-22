@@ -14,7 +14,6 @@ class PostViewController: UIViewController {
         case comment(CommentPhoto)
     }
     
-
     @IBOutlet weak var postDetailTableView: UITableView!
     
     var item: Recent?
@@ -34,22 +33,21 @@ class PostViewController: UIViewController {
     
     private func showComments() {
         guard let id = item?.id else { return }
-        let queueGroup = DispatchGroup()
-        queueGroup.enter()
         network.getCommentsList(photoID: id) { result in
             switch result {
             case .success(let comments):
                 comments.forEach { comment in
-                    let comment = CommentPhoto(linkToAvatar: comment.profileImageLink, nickname: comment.authorname, content: comment.content, dateCommented: comment.datecreate)
-                    self.details.append(.comment(comment))
+                    self.details.append(.comment(.init(
+                        linkToAvatar: comment.profileImageLink,
+                        nickname: comment.authorname,
+                        content: comment.content,
+                        dateCommented: comment.datecreate
+                    )))
                 }
-                queueGroup.leave()
+                self.postDetailTableView.reloadData()
             case .failure(let error):
                 print(error)
             }
-        }
-        queueGroup.notify(queue: .main) {
-            self.postDetailTableView.reloadData()
         }
     }
     
@@ -58,7 +56,7 @@ class PostViewController: UIViewController {
         network.addFavorite(photoID: fave.id) { result in
             switch result {
             case .success(_):
-                self.item?.isFavorite = true
+                return
             case .failure(let error):
                 print(error)
             }
@@ -70,7 +68,7 @@ class PostViewController: UIViewController {
         network.removeFavorite(photoID: fave.id) { result in
             switch result {
             case .success(_):
-                self.item?.isFavorite = false
+                return
             case .failure(let error):
                 print(error)
             }
@@ -78,15 +76,14 @@ class PostViewController: UIViewController {
     }
     
     
-    @IBAction func favoriteButtonTapped(_ sender: FavoriteButton) {
-        if sender.isFavorite {
+    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
+        if sender.isSelected {
             removeFave()
         } else {
             addFave()
         }
-        sender.changeStatus()
+        sender.isSelected = !sender.isSelected
     }
-    
 }
 
 extension PostViewController: UITableViewDelegate, UITableViewDataSource {

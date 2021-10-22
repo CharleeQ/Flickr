@@ -101,63 +101,8 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="uploadPhotoCell" id="xrY-d9-Y85" customClass="NewItemCollectionViewCell" customModule="Flickr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="ZO2-Ei-iHA">
-                                                    <rect key="frame" x="30" y="22" width="64" height="80.5"/>
-                                                    <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="adR-cC-Cdx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cT3-uf-821">
-                                                                    <rect key="frame" x="20" y="8" width="24.5" height="48"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="40"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                            </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <constraints>
-                                                                <constraint firstItem="cT3-uf-821" firstAttribute="centerY" secondItem="adR-cC-Cdx" secondAttribute="centerY" id="GEP-of-hWP"/>
-                                                                <constraint firstAttribute="height" constant="64" id="Pqa-Ax-ftV"/>
-                                                                <constraint firstItem="cT3-uf-821" firstAttribute="centerX" secondItem="adR-cC-Cdx" secondAttribute="centerX" id="TQG-Qz-PRc"/>
-                                                                <constraint firstAttribute="width" constant="64" id="qdm-gl-zbV"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                    <integer key="value" value="32"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                                    <integer key="value" value="2"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
-                                                                    <color key="value" systemColor="systemGray2Color"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5iv-g0-VtF">
-                                                            <rect key="frame" x="20.5" y="67" width="23.5" height="13.5"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="ZO2-Ei-iHA" firstAttribute="centerY" secondItem="xrY-d9-Y85" secondAttribute="centerY" id="2H2-Ej-wDk"/>
-                                            <constraint firstItem="ZO2-Ei-iHA" firstAttribute="centerX" secondItem="xrY-d9-Y85" secondAttribute="centerX" id="4Pn-W6-UOM"/>
-                                        </constraints>
-                                    </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="photoCell" id="fXI-fh-tGW" customClass="PhotoCollectionViewCell" customModule="Flickr" customModuleProvider="target">
-                                        <rect key="frame" x="145" y="0.0" width="124" height="124"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="13n-Q3-P7s">
                                             <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
@@ -178,6 +123,41 @@
                                         <connections>
                                             <outlet property="photo" destination="lWu-FI-4jd" id="CbS-rJ-MZB"/>
                                         </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="uploadPhotoCell" id="x4b-bd-n7G">
+                                        <rect key="frame" x="145" y="0.0" width="124" height="124"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="X8P-LA-MTt">
+                                            <rect key="frame" x="0.0" y="0.0" width="124" height="124"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Gq7-ZN-VDx">
+                                                    <rect key="frame" x="30" y="22" width="64" height="80"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QH0-LU-1C1">
+                                                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="64" id="Byp-aG-h8d"/>
+                                                                <constraint firstAttribute="height" constant="64" id="rH6-vr-9ga"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="40"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryu-aD-Nhk">
+                                                            <rect key="frame" x="0.0" y="64" width="64" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Gq7-ZN-VDx" firstAttribute="centerY" secondItem="X8P-LA-MTt" secondAttribute="centerY" id="fuz-pF-pmc"/>
+                                                <constraint firstItem="Gq7-ZN-VDx" firstAttribute="centerX" secondItem="X8P-LA-MTt" secondAttribute="centerX" id="lHs-vX-KGF"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -694,7 +674,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="A5T-9Y-Uvo">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="postDetailCell" id="KTc-ex-q5o" customClass="PostDetailTableViewCell" customModule="Flickr" customModuleProvider="target">
@@ -742,13 +722,15 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7A-4H-atV" customClass="FavoriteButton" customModule="Flickr" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v7A-4H-atV">
                                                     <rect key="frame" x="369" y="427" width="30" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="B4i-N5-8h8"/>
                                                         <constraint firstAttribute="width" constant="30" id="WDW-ND-9S0"/>
                                                     </constraints>
-                                                    <buttonConfiguration key="configuration" style="plain" image="Save"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" image="Save"/>
+                                                    <state key="selected" image="Save.fill"/>
                                                     <connections>
                                                         <action selector="favoriteButtonTapped:" destination="VWQ-dC-yUI" eventType="touchUpInside" id="pPH-vq-t3u"/>
                                                     </connections>
@@ -769,17 +751,17 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateUpload" destination="lD6-qF-kyJ" id="JoS-RG-BGt"/>
-                                            <outlet property="faveButton" destination="v7A-4H-atV" id="F04-V5-fts"/>
+                                            <outlet property="faveButton" destination="v7A-4H-atV" id="5vP-xI-6y2"/>
                                             <outlet property="postDescription" destination="zTi-PC-vd9" id="qQT-jO-HJX"/>
                                             <outlet property="postImage" destination="hgb-Hi-dVr" id="Fyh-AK-CGN"/>
                                             <outlet property="postTitle" destination="Ptr-WX-Ouo" id="2Td-gl-RuZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentCell" id="Unc-fT-8H2" customClass="CommentTableViewCell" customModule="Flickr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="551.5" width="414" height="84.5"/>
+                                        <rect key="frame" x="0.0" y="551.5" width="414" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Unc-fT-8H2" id="cLO-Iy-Ilj">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="84.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="59a-y8-zd4">
@@ -797,7 +779,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZwM-wB-MOS">
-                                                    <rect key="frame" x="66" y="10" width="333" height="64.5"/>
+                                                    <rect key="frame" x="66" y="10" width="333" height="75"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="55" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abV-Kq-8m1">
                                                             <rect key="frame" x="0.0" y="0.0" width="333" height="0.0"/>
@@ -806,7 +788,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ne4-Pu-ct5">
-                                                            <rect key="frame" x="0.0" y="6" width="333" height="58.5"/>
+                                                            <rect key="frame" x="0.0" y="6" width="333" height="69"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" systemColor="tertiaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
@@ -842,19 +824,40 @@
                             <constraint firstItem="A5T-9Y-Uvo" firstAttribute="top" secondItem="HS5-st-wnL" secondAttribute="top" id="j5j-w5-X8d"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="F78-IU-bx8"/>
+                    <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="F78-IU-bx8">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="DXx-7j-lhj"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="postDetailTableView" destination="A5T-9Y-Uvo" id="LFa-am-x9M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUD-K4-DvC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1964" y="-1360"/>
+            <point key="canvasLocation" x="2873.913043478261" y="-1360.0446428571429"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0tq-h2-LmC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oQe-H9-KdK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k40-Kn-zP4">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VWQ-dC-yUI" kind="relationship" relationship="rootViewController" id="5V4-vG-NJa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50S-VT-752" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1963.7681159420292" y="-1360.0446428571429"/>
         </scene>
     </scenes>
     <resources>
         <image name="Oval" width="96" height="96"/>
         <image name="Save" width="22" height="24"/>
+        <image name="Save.fill" width="22" height="24"/>
         <image name="comments" width="198" height="160"/>
         <image name="faves" width="160" height="160"/>
         <image name="house" catalog="system" width="128" height="106"/>
@@ -874,9 +877,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

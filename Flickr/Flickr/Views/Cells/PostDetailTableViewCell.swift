@@ -10,7 +10,7 @@ import UIKit
 class PostDetailTableViewCell: UITableViewCell {
 
     @IBOutlet weak var postImage: UIImageView!
-    @IBOutlet weak var faveButton: FavoriteButton!
+    @IBOutlet weak var faveButton: UIButton!
     @IBOutlet weak var postTitle: UILabel!
     @IBOutlet weak var postDescription: UILabel!
     @IBOutlet weak var dateUpload: UILabel!
@@ -20,6 +20,6 @@ class PostDetailTableViewCell: UITableViewCell {
         postDescription.text = item.description
         dateUpload.setDate(timestamp: item.dateUpload)
         postTitle.text = item.title
-        faveButton.isFavorite = item.isFavorite
+        faveButton.isSelected = item.isFavorite
     }
 }

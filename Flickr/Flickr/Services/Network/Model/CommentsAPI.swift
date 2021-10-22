@@ -14,7 +14,7 @@ struct Comment: Decodable {
     let authorname: String
     let iconserver: String
     let iconfarm: Int
-    let datecreate: String
+    let datecreate: Date
     let realname: String
     let content: String
     var profileImageLink: String {

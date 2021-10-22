@@ -11,5 +11,5 @@ struct CommentPhoto: Equatable {
     let linkToAvatar: String
     let nickname: String
     let content: String
-    let dateCommented: String
+    let dateCommented: Date
 }

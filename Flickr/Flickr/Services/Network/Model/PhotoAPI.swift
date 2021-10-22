@@ -152,7 +152,7 @@ struct Photos: Decodable {
         let server: String
         let title: String
         let ownername: String
-        let dateupload: String
+        let dateupload: Date
         let iconserver: String
         let iconfarm: Int
         var link: String {
