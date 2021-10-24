@@ -28,11 +28,13 @@ extension NetworkService {
         var params: [NetworkParameters: Any] = [.photo_id: photoID]
         if let secret = secret { params[.secret] = secret }
         
-        request(method: "flickr.photos.getInfo",
-                parameters: params,
-                serializer: JSONSerializer<PhotoFlickrApi>()) { result in
-            completion(result.map { $0.photo })
-        }
+        requestWithOAuth(
+            http: .GET,
+            method: "flickr.photos.getInfo",
+            parameters: params,
+            serializer: JSONSerializer<PhotoFlickrApi>()) { result in
+                completion(result.map { $0.photo })
+            }
     }
     
     func deletePhoto(photoID: String, completion: @escaping (Result<Void, Error>) -> Void) {

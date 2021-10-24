@@ -10,13 +10,14 @@ import UIKit
 class PostViewController: UIViewController {
     
     enum DataSourceItem: Equatable {
-        case post
+        case post(Post)
         case comment(CommentPhoto)
     }
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var postDetailTableView: UITableView!
     
-    var item: Recent?
+    var itemID: String?
     var details = [DataSourceItem]()
     private let network = NetworkService(accessToken: UserSettings.get().token,
                                          tokenSecret: UserSettings.get().tokenSecret)
@@ -26,13 +27,35 @@ class PostViewController: UIViewController {
         postDetailTableView.dataSource = self
         postDetailTableView.delegate = self
         
-        details.append(.post)
-        
+        showPost()
         showComments()
     }
     
+    private func showPost() {
+        guard let id = itemID else { return }
+        DispatchQueue.main.async {
+            self.spinner.startAnimating()
+        }
+        network.getPhotoInfo(photoID: id, secret: nil) { result in
+            switch result {
+            case .success(let photo):
+                self.details.append(.post(.init(
+                    link: photo.link,
+                    date: photo.dateuploaded,
+                    title: photo.title.content,
+                    description: photo.description.content,
+                    isFavorite: photo.isFave
+                )))
+                self.postDetailTableView.reloadData()
+                self.spinner.stopAnimating()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func showComments() {
-        guard let id = item?.id else { return }
+        guard let id = itemID else { return }
         network.getCommentsList(photoID: id) { result in
             switch result {
             case .success(let comments):
@@ -52,8 +75,8 @@ class PostViewController: UIViewController {
     }
     
     private func addFave() {
-        guard let fave = item else { return }
-        network.addFavorite(photoID: fave.id) { result in
+        guard let faveID = itemID else { return }
+        network.addFavorite(photoID: faveID) { result in
             switch result {
             case .success(_):
                 return
@@ -64,8 +87,8 @@ class PostViewController: UIViewController {
     }
     
     private func removeFave() {
-        guard let fave = item else { return }
-        network.removeFavorite(photoID: fave.id) { result in
+        guard let faveID = itemID else { return }
+        network.removeFavorite(photoID: faveID) { result in
             switch result {
             case .success(_):
                 return
@@ -93,9 +116,9 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch details[indexPath.row] {
-        case .post:
-            guard let cell = postDetailTableView.dequeueReusableCell(withIdentifier: "postDetailCell", for: indexPath) as? PostDetailTableViewCell, let item = item else { return UITableViewCell() }
-            cell.config(item: item)
+        case .post(let post):
+            guard let cell = postDetailTableView.dequeueReusableCell(withIdentifier: "postDetailCell", for: indexPath) as? PostDetailTableViewCell else { return UITableViewCell() }
+            cell.config(item: post)
             
             return cell
         case .comment(let comment):

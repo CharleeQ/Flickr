@@ -758,10 +758,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="commentCell" id="Unc-fT-8H2" customClass="CommentTableViewCell" customModule="Flickr" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="551.5" width="414" height="95"/>
+                                        <rect key="frame" x="0.0" y="551.5" width="414" height="98.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Unc-fT-8H2" id="cLO-Iy-Ilj">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="98.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="59a-y8-zd4">
@@ -779,7 +779,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZwM-wB-MOS">
-                                                    <rect key="frame" x="66" y="10" width="333" height="75"/>
+                                                    <rect key="frame" x="66" y="10" width="333" height="78.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="55" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abV-Kq-8m1">
                                                             <rect key="frame" x="0.0" y="0.0" width="333" height="0.0"/>
@@ -788,7 +788,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ne4-Pu-ct5">
-                                                            <rect key="frame" x="0.0" y="6" width="333" height="69"/>
+                                                            <rect key="frame" x="0.0" y="6" width="333" height="72.5"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" systemColor="tertiaryLabelColor"/>
                                                             <nil key="highlightedColor"/>
@@ -814,13 +814,29 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Jt5-1w-9SU">
+                                <rect key="frame" x="179.5" y="420.5" width="55" height="55"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="oJN-rW-SCF"/>
+                                    <constraint firstAttribute="height" constant="55" id="ria-gf-MvK"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HS5-st-wnL"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HS5-st-wnL" firstAttribute="trailing" secondItem="A5T-9Y-Uvo" secondAttribute="trailing" id="GwO-FU-bgH"/>
                             <constraint firstItem="A5T-9Y-Uvo" firstAttribute="leading" secondItem="HS5-st-wnL" secondAttribute="leading" id="T6f-cv-ad7"/>
+                            <constraint firstItem="Jt5-1w-9SU" firstAttribute="centerX" secondItem="e4T-We-dEl" secondAttribute="centerX" id="ZmR-xY-nJc"/>
                             <constraint firstItem="HS5-st-wnL" firstAttribute="bottom" secondItem="A5T-9Y-Uvo" secondAttribute="bottom" id="ahQ-uL-QZ9"/>
+                            <constraint firstItem="Jt5-1w-9SU" firstAttribute="centerY" secondItem="e4T-We-dEl" secondAttribute="centerY" id="eiq-Iq-KEc"/>
                             <constraint firstItem="A5T-9Y-Uvo" firstAttribute="top" secondItem="HS5-st-wnL" secondAttribute="top" id="j5j-w5-X8d"/>
                         </constraints>
                     </view>
@@ -829,6 +845,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="postDetailTableView" destination="A5T-9Y-Uvo" id="LFa-am-x9M"/>
+                        <outlet property="spinner" destination="Jt5-1w-9SU" id="9yQ-DB-NUa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YUD-K4-DvC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -838,6 +855,7 @@
         <!--Navigation Controller-->
         <scene sceneID="0tq-h2-LmC">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="50S-VT-752" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oQe-H9-KdK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k40-Kn-zP4">
@@ -849,7 +867,6 @@
                         <segue destination="VWQ-dC-yUI" kind="relationship" relationship="rootViewController" id="5V4-vG-NJa"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="50S-VT-752" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1963.7681159420292" y="-1360.0446428571429"/>
         </scene>

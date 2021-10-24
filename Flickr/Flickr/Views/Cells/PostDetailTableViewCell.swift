@@ -15,10 +15,10 @@ class PostDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var postDescription: UILabel!
     @IBOutlet weak var dateUpload: UILabel!
     
-    func config(item: Recent) {
+    func config(item: Post) {
         postImage.setPhoto(link: item.link)
         postDescription.text = item.description
-        dateUpload.setDate(timestamp: item.dateUpload)
+        dateUpload.setDate(timestamp: item.date)
         postTitle.text = item.title
         faveButton.isSelected = item.isFavorite
     }

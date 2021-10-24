@@ -10,8 +10,9 @@ import Foundation
 struct Photo: Decodable {
     let id: String
     let secret: String
+    let server: String
     let farm: Int
-    let dateuploaded: String
+    let dateuploaded: Date
     let isfavorite: Int
     let license: String
     let safetyLevel: String
@@ -34,10 +35,14 @@ struct Photo: Decodable {
             return true
         }
     }
+    var link: String {
+        "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg"
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
         case secret
+        case server
         case farm
         case dateuploaded
         case isfavorite
