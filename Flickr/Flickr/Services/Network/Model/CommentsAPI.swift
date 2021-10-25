@@ -13,9 +13,13 @@ struct Comment: Decodable {
     let authorIsDeleted: Int
     let authorname: String
     let iconserver: String
-    let datecreate: String
+    let iconfarm: Int
+    let datecreate: Date
     let realname: String
     let content: String
+    var profileImageLink: String {
+        "https://farm\(iconfarm).staticflickr.com/\(iconserver)/buddyicons/\(author).jpg"
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -23,6 +27,7 @@ struct Comment: Decodable {
         case authorIsDeleted = "author_is_deleted"
         case authorname
         case iconserver
+        case iconfarm
         case datecreate
         case realname
         case content = "_content"

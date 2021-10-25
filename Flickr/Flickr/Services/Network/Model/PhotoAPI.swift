@@ -10,14 +10,13 @@ import Foundation
 struct Photo: Decodable {
     let id: String
     let secret: String
+    let server: String
     let farm: Int
-    let dateuploaded: String
+    let dateuploaded: Date
     let isfavorite: Int
     let license: String
     let safetyLevel: String
     let rotation: Int
-    let originalsecret: String
-    let originalformat: String
     let owner: Owner
     let title: Title
     let description: Description
@@ -28,18 +27,28 @@ struct Photo: Decodable {
     let publiceditability: Publiceditability
     let comments: Comments
     let media: String
+    let urls: URLs
+    var isFave: Bool {
+        if isfavorite == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+    var link: String {
+        "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg"
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
         case secret
+        case server
         case farm
         case dateuploaded
         case isfavorite
         case license
         case safetyLevel = "safety_level"
         case rotation
-        case originalsecret
-        case originalformat
         case owner
         case title
         case description
@@ -50,16 +59,16 @@ struct Photo: Decodable {
         case publiceditability
         case comments
         case media
+        case urls
     }
     
     struct Owner: Decodable {
         let nsid: String
         let username: String
         let realname: String
-        let location: String
+        let location: String?
         let iconserver: String
         let iconfarm: Int
-        let pathAlias: String
         
         enum CodingKeys: String, CodingKey {
             case nsid
@@ -68,7 +77,6 @@ struct Photo: Decodable {
             case location
             case iconserver
             case iconfarm
-            case pathAlias = "path_alias"
         }
     }
     
@@ -97,7 +105,6 @@ struct Photo: Decodable {
     struct Dates: Decodable {
         let posted: String
         let taken: String
-        let takengranularity: Int
         let takenunknown: String
         let lastupdate: String
     }
@@ -119,12 +126,60 @@ struct Photo: Decodable {
             case content = "_content"
         }
     }
+    
+    struct URLs: Decodable {
+        let url: [JSONURL]
+        
+        struct JSONURL: Decodable {
+            let type: String
+            let content: String
+            
+            enum CodingKeys: String, CodingKey {
+                case type
+                case content = "_content"
+            }
+        }
+    }
 }
 
-struct RecentPhoto: Decodable {
-    let id: String
-    let owner: String
-    let secret: String
-    let server: String
-    let title: String
+struct Photos: Decodable {
+    let page: Int
+    let pages: Int
+    let perpage: Int
+    let total: Int
+    let photo: [RecentPhoto]
+    
+    struct RecentPhoto: Decodable {
+        let id: String
+        let owner: String
+        let secret: String
+        let farm: Int
+        let server: String
+        let title: String
+        let ownername: String
+        let dateupload: Date
+        let iconserver: String
+        let iconfarm: Int
+        var link: String {
+            "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_b.jpg"
+        }
+        var profileImageLink: String {
+            "https://farm\(iconfarm).staticflickr.com/\(iconserver)/buddyicons/\(owner).jpg"
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case owner
+            case secret
+            case farm
+            case server
+            case title
+            case ownername
+            case dateupload
+            case iconserver
+            case iconfarm
+        }
+    }
 }
+
+

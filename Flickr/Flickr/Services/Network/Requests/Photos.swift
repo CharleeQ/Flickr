@@ -9,16 +9,16 @@ import Foundation
 
 extension NetworkService {
     func getRecentPhotos(extras: String?,
-                         perPage: Int = 100,
+                         perPage: Int = 20,
                          page: Int = 1,
-                         completion: @escaping (Result<[RecentPhoto], Error>) -> Void) {
+                         completion: @escaping (Result<Photos, Error>) -> Void) {
         var params: [NetworkParameters: Any] = [.per_page: perPage, .page: page]
         if let extras = extras { params[.extras] = extras }
         
         request(method: "flickr.photos.getRecent",
                 parameters: params,
                 serializer: JSONSerializer<RecentFlickrApi>()) { result in
-            completion(result.map { $0.photos.photo })
+            completion(result.map { $0.photos })
         }
     }
     
@@ -28,11 +28,13 @@ extension NetworkService {
         var params: [NetworkParameters: Any] = [.photo_id: photoID]
         if let secret = secret { params[.secret] = secret }
         
-        request(method: "flickr.photos.getInfo",
-                parameters: params,
-                serializer: JSONSerializer<PhotoFlickrApi>()) { result in
-            completion(result.map { $0.photo })
-        }
+        requestWithOAuth(
+            http: .GET,
+            method: "flickr.photos.getInfo",
+            parameters: params,
+            serializer: JSONSerializer<PhotoFlickrApi>()) { result in
+                completion(result.map { $0.photo })
+            }
     }
     
     func deletePhoto(photoID: String, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -51,12 +53,4 @@ private struct PhotoFlickrApi: Decodable {
 private struct RecentFlickrApi: Decodable {
     let photos: Photos
     let stat: String
-    
-    struct Photos: Decodable {
-        let page: Int
-        let pages: Int
-        let perpage: Int
-        let total: Int
-        let photo: [RecentPhoto]
-    }
 }

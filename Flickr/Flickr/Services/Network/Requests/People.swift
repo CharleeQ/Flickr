@@ -32,20 +32,26 @@ enum PrivacyFilter: Int {
 }
 
 extension NetworkService {
+    func getHumanInfo(userID: String, completion: @escaping (Result<Person, Error>) -> Void) {
+        let params: [NetworkParameters: Any] = [.user_id: userID]
+        request(method: "flickr.people.getInfo", parameters: params, serializer: JSONSerializer<UserInfoFlickrApi>()) { result in
+            switch result {
+            case .success(let personInfo):
+                completion(.success(personInfo.person))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     func getPhotos(userID: String,
-                   safeSearch: SafeSearch = .forSafe,
-                   contentType: ContentType = .forAll,
-                   privacyFilter: PrivacyFilter = .publicPhotos,
                    extras: String?,
                    perPage: Int = 100,
                    page: Int = 1,
                    completion: @escaping (Result<[UsersPhoto], Error>) -> Void) {
         var params: [NetworkParameters: Any] = [.user_id: userID,
-                                                .safe_search: safeSearch.rawValue,
-                                                .content_type: contentType.rawValue,
-                                                .privacy_filter: privacyFilter.rawValue,
                                                 .per_page: perPage,
-                                                .page: page]
+                                                .page: page,
+                                                .privacy_filter: "1"]
         if let extras = extras { params[.extras] = extras }
         
         requestWithOAuth(http: .POST,
@@ -73,4 +79,9 @@ private struct PeoplePhotosFlickrApi: Decodable {
         let total: Int
         let photo: [UsersPhoto]
     }
+}
+
+private struct UserInfoFlickrApi: Decodable {
+    let person: Person
+    let stat: String
 }

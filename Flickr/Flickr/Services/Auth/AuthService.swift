@@ -34,7 +34,7 @@ class AuthService {
     
     // MARK: - Intents
     
-    func login(presenter: ASWebAuthenticationPresentationContextProviding, completion: @escaping ((Result<[String: String], Error>) -> Void)) {
+    func login(presenter: ASWebAuthenticationPresentationContextProviding, completion: @escaping ((Result<AuthUser, Error>) -> Void)) {
         getARequestToken { result in
             switch result {
             case .success(let data):
@@ -43,19 +43,27 @@ class AuthService {
                     case .success(let tokens):
                         self.exchangingTheRequestForAccess(request: tokens.0, verifier: tokens.1) { result in
                             switch result {
-                            case .success(let tokens):
-                                print(tokens)
-                                completion(.success(tokens))
+                            case .success(let user):
+                                print(user)
+                                DispatchQueue.main.async {
+                                    completion(.success(user))
+                                }
                             case .failure(let error):
-                                completion(.failure(error))
+                                DispatchQueue.main.async {
+                                    completion(.failure(error))
+                                }
                             }
                         }
                     case .failure(let error):
-                        completion(.failure(error))
+                        DispatchQueue.main.async {
+                            completion(.failure(error))
+                        }
                     }
                 }
             case .failure(let error):
-                completion(.failure(error))
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -70,7 +78,7 @@ class AuthService {
             .sorted { $0.0.rawValue < $1.0.rawValue }
             .map { (key, value) -> String in "\(key.rawValue)=\(value)" }
             .joined(separator: "&")
-            
+        
         let string = "\(method.rawValue)&\(base)&\(params.addingPercentEncoding(withAllowedCharacters: .urlCharset)!)"
         let encryptString = string.hmac(key: "\(constants.consumerSecret)&\(tokenSecret ?? "")")
         print(encryptString)
@@ -142,7 +150,7 @@ class AuthService {
         }
     }
     
-    private func exchangingTheRequestForAccess(request: String, verifier: String, completion: @escaping (Result<[String: String], Error>) -> Void) {
+    private func exchangingTheRequestForAccess(request: String, verifier: String, completion: @escaping (Result<AuthUser, Error>) -> Void) {
         let params: [OAuthParameters: String] = [.oauth_consumer_key: constants.consumerKey,
                                                  .oauth_nonce: constants.nonce,
                                                  .oauth_signature_method: constants.signatureMethod,
@@ -159,7 +167,13 @@ class AuthService {
                 guard let string = String(data: data, encoding: .utf8) else { return }
                 print(string)
                 let tokens = self.parsingTokens(of: string)
-                completion(.success(tokens))
+                let userInfo = AuthUser(token: tokens["oauth_token"] ?? "unknown",
+                                        tokenSecret: tokens["oauth_token_secret"] ?? "unknown",
+                                        nsid: tokens["user_nsid"] ?? "unknown",
+                                        username: tokens["username"] ?? "unknown",
+                                        fullname: tokens["fullname"]?.removingPercentEncoding ?? "unknown")
+                UserSettings.save(userInfo)
+                completion(.success(userInfo))
                 
             } else if let error = error {
                 completion(.failure(error))
